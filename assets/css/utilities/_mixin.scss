@@ -1,0 +1,139 @@
+
+@mixin bgimg($img){
+    width: image-width('/assets/images/#{$img}');
+    height: image-height('/assets/images/#{$img}');
+    background: url('/assets/images/#{$img}') no-repeat;
+    background-size: 100%;
+}
+
+@mixin bgimg-2x($img){
+    width: image-width('~assets/images/#{$img}')/2;
+    height: image-height('~assets/images/#{$img}')/2;
+    background: url('~assets/images/#{$img}') no-repeat;
+    background-size: 100%;
+}
+
+@mixin bgimgFullWidth($img){
+    background: url('~assets/images/#{$img}') no-repeat;
+    background-size: 100%;
+    @include media('below-small') {
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+@mixin maxWidth-image($img){
+    max-width: image-width('~assets/images/#{$img}');
+}
+
+@mixin maxHeight-image($img){
+    max-height: image-height('~assets/images/#{$img}');
+}
+
+@mixin text-hide{
+	white-space: nowrap;
+	text-indent: 100%;
+	overflow: hidden;
+}
+
+@mixin flex($fd: row, $jc: center, $ai: center) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+@mixin flexCenter{
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+
+}
+@mixin flexBetween{
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+@mixin flexRow{
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row; 
+}
+@mixin flexColumn{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column ; 
+}
+@mixin clearfix {
+    display: block;
+    &::after {
+        clear: both;display: block;visibility: hidden;height: 0;content: ".";
+    }
+}
+@mixin ellipsis {
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* fix the mobile without hover */
+/* ----------------------------------------------------------------------------------- */
+@mixin hover-supported {    
+    /* 
+     * https://developer.mozilla.org/en-US/docs/Web/CSS/@media/pointer 
+     * coarse: The primary input mechanism includes a pointing device of limited accuracy.
+     */
+    @media not all and (pointer: coarse) {
+      &:hover {
+        @content;
+      }
+    }
+}
+/* ----------------------------------------------------------------------------------- */
+/* UI style component */
+/* ----------------------------------------------------------------------------------- */
+@mixin btn-goldGradient-line($btn-fill-color){
+    position: relative;
+    padding: 0;
+    .inner{
+        border-radius: 7px;
+        padding: 0.3rem 1.2rem;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        background: $btn-fill-color;
+        position: relative;
+        z-index: 1;
+    }
+    &:after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: -1px;
+        background: linear-gradient(45deg, #D0A96B 0%, #F0DEAB 19%, #DFC58A 30%, #D0A96B 33%, #F3E9C5 61%, #F8F6DB 67%, #F5F2D3 67%, #ECE1B5 69%, #E4D59E 72%, #DFCC8E 74%, #DCC784 76%, #DBC581 80%, #D6BE7B 84%, #C8AB6B 89%, #B28B51 96%, #A37640 100%);
+        border-radius: 7px;
+        z-index: 0;
+    }
+}

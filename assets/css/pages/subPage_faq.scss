@@ -1,0 +1,145 @@
+// @import "compass/css3";
+@import "~assets/css/utilities/_variable";
+@import "~assets/css/utilities/_mixin";
+@import "~assets/css/utilities/_extend";
+@import "~assets/css/utilities/_media-queries";
+
+/* ----------------------------------------------------------------------------------- */
+/* faq:   */
+/* ----------------------------------------------------------------------------------- */
+.faq_collapse{
+
+    .flexRow{
+        padding: 0 2rem 2rem;
+        justify-content: space-between;
+        align-items: flex-end;
+        @include media('below-tablet') {
+            @include flexColumn;
+            padding: 0 2rem;
+        }
+    }
+    .flexColumn{
+        width: 28%;
+        align-self: flex-start;
+        @include media('below-tablet') {
+            min-height: min-content;
+            align-items: initial;
+            width: 100%;
+            margin: 1rem 0;
+        }
+    }
+    p{
+        font-size: initial;
+        margin: 1rem 0;
+        // margin-bottom: auto;
+        height: 6rem;
+        @include media('below-tablet') {
+            margin: 1rem 0;
+            height: auto;
+        }
+    }
+    img{
+        border: 1px solid #d6d6d6;
+    }
+    .num{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: $web-mainColor;
+        font-weight: 500;
+        text-align: center;
+        line-height: 20px;
+        color: #fff;
+        margin-right: 0.5rem;
+    }
+
+
+    .alignCenter{
+        margin: 0 auto;
+    }
+}
+#gccoin{
+    .flexColumn{
+        width: 100%;
+        max-width: 700px;
+    }
+    p{
+       height: auto; 
+    }
+    a{
+        border-bottom: 1px solid;
+        padding-bottom: 2px;
+        color: $blueLink-color;
+    }
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* p height  */
+/* ----------------------------------------------------------------------------------- */
+#transaction{
+    .flexRow:nth-child(2){
+        p{
+            height: 5rem;
+        }
+    }
+}
+#consign{
+    .flexRow:nth-child(1){
+        p{
+            height: 3rem;
+        }
+    }
+    .flexRow:nth-child(2){
+        p{
+            height: 7rem;
+        }
+    }
+    .flexRow:nth-child(3){
+        p{
+            height: 15rem;
+        }
+    }
+}
+#takeback{
+    p{
+        height: 6rem;
+    }
+}
+#cashout{
+    .flexRow:nth-child(1){
+        p{
+            height: 5rem;
+        }
+    }
+    .flexRow:nth-child(2){
+        p{
+            height: 9rem;
+        }
+    }
+}
+/* ----------------------------------------------------------------------------------- */
+/* custom CSS (overwrite element UI)   */
+/* ----------------------------------------------------------------------------------- */
+.el-collapse-item__header{
+    font-size: 1.1rem;
+    line-height: 2rem;
+    font-weight: bold;
+    height: 3rem;
+    @include media('below-tablet') {
+        font-size: 1.3rem;
+    }
+}
+.el-collapse{
+    // iOS "clickable elements" fix for role="button"
+    // Fixes "clickability" issue (and more generally, the firing of events such as focus as well)
+    // for traditionally non-focusable elements with role="button"
+    // see https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+    [role="button"] {
+        cursor: pointer !important;
+    }
+    [role="tab"] {
+        cursor: pointer !important;
+    }
+}

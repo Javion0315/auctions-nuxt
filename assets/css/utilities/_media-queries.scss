@@ -1,0 +1,69 @@
+
+$below-medium: 1280px;
+$below-desktop: 1024px;
+$below-small: 850px;
+$below-tablet: 767px;
+$below-mobile: 550px;
+
+$above-medium: 1281px;
+$above-mediumDesktop: 1200px;
+$above-desktop: 1025px;
+$above-small: 851px;
+$above-tablet: 768px;
+$above-mobile: 551px;
+$below-mobile-small: 400px;
+@mixin media($point) {
+	@if $point == 'above-largeDesktop' {
+		@media (min-width: 1500px) { @content; }
+	}
+	@if $point == 'below-largeDesktop' {
+		@media (max-width: 1500px) { @content; }
+	}
+	@if $point == 'above-large' {
+	  @media (min-width: 1401px) { @content; }
+	}
+	@if $point == 'below-large' {
+	  @media (max-width: 1401px) { @content; }
+	}
+	@if $point == 'above-medium' {
+	  @media (min-width: 1281px) { @content; }
+	}
+	@if $point == 'below-medium' {
+	  @media (max-width: 1281px) { @content; }
+	}
+	@if $point == 'above-mediumDesktop' {
+	  @media (min-width: 1200px)  { @content; }
+	}
+	@if $point == 'below-mediumDesktop' {
+	  @media (max-width: 1200px)  { @content; }
+	}
+	@if $point == 'above-desktop' {
+	  @media (min-width: 1025px)  { @content; }
+	}
+	@if $point == 'below-desktop' {
+	  @media (max-width: 1025px)  { @content; }
+	}
+	@if $point == 'above-small' {
+	  @media (min-width: 851px)  { @content; }
+	}
+	@if $point == 'below-small' {
+	  @media (max-width: 851px)  { @content; }
+	}
+	@if $point == 'above-tablet' {
+	  @media (min-width: 768px)  { @content; }
+	}
+	@if $point == 'below-tablet' {
+	  @media (max-width: 768px)  { @content; }
+	}
+	@if $point == 'above-mobile' {
+	  @media (min-width: 551px) { @content; }
+	}
+	@if $point == 'below-mobile' {
+	  @media (max-width: 551px)  { @content; }
+	}
+	@if $point == 'below-mobile-small' {
+	  @media (max-width: 400px)  { @content; }
+	}
+}
+
+

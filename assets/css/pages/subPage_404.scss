@@ -1,0 +1,111 @@
+@charset "UTF-8";
+// @import "compass/css3";
+@import "../utilities/_variable";
+@import "../utilities/_mixin";
+@import "../utilities/_extend";
+@import "../utilities/_media-queries";
+@import "../pages/subPage_common";
+
+/* ----------------------------------------------------------------------------------- */
+/* erro404Page */
+/* ----------------------------------------------------------------------------------- */
+.erro404Page{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: calc(100vh - 60px);
+    @include media('below-mediumDesktop') {
+        height: calc(140vh - 60px);
+    }
+	.pageTitle{
+        text-align: center;
+    }
+    .mainContainer{
+        margin: auto;
+    }
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* footerMap */
+/* ----------------------------------------------------------------------------------- */
+footer{
+    width: 100%;
+    float: left;
+    color: #555;
+    box-sizing: border-box;
+    background: #e6e6e6;
+    margin-top: auto;
+    a{
+        color: #555;
+    }
+}
+.footerblock{
+    max-width: 1300px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: left !important;
+    padding: 2em 0;
+    @include media('below-mediumDesktop') {
+        padding: 2em 1rem;
+    }
+    
+}
+.footermap{
+    .ftnav{
+        float: left;
+        text-align: left !important;
+        h3{
+            color:  $textcColor-highlight;
+            font-size: $font-Large;
+        }
+    }
+    dl{
+        // float: left;
+        margin: 0.5rem 0.7em;
+        @extend %inlineBlock-top;
+    }
+    dt{
+        font-size: 0.95em;
+        border-bottom: 1px solid $textcColor-gray;
+        padding: 1rem 0;
+        a{
+            color: #000;
+        }
+    }
+    dd{
+        font-size: 0.9em;
+        padding-top: 10px;
+    }
+    .ftnav.article{
+        width: 18%;
+        margin-left: 1.5rem;
+        @include media('below-mediumDesktop') {
+            width: 100%;
+            margin: 1rem 0 0 0;
+        }
+        dl{
+            list-style-type: disc;
+        }
+        dd{
+            font-size: 0.9em;
+            padding: 1rem 0;
+            border-bottom: 1px dashed $textcColor-gray;
+            &:last-child{
+                border-bottom: none;
+            }
+        }
+    }
+    .ftnav.topic{
+        width: 80%;
+        @include media('below-mediumDesktop') {
+            width: 100%;
+        }
+        dl{
+            width: calc(100% / 5 - 1.7rem);
+            @include media('below-tablet') {
+                width: calc(100% / 3 - 1.7rem);
+            }
+        }
+    }
+}

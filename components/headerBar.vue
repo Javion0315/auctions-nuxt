@@ -1,0 +1,342 @@
+
+<template>
+<div>
+            <div class="black-overlay" v-on:click="closeAlert"></div>
+            <div class="maskDark" v-on:click="MaskHide"></div>
+            <div id="downloadme" class="flexCenter animated fadeIn">
+                <!-- <div class="close_btn" v-on:click="closeTopDownload">
+                <span class="icon-close"></span>
+                </div> -->
+                <div id="download_content" class="flexCenter">
+                <div id="download_logo"></div>
+                <div id="download_text">
+                    <div class="bold">GemCard App Download</div>
+                    <!-- <div class="price mobileBlock">Open</div> -->
+                </div>
+                <div class="download_icon mobileHide">
+                    <a href="https://apps.apple.com/us/app/id1527395702" 
+                    target="_blank" 
+                    @click="gtagTrack('Download_FixedTop_DeskTop_iOS')">
+                        <img src="~assets/images/btn_appstore_footer.png">
+                    </a>
+                </div>
+                <div class="download_icon mobileHide">
+                    <a href="https://play.google.com/store/apps/details?id=com.cardcool.gemcard" 
+                    target="_blank" 
+                    @click="gtagTrack('Download_FixedTop_DeskTop_Android')">
+                        <img src="~assets/images/btn_googleplay_footer.png">
+                    </a>
+                </div>
+                <div class="oppenButton mobileBlock"> 
+                    <span class="oppenButton__label" 
+                    @click="openApp() ; gtagTrack('Download_FixedTop_Mobile')">Open</span>
+                </div>
+                </div>
+            </div>
+            <header class="header navbar--normal" :class="{ 'navbar--hidden': !showNavbar ,'navbar--fixed': navbarFixed }">
+                <div class="header__toolBar">
+                    <div class="container flexBetween">
+                        <div class="logo_Horizontal header__toolBar__logo">
+                            <!-- <nuxt-link to="/" title="GemCard"></nuxt-link> -->
+                            <nuxt-link :to="localePath('index')" title="GemCard"></nuxt-link>
+                        </div>
+                        <div class="header__toolBar__tool">
+                            <div class="searchBar">
+                                <!--  上線前隱藏未開發功能
+                                <form class="pc-search">
+                                    <input type="text" placeholder="2009 Topps Stephen Curry" value="" class="searchInput">
+                                    <button class="icon icon-search" type="submit" v-on:click="showMobileSearch"></button>
+                                </form> -->
+                                <!--  上線前隱藏未開發功能
+                                <form class="mobile-search flexBetween">
+                                    <input type="text" placeholder="2009 Topps Stephen Curry" value="" class="searchInput">
+                                    <button class="icon icon-search" type="submit"></button>
+                                </form> -->
+                            </div>
+                           <!--  上線前隱藏未開發功能                              -->
+                            <!-- <form class="language btn btn-line">
+                                <select name="language__select">
+                                　<option value="English">English</option>
+                                　<option value="繁體中文">繁體中文</option>
+                                　<option value="简体中文">简体中文</option>
+                                </select>
+                            </form> -->
+                            <!-- <LangSwitcher /> -->
+                        </div>
+                    </div>
+                </div>
+                <nav class="header__navBar">
+                    <div class="container flexBetween">
+                        <ul class="nav-pc">
+                            <li class="nav-pc__item" 
+                            @click="toggle = toggle !== 'AboutGemCard' ? 'AboutGemCard' : null">
+                                <a class="Label" href="javascript:;">
+                                    {{ $t('menu.AboutGemCard') }}
+                                </a>
+                                <ul class="nav-pc__dropDown dropDown-about" :class="{'isOpen': toggle === 'AboutGemCard' & showNavbar}">
+                                    <li class="dropDown__item"><nuxt-link :to="localePath('howitworks')">How To Sell & Buy Cards</nuxt-link></li>
+                                    <li class="dropDown__item"><nuxt-link :to="localePath('about_us')">About Us</nuxt-link></li>
+                                </ul>  
+                            </li>
+                            <li class="nav-pc__item" 
+                            @click="toggle = toggle !== 'ShopSportsCards' ? 'ShopSportsCards' : null">
+                                <a class="Label" href="javascript:;">
+                                    {{ $t('menu.ShopSportsCards') }}
+                                </a>
+                                <ul class="nav-pc__dropDown" :class="{'isOpen': toggle === 'ShopSportsCards' & showNavbar}">
+                                    <li class="dropDown__item">
+                                        <nuxt-link :to="localePath('/product_ranking/hot_sales/silver')">Hot Sales</nuxt-link>
+                                    </li>
+                                    <li class="dropDown__item">
+                                        <nuxt-link :to="localePath('/product_ranking/rookie/silver')">Rookie</nuxt-link>
+                                    </li>
+                                </ul>
+                                
+                            </li>
+                            <li class="nav-pc__item" 
+                            @click="toggle = toggle !== 'News' ? 'News' : null">
+                                <a class="Label" href="javascript:;">
+                                    {{ $t('menu.News') }}
+                                </a>
+                                <ul class="nav-pc__dropDown dropDown-news" :class="{'isOpen': toggle === 'News' & showNavbar}">
+                                    <li
+                                    class="dropDown__item"
+                                    v-for="(item, index) in HomePageData.news" 
+                                    :key="index">
+                                        <a :href="item.web_url" target="_blank">{{ item.headline }}</a>
+                                    </li>
+                                    <li class="dropDown__item">
+                                        <nuxt-link :to="localePath({ name: 'news-title', params: { title: 'the-ultimate-guide-to-sports-card-grading' }})">
+                                            The Ultimate Guide to Sports Card Grading
+                                        </nuxt-link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-pc__item" 
+                            @click="toggle = toggle !== 'FAQ' ? 'FAQ' : null">
+                                <a class="Label" href="javascript:;">
+                                    {{ $t('menu.FAQ') }}
+                                </a>
+                                <ul class="nav-pc__dropDown" :class="{'isOpen': toggle === 'FAQ' & showNavbar}">
+                                    <li class="dropDown__item"><nuxt-link :to="localePath('faq')" title="FAQ">{{ $t('menu.FAQ') }}</nuxt-link></li>
+                                    <li class="dropDown__item"><nuxt-link :to="localePath('policy')" title="Policy">{{ $t('menu.Policy') }}</nuxt-link></li>
+                                </ul>  
+                            </li>
+                            <!-- <li class="nav-pc__item"><nuxt-link :to="localePath('policy')" title="Policy">{{ $t('menu.Policy') }}</nuxt-link></li> -->
+                            <li class="btn btn-line highlight" v-on:click="open_popup_DowloadApp() ; gtagTrack('Download_SellNow')"> <nuxt-link to="">Join Now</nuxt-link></li>
+                        </ul>
+                        <div class="nav-mobile">
+                            <span class="menuPanel-hamburguer" v-on:click="menuToggleOpen"></span>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+        <div class="menuPanel clearfix">
+            <span class="icon-close" v-on:click="menuToggleOpen"></span>
+            <div class="container clearfix">
+                <div class="logo">
+                    <!-- <nuxt-link to="/" title="GemCard"></nuxt-link> -->
+                    <nuxt-link :to="localePath('index')" title="GemCard"></nuxt-link>
+
+                </div>
+                <div class="logo-vertical">
+                    <nuxt-link to="/" title="GemCard"><img src="~assets/images/logo_vertical.svg"></nuxt-link>
+                </div>
+                <ul class="menuPanel__nestedList">
+                    <li class="list__item nestedList__item">
+                            <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">{{ $t('menu.AboutGemCard') }}</a>
+                            <ul class="dropdown">
+                                <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('howitworks')" title="How To Sell & Buy Cards">How To Sell & Buy Cards</nuxt-link></li>
+                                <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('about_us')" title="About Us">About Us</nuxt-link></li>
+                            </ul>
+                    </li>
+                    <li class="list__item nestedList__item">
+                        <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">{{ $t('menu.ShopSportsCards') }}</a>
+                        <ul class="dropdown">
+                            <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('/product_ranking/hot_sales/silver')">Hot Sales</nuxt-link></li>
+                            <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('/product_ranking/rookie/silver')">Rookie</nuxt-link></li>
+                        </ul>
+                    </li>
+                    <li class="list__item nestedList__item">
+                        <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">{{ $t('menu.News') }}</a>
+                        <ul class="dropdown">
+                            <li class="list__item dropdown__item dropDown-news" v-for="(item, index) in HomePageData.news" :key="index" v-on:click="menuToggleOpen">
+                                <a :href="item.web_url" target="_blank">{{ item.headline }}</a>
+                            </li>
+                            <li class="list__item dropdown__item dropDown-news" v-on:click="menuToggleOpen">
+                                <nuxt-link :to="localePath({ name: 'news-title', params: { title: 'the-ultimate-guide-to-sports-card-grading' }})">
+                                    The Ultimate Guide to Sports Card Grading
+                                </nuxt-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list__item nestedList__item">
+                        <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">{{ $t('menu.FAQ') }}</a>
+                        <ul class="dropdown">
+                            <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('faq')" title="FAQ">{{ $t('menu.FAQ') }}</nuxt-link></li>
+                            <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('policy')" title="Policy">{{ $t('menu.Policy') }}</nuxt-link></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+</div>
+</template>
+
+<script>
+import LangSwitcher from '~/components/LangSwitcher'
+
+import 'assets/js/common.js'
+import {closeTopDownload} from 'assets/js/common.js';
+import {menuToggleOpen} from 'assets/js/common.js';
+import {showMobileSearch} from 'assets/js/common.js';
+import {MaskHide} from 'assets/js/common.js';
+import {open_popup_DowloadApp} from 'assets/js/common.js';
+import {openApp} from 'assets/js/common.js';
+import {showBlackOverlay} from 'assets/js/common.js';
+import {closeAlert} from 'assets/js/common.js';
+
+  export default {
+    props: ['HomePageData'],
+    components: {
+        LangSwitcher
+    },
+    data () {
+      return {				
+        // menu bar fixed on top when scrolled
+        showNavbar: true,
+        navbarFixed: false,
+        lastScrollPosition: 0,
+        scrollValue: 0,
+        // menu toggle open
+        toggle: null,
+      }
+    },
+    mounted () {
+        window.addEventListener('click', this.closeElement);
+       
+       // this.lastScrollPosition = window.pageYOffset
+        window.addEventListener('scroll', this.onScroll);
+        // disable tab anchor “jump” when loading a page，這還不是最好的解法，因為選單明顯閃跳
+        // $(document).on('click','.tabs-component-tab-a',function(e){
+        //     window.removeEventListener('scroll', this.onScroll);
+        //         var st=window.pageYOffset;
+        //         $('html, body').animate({
+        //                 'scrollTop' : st
+        //         });
+        // });
+    },
+    beforeDestroy(){
+        window.removeEventListener('scroll', this.onScroll);
+        window.removeEventListener('click', this.closeElement);
+    },
+    created() {
+    },
+    methods: {
+        gtagTrack(eventName){
+            gtag('event', eventName);
+        },
+        closeTopDownload(){
+            closeTopDownload();
+        },
+        menuToggleOpen(){
+            menuToggleOpen();
+        },
+        menuDropDown(){
+            // var $this = this;
+            $(".list__item").unbind('click').on('click',".dropdown-trigger", function(){
+            var $self_parent = $(this).parents(".list__item"),
+                $self_dropdown = $(this).siblings(".dropdown"),
+                $near_dropdown = $self_parent.siblings().find(".dropdown");
+
+            $self_dropdown.slideToggle("fast");
+            $near_dropdown.slideUp("fast");
+            });
+        },
+        showMobileSearch(){
+            showMobileSearch();
+        },
+        MaskHide(){
+            MaskHide();
+        },
+        open_popup_DowloadApp(){
+            open_popup_DowloadApp();
+        },
+        openApp(){
+            //取得產品id
+            this.pagePid = this.$route.params.pid;
+            let pid = this.pagePid; 
+            
+            //scheme_link
+            let githubURL = new URL(window.location.href);
+            let pathName = githubURL.pathname;//URL的路徑部分（就是檔案目錄）
+            let pageName = pathName.substring(0,pathName.substr(1).indexOf('/')+1); //只取帶"/"的第一層路徑（page name）
+            var scheme_link = "cardcool://web?land_page=HomePage"
+            if(pathName == "/product_ranking/hot_sales"){
+                var scheme_link = "cardcool://web?land_page=HotSalesLeaderboard";
+            }else if(pathName == "/product_ranking/rookie"){
+                var scheme_link = "cardcool://web?land_page=RookiesLeaderboard";
+            }else if(pageName == "/product"){
+                var scheme_link = `cardcool://web?land_page=ProductDetail&landing_page_parameter=${pid}`;
+            }
+
+            //判斷裝置，網頁開啟APP
+            var u = navigator.userAgent;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios
+            if(isAndroid == true){
+            $(".oppenButton").show();
+            var download_link = "https://play.google.com/store/apps/details?id=com.ddrift.gemcard";
+            }
+            if(isiOS == true){
+            $(".oppenButton").show();
+            var download_link = "https://apps.apple.com/tw/app/cardcool-%E5%8D%A1%E5%BA%AB/id1367506627";
+            }
+            if (typeof isiOS === 'undefined') {
+                isiOS = false;
+            }
+            if (typeof isAndroid === 'undefined') {
+                isAndroid = false;
+            }
+            if(isiOS == true || isAndroid == true){
+                var appWindow = window.open(scheme_link,"_blank");
+
+                setTimeout( function () {
+                if (!appWindow) {
+                    appWindow.location = download_link;
+                }
+                },500);
+            }
+        },
+        closeAlert(){
+            closeAlert();
+        },
+        // menu bar fixed on top when scrolled
+        onScroll() {
+            const OFFSET = 60;
+            const headerHeight = 30;
+            if (window.pageYOffset < 0) {
+                return
+            }
+            if (Math.abs(window.pageYOffset - this.lastScrollPosition) < OFFSET) {
+                return
+            }
+            this.navbarFixed = window.pageYOffset > OFFSET && window.pageYOffset < this.lastScrollPosition
+            this.showNavbar = window.pageYOffset < this.lastScrollPosition
+            this.lastScrollPosition = window.pageYOffset
+            // console.log(this);
+        },
+        closeElement(e) {
+        // close desktop menu dropdown when click another element
+            if (!this.$el.contains(e.target)) {
+                this.toggle = !null;
+            }
+        },
+        
+    },
+    
+  }
+</script>

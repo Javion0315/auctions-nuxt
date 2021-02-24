@@ -1,0 +1,123 @@
+/* ------------------------------------
+ *  Width and Height
+ * ------------------------------------ */
+/*wrap*/
+/* ------------------------------------
+ *  Color
+ * ------------------------------------ */
+/* ------------------------------------
+ *  Font
+ * ------------------------------------ */
+/* ------------------------------------
+ *  page
+ * ------------------------------------ */
+/* product_ranking */
+/* ----------------------------------------------------------------------------------- */
+/* fix the mobile without hover */
+/* ----------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------- */
+/* UI style component */
+/* ----------------------------------------------------------------------------------- */
+/* extend */
+/* ----------------------------------------------------------------------------------- */
+
+.flexCenter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+
+.flexBetween {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.btn-track {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* states : */
+/* ----------------------------------------------------------------------------------- */
+.fixedTop {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 997;
+  -webkit-box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.21);
+          box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.21);
+  padding: 0.8rem 1rem;
+  margin: 0 !important;
+}
+
+.ellipsisWidth {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.limit {
+  position: relative;
+}
+
+.limit:after {
+  content: "...";
+  position: absolute;
+  bottom: 0;
+  z-index: 999;
+}
+
+.limit.name {
+  position: relative;
+  overflow: hidden;
+  height: 23px;
+}
+
+.limit-location {
+  height: 1.6rem;
+  line-height: 1.6rem;
+  display: block;
+  overflow: hidden;
+  margin: -2px 0 0 !important;
+}
+
+.limit-location:after {
+  content: "...";
+  position: absolute;
+  bottom: -7px;
+  z-index: 999;
+  left: 36%;
+}
+
+.active {
+  color: #C9B57E;
+}
+
+.btn-track {
+  background: none;
+  color: #4A90E2;
+  font-size: 0.9rem;
+}
+
+.text-decor-solid {
+  border-bottom: 1px solid;
+}
+/*# sourceMappingURL=states.css.map */

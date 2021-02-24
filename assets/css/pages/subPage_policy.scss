@@ -1,0 +1,124 @@
+// @import "compass/css3";
+@import "~assets/css/utilities/_variable";
+@import "~assets/css/utilities/_mixin";
+@import "~assets/css/utilities/_extend";
+@import "~assets/css/utilities/_media-queries";
+
+/* ----------------------------------------------------------------------------------- */
+/* .tabs-anchor .stickyTop (配合header navBar所設定的高度位置) */
+/* ----------------------------------------------------------------------------------- */
+.stickyTop--normal {
+    // width: 100vw;
+    position: fixed;
+    transform: translate3d(0, 0, 0);
+    transition: .3s all ease-out;
+}
+.tabs-anchor.stickyTop--normal.stickyTop--hidden {
+    transform: translate3d(0, -325%, 0);
+}
+.tabs-anchor.stickyTop--normal.stickyTop--fixed {
+    transform: translate3d(0, 4px, 0);
+    @include media('below-mobile') {
+        transform: translate3d(0, -9px, 0);
+    }
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* Policy title */
+/* ----------------------------------------------------------------------------------- */
+.textDecoration{
+    border-bottom: 1px solid;
+    padding-bottom: 2px;
+}
+.policy{
+    section{
+        &:not(.Policy){
+            border-top: 1px solid;
+        }
+    }
+    .title-m{
+        font-weight: bold;
+    }
+    ol, ul, li, dl, dd, dt {
+        list-style: inherit;
+        padding-left: 1.3rem;
+        margin: inherit;
+    }
+    ol > li{
+        list-style: decimal;
+        padding-left: 0;
+    }
+    ol.disc > li{
+        list-style: disc;
+        padding-left: 0;
+    }
+    ul > li{
+        list-style: disc;
+        border-radius: 0;
+    }
+    .textDecoration{
+        &:hover{
+            color: $textcColor-highlight;
+        }
+        
+    }
+    .bold{
+        font-weight: bold;
+    }
+}
+
+.policy{
+    .tabs-anchor{
+        background: #fff;
+        position: sticky;
+        top: 107px;
+        @include media('below-mobile') {
+            font-size: 4vmin;
+        }
+    }
+    ul.tab-anchor-tabs{
+        border: 1px solid $web-mainColor;
+        border-radius: 7px;
+        padding: 0.5rem 0;
+        margin: 0;
+        display: inline-block;
+        width: 100%;
+        background: #fff;
+        font-weight: bold;
+        // font-size: 1.2rem;
+        font-size: 90%;
+        @include media('below-mobile') {
+            border: none;
+            padding: 0.3rem 0 1rem;
+            font-size: 90%;
+            display: flex;
+        }
+    }
+    li.tab-anchor{
+        @extend %inlineBlock-top;
+        list-style: none;
+        cursor: pointer;
+        // width: calc(100% / 4);
+        width: calc(100% / 2);
+        margin: 0;
+        text-align: center;
+        float: left;
+        border-right: 1px solid $web-mainColor;
+        &:last-child(){
+            border-right: none;
+        }
+        @include media('below-mobile') {
+            border-bottom: 1px solid #001939;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .tab_flex li {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+        
+}
+
+

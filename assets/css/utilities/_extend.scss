@@ -1,0 +1,88 @@
+@import "./_media-queries";
+
+/* extend */
+/* ----------------------------------------------------------------------------------- */
+%floatButton{
+    -webkit-animation: float 1.3s ease-in-out 2.7s infinite alternate;
+    animation: float 1.3s ease-in-out 2.7s infinite alternate;
+}
+
+%imgObjectFit-cover{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+%btn-center{
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+%indexBlock-yellow{
+	background: $web-mainColor;	
+}
+
+%object-fit-cover{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+%container-width{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    @include media('below-medium') {
+       padding: 0 1rem;
+    }
+}
+
+%flexCenter,
+.flexCenter{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+%flexBetween,
+.flexBetween{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+%flexRow,
+.flexRow{
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row; 
+}
+%flexColumn,
+.flexColumn{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column ; 
+}
+%inlineBlock-middle{
+    display: inline-block;
+    vertical-align: middle;
+}
+%inlineBlock-top{
+    display: inline-block;
+    vertical-align: top;
+}

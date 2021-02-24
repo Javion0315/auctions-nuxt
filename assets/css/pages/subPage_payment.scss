@@ -1,0 +1,76 @@
+@charset "UTF-8";
+// @import "compass/css3";
+@import "../utilities/_variable";
+@import "../utilities/_mixin";
+@import "../base/reset";
+@import "../utilities/_extend";
+@import "../utilities/_media-queries";
+@import "../layout/_grids";
+@import "../base/iconfont/style";
+
+
+/* ----------------------------------------------------------------------------------- */
+/*  */
+/* ----------------------------------------------------------------------------------- */
+
+
+.payment{
+    width: 100vw;
+    height: 100vh;
+    .app_logo_badge{
+        @include media('below-tablet') {
+            width: 31vmin;
+            margin: 0 auto;
+        }
+        img{
+            width: 100%;
+            max-width:135px;
+            margin-bottom:1.5rem;
+        }
+    }
+    .text{
+        margin-bottom:1.5rem;
+        color: $web-mainColor;
+        font-size: 1.875rem;
+        line-height:32px;
+        font-weight:bold;
+        text-align:center;
+        @include media('below-tablet') {
+            font-size: 7.5vmin;
+        }
+    }
+    .btn-solid{
+        background: $web-secondaryColor;
+        border-radius: 2px;
+        padding: 6px 3rem;
+        @include media('below-tablet') {
+            width: 100%;
+        }
+        a{
+            font-size: 1.125rem;
+        }
+    }
+    p{
+        color: $textcColor-gray;
+        margin-bottom: 5rem;
+        line-height: 1.4rem;
+    }
+}
+
+.payment__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    max-width: 500px;
+    padding: 1rem;
+    z-index: 1002;
+    overflow: auto;
+    text-align: center;
+    border-radius: 7px;
+    @include media('below-tablet') {
+        width: 100%;
+    }
+}
+

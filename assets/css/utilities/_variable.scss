@@ -1,0 +1,55 @@
+/* ------------------------------------
+ *  Width and Height
+ * ------------------------------------ */
+
+/*wrap*/
+$inner-wrap-l : 1200px;
+$inner-wrap-m : 1170px;
+$inner-wrap-s : 1000px;
+$inner-wrap-ss : 720px;
+
+$headerNav-logo-width: 100px;
+$headerNav-logo-width-s: 87px;
+$full-width: 100vw;
+$container-width: 1100px;
+
+
+/* ------------------------------------
+ *  Color
+ * ------------------------------------ */
+$web-mainColor: #001939;
+$web-secondaryColor: #C7B179;
+$web-pointColor: #B40917;
+$textcColor-highlight: #C9B57E;
+$textcColor-light: #E4D7AB;
+$textcColor-gray: #979797;
+$borderColor-gray: #bbb;
+$textcColor-yellow: #ecb73a;
+$link-color: #000;
+$link-color-hover: #fff;
+$blueLink-color: #4A90E2;
+$gradient: linear-gradient(45deg, #D0A96B 0%, #F0DEAB 19%, #DFC58A 30%, #D0A96B 33%, #F3E9C5 61%, #F8F6DB 67%, #F5F2D3 67%, #ECE1B5 69%, #E4D59E 72%, #DFCC8E 74%, #DCC784 76%, #DBC581 80%, #D6BE7B 84%, #C8AB6B 89%, #B28B51 96%, #A37640 100%);
+
+/* ------------------------------------
+ *  Font
+ * ------------------------------------ */
+$base-font-size: 1rem; 
+$font-3XLarge: $base-font-size * 2.5; 
+$font-XXLarge: $base-font-size * 2.2; 
+$font-XLarge: $base-font-size * 1.6; 
+$font-Large: $base-font-size * 1.2; 
+$font-Medium: $base-font-size; 
+$font-Small: $base-font-size * 0.9; 
+$font-XSmall: $base-font-size * 0.8; 
+
+$font-family-Regular: 'Noto Sans', 'Noto Sans TC', 'Sanchez', 'Arial' , "Microsoft JhengHei", 'sans-serif', "微軟正黑體";
+$font-family-special: 'Sanchez', serif;
+
+/* ------------------------------------
+ *  page
+ * ------------------------------------ */
+ /* product_ranking */
+ $productList__item-width : 180px;
+//  $header-height-tablet : 6.5rem;
+ $header-height-tablet : 99px;
+ $header-height-desktop : 100px;

@@ -1,0 +1,44 @@
+// @import "compass/css3";
+@import "~assets/css/utilities/_variable";
+@import "~assets/css/utilities/_mixin";
+@import "~assets/css/utilities/_extend";
+@import "~assets/css/utilities/_media-queries";
+
+/* ----------------------------------------------------------------------------------- */
+/* news title */
+/* ----------------------------------------------------------------------------------- */
+.article {
+    ol, ul, li, dl, dd, dt {
+        list-style: inherit;
+        padding-left: 1.3rem;
+        margin: inherit;
+    }
+    ol > li{
+        list-style: decimal;
+        padding-left: 0;
+    }
+    ol.disc > li{
+        list-style: disc;
+        padding-left: 0;
+    }
+    ul > li{
+        list-style: disc;
+        border-radius: 0;
+    }
+    p a{
+        color: #c3ad72;
+        font-weight: bold;
+    }
+    a {
+        color: #c3ad72;
+        font-weight: bold;
+    }
+    &__subTitle {
+        font-size: 1.6rem;
+    }
+    &__image {
+        width: 100%;
+    }
+}
+
+

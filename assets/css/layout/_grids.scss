@@ -1,0 +1,131 @@
+
+// @import "susy";
+// @import "breakpoint";
+
+
+//使用 map setting
+// $susy: (
+//   	flow: ltr,
+//   	math: fluid,
+//   	output: float,
+//   	gutter-position: after,
+//   	container: auto,
+//   	container-position: center,
+//   	columns: 4,
+//   	gutters: .25,
+//   	column-width: false, //固定柵欄的寬度，若指定如60px，可以固定總體寬度
+//   	global-box-sizing: border-box, 
+//   	last-flow: to,
+//   	debug: (
+//   	  	image: show, //開發時使用show可看到柵欄，使用hide關閉柵欄顯示
+//   	  	color: rgba(#66f, .25),
+//   	  	output: background,
+//   	  	toggle: top right,
+//   	),
+//   	use-custom: (
+//   	  	background-image: true,
+//   	  	background-options: false,
+//   	  	box-sizing: true,
+//   	  	clearfix: false,
+//   	  	rem: true,
+//   	)
+// );
+ 
+//設定三種尺寸
+// $break_layout : (
+// 	mobile: (break:  0px,layout: 4), 
+// 	pad: (break:  640px,layout: 8), 
+// 	desktop: (break:  1280px,layout: 12)
+// );
+
+
+
+section{
+	padding: 2rem 0;
+}
+
+
+//12 Column Grid System
+// $gutter-width:2rem;
+$gutter-width:1rem;
+$grid-num:12;
+
+.container{
+    width: 100%;
+    max-width:1100px;
+    margin: 10px auto;
+    padding-right: $gutter-width;
+    padding-left: $gutter-width;
+}
+.container-mobileFullWidth{
+    width: 100%;
+    max-width:1100px;
+    margin: 10px auto;
+    padding-right: $gutter-width;
+    padding-left: $gutter-width;
+    @include media('below-tablet') {
+        padding: 0;
+    }
+}
+
+.row{
+    display:flex !important;
+    // margin-left: -15px;
+    // margin-right: -15px;
+    flex-wrap:wrap !important;
+}
+
+%col{
+    padding-left: $gutter-width / 2;
+    padding-right: $gutter-width / 2;
+	box-sizing:border-box;
+}
+
+@for $i from 1 through $grid-num{
+    .col-#{$i}{
+		@extend %col;
+		width: 100% * ($i / $grid-num ); 
+		@include media('below-tablet') { 
+			width: 100%;
+		}
+    }
+}
+/* ----------------------------------------------------------------------------------- */
+/* RWD grids ( custom )*/
+/* ----------------------------------------------------------------------------------- */
+
+/* ------------------------------------ */
+/* column mixins  (sass官方mixin) */
+/* ------------------------------------ */
+@mixin col ($col, $sum, $gap: 1em, $align: top, $first: false, $last: false) {
+	width: percentage($col/$sum);
+	display: inline-block;
+    font-size: 16px;
+    padding-left: if($first, 0, $gap);
+    padding-right: if($last, 0, $gap);
+	vertical-align: $align;
+	
+	@include media('below-tablet') {
+		width: 100%;
+		padding: 0;
+	}
+
+    &.fluid { width: percentage($col/$sum); }
+}
+
+/* ------------------------------------ */
+/* Product List  (左右對齊邊界) */
+/* ------------------------------------ */
+
+
+// @mixin ProductList-grid ($cloum_number, $cloum_gutter) {
+//     $sum_cloum_gutter: 100% / $cloum_number;
+//     width: $sum_cloum_gutter - ($cloum_gutter - 1);
+//     // width: 100% / $cloum_number - ($cloum_gutter * $cloum_number - 1) ;
+//     margin-right: $cloum_gutter;
+//     box-sizing: border-box;
+//     //item每到欄位數的倍數時，貼齊右側
+//     &:nth-child(#{$cloum_number}n){
+//         margin-right: 0
+//     }
+// }

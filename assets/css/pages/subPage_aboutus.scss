@@ -1,0 +1,87 @@
+@charset "UTF-8";
+// @import "compass/css3";
+@import "../utilities/_variable";
+@import "../utilities/_mixin";
+@import "../utilities/_extend";
+@import "../utilities/_media-queries";
+// @import "../pages/subPage_common";
+
+/* ----------------------------------------------------------------------------------- */
+/*  */
+/* ----------------------------------------------------------------------------------- */
+
+.aboutUs{
+    .img{
+        width: 60%;
+        clip-path: polygon(23% 0, 100% 0, 79% 100%, 0 101%);
+        @include media('below-small') {
+            width: 100%;
+            background: #0e284b;
+            clip-path: inherit;
+        }
+    }
+    img{
+        @include media('below-small') {
+            transform: translateX(0) !important;
+        }
+    }
+    .text{
+        width: 35%;
+        @include media('below-small') {
+            width: 100%;
+            padding: 4% 6%;
+        }
+    }
+    .flexRow{
+        @include media('below-small') {
+            flex-direction: column !important;
+        }
+    }
+    .fullWidthBg{
+        @include media('below-small') {
+            background: none !important;
+        }
+    }
+    
+}
+
+.keyCards{
+    .fullWidthBg{
+        background: linear-gradient(to right,#0e284b 35%, transparent 0%);
+    }
+}   
+.marketTrend{
+    .flexRow{
+        flex-direction: row-reverse
+    }
+    .fullWidthBg{
+        background: linear-gradient(to left,#0e284b 35%, transparent 0%);
+    }
+    img{
+        transform: translateX(3%);
+    }
+}
+/* ----------------------------------------------------------------------------------- */
+/* animation */
+/* ----------------------------------------------------------------------------------- */
+
+.text_anime {
+    position: relative;
+    overflow: hidden;
+    &::after{
+      content: "";
+      background-color: #fff;
+      display: block;
+      width: 150%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation-name: img_anime;
+      animation-duration: 1.3s;
+      animation-delay: .5s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: both;
+      animation-iteration-count: 1;
+    }
+  }
