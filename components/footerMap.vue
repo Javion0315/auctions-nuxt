@@ -42,31 +42,12 @@
                     <div class="row">
                         <div class="footerMap__list__item list__item">
                             <p class="title-m dropdown-trigger" v-on:click="menuDropDown">Popular Releases</p>
-                            <ul class="mapLink dropdown">
-                                <li class="mapLink__item" v-for="(item, index) in HomePageData.sales" :key="index">
-                                    <nuxt-link :to="localePath(`/product/${item.product.product_id}`)">
-                                        {{ item.playerName }} {{ item.product.basecamp }} {{ item.product.subcamp }}
-                                    </nuxt-link>
-                                </li>
-                            </ul>
                         </div>
                         <div class="footerMap__list__item list__item">
                             <p class="title-m dropdown-trigger" v-on:click="menuDropDown">Popular Basketball Rookie Cards</p>
-                            <ul class="mapLink dropdown">
-                                <li class="mapLink__item" v-for="(item, index) in HomePageData.rookie" :key="index">
-                                    <nuxt-link :to="localePath(`/product/${item.product.product_id}`)">
-                                        {{ item.playerName }} {{ item.product.basecamp }} {{ item.product.subcamp }}
-                                    </nuxt-link>
-                                </li>
-                            </ul>
                         </div>
                         <div class="footerMap__list__item list__item">
                             <p class="title-m dropdown-trigger" v-on:click="menuDropDown">News</p>
-                            <ul class="mapLink dropdown">
-                                <li class="mapLink__item" v-for="(item, index) in HomePageData.news" :key="index">
-                                    <a :href="item.web_url" target="_blank">{{ item.headline }}</a>
-                                </li>
-                            </ul>
                         </div>
                         <div class="footerMap__list__item list__item">
                             <p class="title-m dropdown-trigger" v-on:click="menuDropDown">About GemCard</p>
@@ -143,7 +124,6 @@ export default {
     components: {
       footerBanner,
     },
-    props: ['HomePageData'],
     data () {
         return {				
         }

@@ -1,5 +1,5 @@
 import request from '~/service';
 
 export function getHomePageData() {
-    return request.get('/homePage');
+    return request.post('/home.do');
 }

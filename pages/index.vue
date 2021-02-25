@@ -1,34 +1,14 @@
 <template>
   <div>
-
      <section class="mainV clearfix waypoint" v-waypoint="{ active: true, callback: onWaypoint_mainV, options: intersectionOptions }">
             <div class="mainV-bg">
                 <div class="swiper swiperBox" v-swiper:swiper="swiperOption_banner" ref="swiperBox">
                     <div class="swiper-wrapper container">
-                        <div class="swiper-slide" v-for="(item,i) in banners" :key="i">
+                        <div class="swiper-slide" v-for="(item,i) in carouseList" :key="i">
                             <div class="mainV-innerBox">
                                 <div class="clip"></div>
                                 <div class="mainV__img">
-                                    <img :src="require(`~/assets/images/${item.banner}`)">
-                                </div>
-                                <div class="mainV__text">
-                                    <h1 class="title loading">
-                                      <div class="slantMask-item">
-                                          <span class="def def1">{{ item.title_line1 }}</span>
-                                          <span class="cover cover1"></span>
-                                      </div>
-                                      <div class="slantMask-item">
-                                          <span class="def def2">{{ item.title_line2 }}</span>
-                                          <span class="cover cover2"></span>
-                                      </div>
-                                    </h1>
-                                    <h2 class="summary">
-                                        <span class="displayBlock">{{ item.summary1 }}</span>
-                                        <span class="displayBlock">{{ item.summary2 }}</span>
-                                        <span class="displayBlock">{{ item.summary3 }}</span>
-                                    </h2>
-                                    <div class="btn btn-white" v-on:click="open_popup_DowloadApp() ; gtagTrack('Download_SellNow')">{{ item.btn }}</div>
-                                    <!-- <nuxt-link :to="item.btn_link" class="btn btn-white">{{ item.btn }}</nuxt-link> -->
+                                    <img :src="imgPath + item.image">
                                 </div>
                             </div>
                         </div>
@@ -38,30 +18,37 @@
             </div>
      </section>
 
-      <section class="hotProduct product"> 
+    <section> 
           <div class="container">
-              <h2 class="heading-l txtCenter">TRENDING CARDS</h2>
+            <h1 class="heading-l txtCenter">GemCard Auction</h1>
+            <!-- Featuring Auction Items -->
               <div class="mvp hotProduct__section">
                   <div class="hotProduct__section__head flexBetween">
-                      <h3 class="title-m">HOT SALES</h3>
-                          <nuxt-link :to="localePath('/product_ranking/hot_sales/silver')" class="showall" @click.native="gtagTrack('HomePage_HotSale_SeeAll')">
-                              Show all <i class="icon icon-arrow-right"></i>
-                          </nuxt-link>
+                    <div>
+                      <h2 class="title-m" style="font-weight: bold; font-size: 1.8rem; margin-bottom: 0.5rem;">Featuring Auction Items</h2>
+                      <h5>BASEBALL CARDS / SPORT COLLECTIBLES / MEMORABILIA</h5>
+                    </div>
+                      
+                      <div class="showall">
+                        <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="showall" @click.native="gtagTrack('HomePage_Rookie_SeeAll')">
+                            Show all <i class="icon icon-arrow-right"></i>
+                        </nuxt-link>
+                      </div>
                   </div>
                   <div class="mvpList slideList">
-                      <div class="swiper swiperBox" v-swiper:swiper2="swiperOption_mvp" ref="swiperBox2">
+                      <div class="swiper swiperBox" v-swiper:swiper2="swiperOption_Items" ref="swiperBox2">
                           <div class="swiper-wrapper">
-                              <div class="swiper-slide" v-for="(item, index) in hotSales" :key="index">
+                              <div class="swiper-slide" v-for="(item, index) in items" :key="index">
                                   <div class="mvpList__item productList__item" v-if="index === 10">
                                       <nuxt-link :to="localePath('/product_ranking/hot_sales/silver')" class="seeMore">
                                           <span class="seeMore__text">See More</span>
                                       </nuxt-link>
                                   </div>
                                    <div class="mvpList__item productList__item" v-else>
-                                      <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.product.product_id }})" 
+                                      <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.id }})" 
                                       @click.native="gtagTrack('HomePage_HotSale_Player')">
                                           <div class="productList__item__img product__imgMask">
-                                              <img :src="imgPath + salesImg[index]" :alt="item.title">
+                                              <img :src="imgPath + item.images[0]" :alt="item.title">
                                               <svg class="clip-svg imgMask" width="0" height="0">
                                                 <defs>
                                                   <clipPath id="clip-shape" clipPathUnits="objectBoundingBox" >
@@ -71,38 +58,52 @@
                                               </svg>
                                           </div>
                                           <div class="text">
-                                            <h4 class="title ellipsis" v-if="$i18n.locale === 'zh-cn'">{{ item.product.chinese_name }} {{ item.product.basecamp }} {{ item.product.subcamp }}</h4>
-                                            <h4 class="title ellipsis" v-else>{{ item.playerName }} {{ item.product.basecamp }} {{ item.product.subcamp }}</h4>
+                                            <h4 class="title ellipsis" style="color: #001939">{{ item.title }}</h4>
                                             <div class="row">
-                                              <div class="price"><span class="lastSale">Last Sale</span>
-                                                <span class="dollar" v-if="item.gemcardPrice <= '0'">
-                                                  US$--
+                                              <div class="price" style="margin-bottom: 8px"><span class="lastSale">預估價: US{{ item.estimated_price }}</span>
+                                              </div>
+                                              <div style="display: flex; justify-content: space-between; width: 86%; height: 30px;">
+                                                <div class="btn btn-solid" v-if="item.status === 1"
+                                                  style="background-color: #C9B57E;
+                                                    height: 25px;
+                                                    display: flex;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                    font-size: 12px;
+                                                    margin: 10px 0px">
+                                                  Bidding
+                                                </div>
+                                                <div class="btn btn-solid"
+                                                  style="background-color: lightgray;
+                                                    height: 25px;
+                                                    display: flex;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                    font-size: 12px;
+                                                    margin: 10px 0px">
+                                                  {{ item.bids }} Bids
+                                                </div>
+                                              </div>
+                                              <div>
+                                                <span class="lastSale" style="color: darkgray">{{ item.special_name }}                                          
                                                 </span>
-                                                <span class="dollar" v-else>
-                                                  US${{ Math.floor(item.gemcardPrice)/100 }}
-                                                </span>
                                               </div>
-                                              <div class="btn btn-solid priceDown" :class="{'priceUp': item.priceUp >= 0 }" v-if="item.priceUp >= 0">
-                                                +{{ item.priceUp | setPriceUp }}%
-                                              </div>
-                                              <div class="btn btn-solid priceDown" :class="{'priceUp': item.priceUp >= 0 }" v-else>
-                                                {{ item.priceUp | setPriceUp }}%
-                                              </div>
+                                              
                                             </div>
-                                          </div>
+                                        </div>
                                       </nuxt-link>
                                   </div>
                               </div>
                           </div>
-                          <div class="swiper-pagination swp_mvp"  slot="pagination"></div>
-                          <div class="swiper-button-prev swp_mvp" slot="button-prev"></div>
-                          <div class="swiper-button-next swp_mvp" slot="button-next"></div> 
+                          <div class="swiper-button-prev swp_Items" slot="button-prev"></div>
+                          <div class="swiper-button-next swp_Items" slot="button-next"></div> 
                       </div>
                   </div>
               </div>
+              <!-- Current Auctions -->
               <div class="rookie hotProduct__section">
                   <div class="hotProduct__section__head flexBetween">
-                      <h3 class="title-m">ROOKIE</h3>
+                      <h3 class="title-m" style="font-weight: bold; font-size: 1.8rem; margin-bottom: 0.5rem;">Current Auctions</h3>
                       <div class="showall">
                         <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="showall" @click.native="gtagTrack('HomePage_Rookie_SeeAll')">
                             Show all <i class="icon icon-arrow-right"></i>
@@ -110,268 +111,80 @@
                       </div>
                   </div>
                   <div class="rookieList slideList">
-                      <div class="swiper swiperBox" v-swiper:swiper3="swiperOption_rookie" ref="swiperBox3">
+                      <div class="swiper swiperBox" v-swiper:swiper3="swiperOption_Current" ref="swiperBox3">
                           <div class="swiper-wrapper">
-                              <div class="swiper-slide" v-for="(item, index) in rookie" :key="index">
+                              <div class="swiper-slide" v-for="(item, index) in currentList" :key="index">
                                   <div class="rookieList__item productList__item" v-if="index == 10">
                                     <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="seeMore">
                                       <span class="seeMore__text">See More</span>
                                     </nuxt-link>
                                   </div>
                                   <div class="rookieList__item productList__item" v-else>
-                                    <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.product.product_id }})" 
+                                    <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.id }})" 
                                     @click.native="gtagTrack('HomePage_Rookie_Player')">
-                                      <div class="product__imgMask"><img :src="imgPath + rookieImg[index]" :alt="item.title"></div>
+                                      <div class="product__imgMask"><img :src="imgPath + item.image" :alt="item.title"></div>
                                       <div class="text">
-                                        <h4 class="title ellipsis" v-if="$i18n.locale === 'zh-cn'">{{ item.product.chinese_name }} {{ item.product.basecamp }} {{ item.product.subcamp }}</h4>
-                                        <h4 class="title ellipsis" v-else>{{ item.playerName }} {{ item.product.basecamp }} {{ item.product.subcamp }}</h4>
+                                        <h4 class="title ellipsis" style="color: #001939">{{ item.title }}</h4>
+                                        <div class="row">
+                                          <div class="price" style="margin-bottom: 8px">
+                                            <span class="lastSale" style="color: darkgray">{{ item.start_time }}-{{ item.end_time }}                                              
+                                            </span>
+                                          </div>
+                                        </div>
                                       </div> 
                                     </nuxt-link>
                                   </div>
                               </div>
                           </div>
-                          <div class="swiper-pagination swp_rookie"  slot="pagination"></div>
-                          <div class="swiper-button-prev swp_rookie" slot="button-prev"></div>
-                          <div class="swiper-button-next swp_rookie" slot="button-next"></div> 
+                          <div class="swiper-button-prev swp_Current" slot="button-prev"></div>
+                          <div class="swiper-button-next swp_Current" slot="button-next"></div> 
                       </div>
                   </div>
               </div>
-              <div class="popular tabs-component hotProduct__section">
-                  <h3 class="title-l txtCenter">POPULAR</h3>
-                  <tabs :options="{ useUrlFragment: false }">
-                    <!--<tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged" >-->
-                      <tab name="RISERS">
-                          <ul class="tabList popular__tabList">
-                              <li class="tabList__item popular__tabList__item "
-                              v-for="(item, index) in highest" :key="index">
-                                  <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.product.product_id }})" 
-                                  class="itemInner" 
-                                  @click.native="gtagTrack('HomePage_Popular_Highest_Player')">
-                                      <div class="left">
-                                          <div class="ranking"><span class="number">{{ index+1 }}</span></div>
-                                          <div class="product__imgMask"><img :src="imgPath + highestImg[index]" alt="Jaren Jackson Jr. Prizm Base"></div>
-                                          <div class="text">
-                                              <div class="name" v-if="$i18n.locale === 'zh-cn'">{{ item.product.chinese_name }} {{ item.product.basecamp }} {{ item.product.subcamp }}</div>
-                                              <div class="name" v-else>{{ item.playerName }} {{ item.product.basecamp }} {{ item.product.subcamp }}</div>
-                                              <div class="years">{{ item.product.is_rc === true ? 'RC' : '' }} {{ item.product.grader }} {{ item.product.grade }} {{ item.product.seasons }}</div>
-                                              <div class="price">
-                                                <span class="lastSale">Last Sale</span>
-                                                <span class="dollar" v-if="item.gemcardPrice <= '0'"> US$--</span>
-                                                <span class="dollar" v-else> US${{ Math.floor(item.gemcardPrice)/100 }}</span>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="btn btn-solid priceDown" :class="{'priceUp': item.priceUp >= 0 }" v-if="item.priceUp >= 0">
-                                        +{{ item.priceUp | setPriceUp }}%
-                                      </div>
-                                      <div class="btn btn-solid priceDown" :class="{'priceUp': item.priceUp >= 0 }" v-else>
-                                        {{ item.priceUp | setPriceUp }}%
-                                      </div>
-                                  </nuxt-link>
-                              </li>
-                          </ul>
-                      </tab>
-                      <tab name="FALLERS">
-                          <ul class="tabList popular__tabList">
-                              <li class="tabList__item popular__tabList__item"
-                              v-for="(item, index) in lowest" :key="index">
-                                  <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.product.product_id }})" 
-                                  class="itemInner" 
-                                  @click.native="gtagTrack('HomePage_Popular_Lowest_Player')">
-                                      <div class="left">
-                                          <div class="ranking"><span class="number">{{ index+1 }}</span></div>
-                                          <div class="product__imgMask"><img :src="imgPath + lowestImg[index]" alt="Jaren Jackson Jr. Prizm Base"></div>
-                                          <div class="text">
-                                              <div class="name" v-if="$i18n.locale === 'zh-cn'">{{ item.product.chinese_name }} {{ item.product.basecamp }} {{ item.product.subcamp }}</div>
-                                              <div class="name" v-else>{{ item.playerName }} {{ item.product.basecamp }} {{ item.product.subcamp }}</div>
-                                              <div class="years">{{ item.product.is_rc === true ? 'RC' : '' }} {{ item.product.grader }} {{ item.product.grade }} {{ item.product.seasons }}</div>
-                                              <div class="price">
-                                                <span class="lastSale">Last Sale</span>
-                                                <span class="dollar" v-if="item.gemcardPrice <= '0'"> US$--</span>
-                                                <span class="dollar" v-else> US${{ Math.floor(item.gemcardPrice)/100 }}</span>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="btn btn-solid priceDown" :class="{'priceUp': item.priceUp >= 0 }" v-if="item.priceUp >= 0">
-                                        +{{ item.priceUp | setPriceUp }}%
-                                      </div>
-                                      <div class="btn btn-solid priceDown" :class="{'priceUp': item.priceUp >= 0 }" v-else>
-                                        {{ item.priceUp | setPriceUp }}%
-                                      </div>
-                                  </nuxt-link>
-                              </li>
-                          </ul>
-                      </tab>
-                  </tabs>
-              </div>
-          </div>
-      </section>
-      <!-- 0923隱藏此區塊，改成直接顯示howitworks -->
-      <!-- <section class="ourAdvantage container" v-waypoint="{ active: true, callback: onWaypoint_ourAdvantage, options: intersectionOptions }">
-          <h2 class="heading-l txtCenter">Why Trade on GemCard?</h2>
-          <ul class="ourAdvantage__features-list row">
-              <li class="item waypoint">
-                <h3 class="title-l">Lowest Commission</h3>
-                <p class="summary">5% commission is the only cost for each trade. GemCard is made for professional, active traders looking to maximize profits.</p>
-              </li>
-              <li class="item waypoint">
-                <h3 class="title-l">Fast Trades</h3>
-                <p class="summary">Traders buy and sell cards as stocks. No need for shipping time and trial periods.Increased frequency makes the market more active.</p>
-              </li>
-              <li class="item waypoint">
-                <h3 class="title-l">Hobby Shop Network</h3>
-                <p class="summary">GemCard collaborates with well-trusted local sports card shops. Consign your cards with professional help and peace of mind.</p>
-              </li>
-          </ul>
-          <table class="advantage rwdTable rwdTable--flip">
-              <thead>
-              <tr>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-                <th>Commission</th>
-                <th>Waiting time</th>
-                <th>Consignment fee</th>
-                <th>Trust</th>
-                <th>Market Trends</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <th><i class="icon icon-award"></i></th>
-                <th>GemCard</th>
-                <td>5%</td>
-                <td>Instant</td>
-                <td>Free</td>
-                <td><i class="icon-check"></i></td>
-                <td><i class="icon-check"></i></td>
-              </tr>
-              <tr>
-                <th>&nbsp;</th>
-                <th>eBay</th>
-                <td>15%</td>
-                <td>Around 14 days</td>
-                <td>$3</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <th>&nbsp;</th>
-                <th>StockX</th>
-                <td>3%</td>
-                <td>Around 10 days</td>
-                <td>8% ~ 9.5%</td>
-                <td>-</td>
-                <td><i class="icon-check"></i></td>
-              </tr>
-              <tr>
-                <th>&nbsp;</th>
-                <th>Instagram</th>
-                <td>Depends on seller</td>
-                <td>Depends on seller</td>
-                <td>Depends on seller</td>
-                <td>Depends on seller</td>
-                <td>Depends on seller</td>
-              </tr>
-              </tbody>
-          </table>
-          <div class="clearfix txtCenter">
-                <nuxt-link to="/howitworks" class="btn btn-secondary btn-biggest">How It Works</nuxt-link>
-          </div>
-      </section> -->
-      <div class="sectionBg">
-          <section class="selling container waypoint" v-waypoint="{ active: true, callback: onWaypoint_selling, options: intersectionOptions }">
-              <h2 class="heading-l txtCenter">Buying on GemCard</h2>
-              <div class="stepList selling__stepList">
-                  <div class="item selling__item">
-                    <div class="icon-cricle">
-                        <i class="icon icon-Authentication"></i>
-                    </div>   
-                    <div class="text">
-                        <h3 class="title-l">Register as a Member</h3>
-                        <p class="summary">Once registered as a member, you can access all the great cards and valuable market information on GemCard in just a few clicks.</p>
-                    </div>
-                  </div>
-                  <div class="item selling__item">
-                    <div class="icon-cricle">
-                        <i class="icon icon-EarnMoney"></i>
-                    </div>   
-                    <div class="text">
-                        <h3 class="title-l">View Updated Market Trends</h3>
-                        <p class="summary">Information is gathered from many different marketplaces. These trends can help you make smart purchasing decisions.</p>
-                    </div>
-                  </div>
-                  <div class="item selling__item">
-                    <div class="icon-cricle">
-                        <i class="icon icon-graded-cards"></i>
-                    </div>   
-                    <div class="text">
-                        <h3 class="title-l">Shop with Confidence</h3>
-                        <p class="summary">Every card on GemCard is graded by the world’s two largest third-party sports card authentication services. By cards directly or place a bid on an auction.</p>
-                    </div>
-                  </div>
-                  <div class="item selling__item">
-                    <div class="icon-cricle">
-                        <i class="icon icon-getcards"></i>
-                    </div>   
-                    <div class="text">
-                        <h3 class="title-l">Get Gem Mint Cards</h3>
-                        <p class="summary">After you buy a card or place a winning bid, you can choose to have it mailed to you in 7-10 business days.</p>
-                    </div>
-                  </div>
-              </div>
-          </section>
-      </div>
 
-      <!-- 等球卡網頁有自己的News時再開啟此版本設計 -->
-      <!-- <section class="container">
-          <figure>
-              <div class="row news waypoint" v-waypoint="{ active: true, callback: onWaypoint_news, options: intersectionOptions }">
-                  <div class="news__img">
-                        <img src="~assets/images/news.jpg" alt="新聞插圖">
+              <!-- Upcoming Auctions -->
+               <div class="rookie hotProduct__section">
+                  <div class="hotProduct__section__head flexBetween">
+                      <h3 class="title-m" style="font-weight: bold; font-size: 1.8rem; margin-bottom: 0.5rem;">Upcoming Auctions</h3>
+                      <div class="showall">
+                        <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="showall" @click.native="gtagTrack('HomePage_Rookie_SeeAll')">
+                            Show all <i class="icon icon-arrow-right"></i>
+                        </nuxt-link>
+                      </div>
                   </div>
-                  <div class="news__text">
-                      <h2 class="heading-l">News</h2>
-                      <figcaption>
-                          <h3 class="title-l">Why Investors Should Buy Mickey Mantle's 'True' 1951 Bowman Rookie Card Instead Of His 1952 Topps</h3>
-                          <div class="date">Posted May 14, 2019</div>
-                          <p class="summary">
-                              Last year, Super Bowl champion Evan Mathis, sold a mint PSA 9 (on a scale of one to ten) 1952 Topps Mickey Mantle for $2.9 million in a Heritage auction. If one of the three existing gem mint PSA 10s came up for sale, it would command $10 million.….
-                          </p>
-                      </figcaption>
-                      <div class="news__button">
-                          <span class="btn btn-primary fluid"><a href="#">Full Article</a></span>
-                          <span class="btn btn-primary fluid"><a href="#">More News</a></span>
+                  <div class="rookieList slideList">
+                      <div class="swiper swiperBox" v-swiper:swiper4="swiperOption_Upcoming" ref="swiperBox4">
+                          <div class="swiper-wrapper">
+                              <div class="swiper-slide" v-for="(item, index) in upcomingList" :key="index">
+                                  <div class="rookieList__item productList__item" v-if="index == 10">
+                                    <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="seeMore">
+                                      <span class="seeMore__text">See More</span>
+                                    </nuxt-link>
+                                  </div>
+                                  <div class="rookieList__item productList__item" v-else>
+                                    <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.id }})" 
+                                    @click.native="gtagTrack('HomePage_Rookie_Player')">
+                                      <div class="product__imgMask"><img :src="imgPath + item.image" :alt="item.title"></div>
+                                      <div class="text">
+                                        <h4 class="title ellipsis" style="color: #001939">{{ item.title }}</h4>
+                                        <div class="row">
+                                          <div class="price" style="margin-bottom: 8px">
+                                            <span class="lastSale" style="color: darkgray">{{ item.start_time }}-{{ item.end_time }}                                              
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div> 
+                                    </nuxt-link>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="swiper-button-prev swp_Upcoming" slot="button-prev"></div>
+                          <div class="swiper-button-next swp_Upcoming" slot="button-next"></div> 
                       </div>
                   </div>
               </div>
-          </figure>
-      </section> -->
-
-      <section class="container">
-          <figure>
-              <div class="news waypoint" v-waypoint="{ active: true, callback: onWaypoint_news, options: intersectionOptions }">
-                  <h2 class="heading-l txtCenter">News</h2>
-                  <div class="newsList-outer">
-                      <ul class="newsList clearfix">
-                          <li class="newsItem col-6" v-for="(item, index) in news" :key="index" style="margin-bottm: 10px;">
-                              <a :href="item.web_url" target="_blank" class="row">
-                              <div class="news__img col-4">
-                                <img :src="imgPath + item.image_url" alt="新聞插圖">
-                              </div>
-                              <div class="news__text col-8">
-                                <figcaption style="height: 165px">
-                                    <h3 class="title-m">{{ item.headline }}</h3>
-                                    <div class="date"><span class="posted mobileHide">Posted</span>{{ item.ESPN_created_at | setTime }} ago</div>
-                                </figcaption>
-                              </div>
-                            </a>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </figure>
+          </div>
       </section>
-      <!-- <pre>{{ homePage.news }}</pre> -->
   </div>
 </template>
 
@@ -504,18 +317,18 @@ const moment = require('moment');
             preloadImages: false,
             lazy: true
         },
-        swiperOption_mvp: {
+        swiperOption_Items: {
             speed:1000,
             slidesPerView: 5,
             spaceBetween : 25,
             centeredSlides: false,
             pagination: {
-                el: '.swiper-pagination.swp_mvp',
+                el: '.swiper-pagination.swp_Items',
                 clickable: true
             },
             navigation: {
-                nextEl: '.swiper-button-next.swp_mvp',
-                prevEl: '.swiper-button-prev.swp_mvp',
+                nextEl: '.swiper-button-next.swp_Items',
+                prevEl: '.swiper-button-prev.swp_Items',
             },
             // mousewheel: true,
             preloadImages: false,
@@ -538,18 +351,18 @@ const moment = require('moment');
             },
 
         },
-        swiperOption_rookie: {
+        swiperOption_Current: {
             speed:1000,
-            slidesPerView: 6,
+            slidesPerView: 3,
             spaceBetween : 35,
             centeredSlides: false,
             pagination: {
-                el: '.swiper-pagination.swp_rookie',
+                el: '.swiper-pagination.swp_Current',
                 clickable: true
             },
             navigation: {
-                nextEl: '.swiper-button-next.swp_rookie',
-                prevEl: '.swiper-button-prev.swp_rookie',
+                nextEl: '.swiper-button-next.swp_Current',
+                prevEl: '.swiper-button-prev.swp_Current',
             },
             // mousewheel: true,
             preloadImages: false,
@@ -569,37 +382,53 @@ const moment = require('moment');
               }
             }
         },
-        news: [],
-        sales: [],
-        rookie: [],
-        highest: [],
-        lowest: [],
-        salesImg: [],
-        rookieImg: [],
-        highestImg: [],
-        lowestImg: [],
+        swiperOption_Upcoming: {
+            speed:1000,
+            slidesPerView: 3,
+            spaceBetween : 35,
+            centeredSlides: false,
+            pagination: {
+                el: '.swiper-pagination.swp_Upcoming',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next.swp_Upcoming',
+                prevEl: '.swiper-button-prev.swp_Upcoming',
+            },
+            // mousewheel: true,
+            preloadImages: false,
+            lazy: true,
+            breakpoints: {
+              768:{
+                spaceBetween : 28,
+                centeredSlides: true,
+                slidesOffsetBefore: -280,
+                slidesPerView: 4.5,
+              },
+              450:{
+                spaceBetween : 20,
+                centeredSlides: true,
+                slidesOffsetBefore: -105,
+                slidesPerView: 2.7,
+              }
+            }
+        },
         imgPath: '',
       }
     },
     computed: {
-      homePage(){
-        return this.$store.state.homePage.homePage;
+      currentList(){
+        return this.$store.state.homePage.currentList;
       },
-      espn_news(){
-        return this.$store.state.homePage.news;
+      items() {
+        return this.$store.state.homePage.items;
       },
-      hotSales(){
-        return this.$store.state.homePage.hotSales;
+      upcomingList() {
+        return this.$store.state.homePage.upcoming;
       },
-      priceUpHigestFive(){
-        return this.$store.state.homePage.priceUpHigestFive;
-      },
-      priceUpLowestFive(){
-        return this.$store.state.homePage.priceUpLowestFive;
-      },
-      rcPlayers(){
-        return this.$store.state.homePage.rcPlayers;
-      },
+      carouseList() {
+        return this.$store.state.homePage.carouseList;
+      }
     },
     filters: {
       setTime(value) {
@@ -626,7 +455,7 @@ const moment = require('moment');
       },
     },
     created() {
-      this.getData();
+      // this.getData();
       this.imgPath = process.env.IMAGE_DOMAIN;
     },
     mounted () {  
@@ -641,45 +470,6 @@ const moment = require('moment');
       },
       gtagTrack(eventName){
           gtag('event', eventName);
-      },
-      getData() {
-          this.news = this.$store.state.homePage.news; // 取得news資料
-          this.sales = this.$store.state.homePage.hotSales; // 取得sales資料
-          const hotSalesLength = this.$store.state.homePage.hotSales.length;
-          for (let i = 0; i <= hotSalesLength; i++) {
-            if (this.sales[i]) {
-              let getSalesImg = [];
-              getSalesImg = JSON.parse(this.sales[i].product.image);
-              this.salesImg.push(getSalesImg[0].url);
-            }
-          }
-          this.rookie = this.$store.state.homePage.rcPlayers; // 取得rookie資料
-          let rookieLength = this.$store.state.homePage.rcPlayers.length;
-          for (let i = 0; i <=rookieLength; i++) {
-            if (this.rookie[i]) {
-              let getRookieImg = [];
-              getRookieImg = JSON.parse(this.rookie[i].product.image);
-              this.rookieImg.push(getRookieImg[0].url);
-            }
-          }
-          this.highest = this.$store.state.homePage.priceUpHigestFive; // 取得highest資料
-          const highestLength = this.$store.state.homePage.priceUpHigestFive.length;
-          for (let i = 0; i <= highestLength; i++) {
-            if (this.highest[i]) {
-              let getHighestImg = [];
-              getHighestImg = JSON.parse(this.highest[i].product.image);
-              this.highestImg.push(getHighestImg[0].url);
-            }
-          }
-          this.lowest = this.$store.state.homePage.priceUpLowestFive; // 取得lowest資料
-          const lowestLength = this.$store.state.homePage.priceUpLowestFive.length;
-          for (let i = 0; i <= lowestLength; i++) {
-            if (this.lowest[i]) {
-              let getHighestImg = [];
-              getHighestImg = JSON.parse(this.lowest[i].product.image);
-              this.lowestImg.push(getHighestImg[0].url);
-            }
-          }
       },
       closeTopDownload(){
         closeTopDownload();
@@ -728,11 +518,11 @@ const moment = require('moment');
           }, 800);
         }
       },
-      onWaypoint_news ({ going, direction }) {
-        if (going === this.$waypointMap.GOING_IN) {
-          $(".news").addClass('fadeInUp animated').css('opacity','1');
-        }
-      },
+      // onWaypoint_news ({ going, direction }) {
+      //   if (going === this.$waypointMap.GOING_IN) {
+      //     $(".news").addClass('fadeInUp animated').css('opacity','1');
+      //   }
+      // },
       open_popup_DowloadApp(){
           open_popup_DowloadApp();
       },

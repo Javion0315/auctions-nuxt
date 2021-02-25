@@ -94,25 +94,6 @@
                                 
                             </li>
                             <li class="nav-pc__item" 
-                            @click="toggle = toggle !== 'News' ? 'News' : null">
-                                <a class="Label" href="javascript:;">
-                                    {{ $t('menu.News') }}
-                                </a>
-                                <ul class="nav-pc__dropDown dropDown-news" :class="{'isOpen': toggle === 'News' & showNavbar}">
-                                    <li
-                                    class="dropDown__item"
-                                    v-for="(item, index) in HomePageData.news" 
-                                    :key="index">
-                                        <a :href="item.web_url" target="_blank">{{ item.headline }}</a>
-                                    </li>
-                                    <li class="dropDown__item">
-                                        <nuxt-link :to="localePath({ name: 'news-title', params: { title: 'the-ultimate-guide-to-sports-card-grading' }})">
-                                            The Ultimate Guide to Sports Card Grading
-                                        </nuxt-link>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-pc__item" 
                             @click="toggle = toggle !== 'FAQ' ? 'FAQ' : null">
                                 <a class="Label" href="javascript:;">
                                     {{ $t('menu.FAQ') }}
@@ -159,19 +140,6 @@
                         </ul>
                     </li>
                     <li class="list__item nestedList__item">
-                        <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">{{ $t('menu.News') }}</a>
-                        <ul class="dropdown">
-                            <li class="list__item dropdown__item dropDown-news" v-for="(item, index) in HomePageData.news" :key="index" v-on:click="menuToggleOpen">
-                                <a :href="item.web_url" target="_blank">{{ item.headline }}</a>
-                            </li>
-                            <li class="list__item dropdown__item dropDown-news" v-on:click="menuToggleOpen">
-                                <nuxt-link :to="localePath({ name: 'news-title', params: { title: 'the-ultimate-guide-to-sports-card-grading' }})">
-                                    The Ultimate Guide to Sports Card Grading
-                                </nuxt-link>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="list__item nestedList__item">
                         <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">{{ $t('menu.FAQ') }}</a>
                         <ul class="dropdown">
                             <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('faq')" title="FAQ">{{ $t('menu.FAQ') }}</nuxt-link></li>
@@ -200,7 +168,6 @@ import {showBlackOverlay} from 'assets/js/common.js';
 import {closeAlert} from 'assets/js/common.js';
 
   export default {
-    props: ['HomePageData'],
     components: {
         LangSwitcher
     },
