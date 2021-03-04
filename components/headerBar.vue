@@ -103,7 +103,7 @@
                                     <li class="dropDown__item"><nuxt-link :to="localePath('policy')" title="Policy">{{ $t('menu.Policy') }}</nuxt-link></li>
                                 </ul>  
                             </li>
-                            <!-- <li class="nav-pc__item"><nuxt-link :to="localePath('policy')" title="Policy">{{ $t('menu.Policy') }}</nuxt-link></li> -->
+                            <li class="nav-pc__item"><nuxt-link :to="localePath('consign')" title="Consign">Consign</nuxt-link></li>
                             <li class="btn btn-line highlight" v-on:click="open_popup_DowloadApp() ; gtagTrack('Download_SellNow')"> <nuxt-link to="">Join Now</nuxt-link></li>
                         </ul>
                         <div class="nav-mobile">
