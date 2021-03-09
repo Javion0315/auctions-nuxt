@@ -61,6 +61,7 @@ export default {
     { src: '~/plugins/firebase.js', ssr: false ,/*mode: 'server' ,*/  mode: 'client' },//Firebase SDK
     // { src: '~/plugins/vue- faq-accordion.js', ssr: false , mode: 'client' },
     { src: '~/plugins/element-ui/element-ui' },
+    { src: '~/plugins/font-awesome' }
  ],
  /*
   ** Nuxt.js dev-modules
@@ -76,6 +77,7 @@ export default {
     '@nuxtjs/sitemap',
     '@nuxtjs/dotenv',
     ['nuxt-i18n', I18N],
+    'nuxt-fontawesome',
   ],
   axios: {
     proxy: true,
@@ -165,6 +167,23 @@ export default {
       },
     ]
     
-  }
+  },
+  fontawesome: {
+    component: 'fa',
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+      {
+        set: '@fortawesome/free-regular-svg-icons',
+        icons: ['far']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['fab']
+      }
+    ]
+  },
 
 }

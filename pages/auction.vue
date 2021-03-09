@@ -1,0 +1,99 @@
+<template>
+  <div>
+      <section class="policy mainContent">
+          <section class="Privacy" style="padding: 0px">
+            <div style="background-color: darkgray; width: 100%; height: 350px"></div>
+            <div class="container">
+                <el-tabs v-model="activeName" class="tabStyle"
+                style="margin: 35px 0px;">
+                    <el-tab-pane label="OVERVIEW" name="OVERVIEW">
+                        <overview style="padding: 80px 150px;"></overview>
+                    </el-tab-pane>
+                    <el-tab-pane label="VIEW COLLECTION" name="COLLECTION">
+                        <collection style="padding: 50px 90px;"></collection>
+                    </el-tab-pane>
+                </el-tabs>
+            </div>
+          </section>
+      </section>
+
+  </div>
+</template>
+
+<script>
+import overview from '~/components/auctionOverview'
+import collection from '~/components/auctionCollections'
+
+  export default {
+    components: {
+      overview,
+      collection
+    },
+    data () {
+      return {				
+        activeName: 'OVERVIEW',
+        showNavbar: true,
+        navbarFixed: false,
+        lastScrollPosition: 0,
+        scrollValue: 0,
+      }
+    },
+    mounted () {
+        // this.lastScrollPosition = window.pageYOffset
+        window.addEventListener('scroll', this.onScroll);
+        
+    },
+    beforeDestroy(){
+        window.removeEventListener('scroll', this.onScroll);
+    },
+    methods: {
+        anchorScroll(){
+          $(".tab-anchor-tabs").on('click',".tab-anchor", function(){
+              var attr = this.getAttribute("data-goHash");
+              var target_top = document.getElementById(attr).offsetTop;
+              $("html,body").animate({scrollTop: target_top - 200}, 700);
+          });
+        },
+        onScroll() {
+          const OFFSET = 60;
+          const headerHeight = 30;
+          if (window.pageYOffset < 0) {
+              return
+          }
+          if (Math.abs(window.pageYOffset - this.lastScrollPosition) < OFFSET) {
+              return
+          }
+          this.navbarFixed = window.pageYOffset > OFFSET && window.pageYOffset < this.lastScrollPosition
+          this.showNavbar = window.pageYOffset < this.lastScrollPosition
+          this.lastScrollPosition = window.pageYOffset
+        },
+    },
+      
+  }
+</script>
+
+<style lang="scss">
+  @import "assets/css/base/default.scss";
+  @import "assets/css/pages/subPage_policy.scss";
+ 
+</style>
+
+<style scoped>
+    .tabStyle >>> .el-tabs__nav-wrap::after {
+        background-color: transparent !important;
+    }
+    .tabStyle >>> .el-tabs__item {
+        margin: 14px 0px;
+        letter-spacing: 1px;
+        font-size: 20px;
+        font-weight: 300;
+    }
+    .tabStyle >>> .el-tabs__item.is-active {
+        color: black !important
+    }
+    .tabStyle >>> .el-tabs__active-bar {
+        background-color: #797979 !important;
+        width: 105px;
+        height: 3.5px !important;
+    }
+</style>
