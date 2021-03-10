@@ -95,15 +95,25 @@
                                      <div>
                                         <el-checkbox class="checkboxStyle" v-model="form.alipay" style="border-bottom: 2px solid #C4C4C4; padding-bottom: 5px; width: 95%">
                                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                                <span style="font-size: 1.1rem; font-weight: 400;">支付寶</span>
+                                                <span style="font-size: 1.1rem; font-weight: 400;">銀行帳戶</span>
                                                 <i class="el-icon-arrow-down"></i>
                                             </div>
                                         </el-checkbox>
 
                                         <div style="width: 95%; padding: 35px 20px;">
-                                            <el-input v-model="account.link" placeholder="收款帳戶資訊"
+                                            <el-input v-model="account.ISBN" placeholder="ISBN"
                                             style="width: 100%; margin-bottom: 22px"></el-input>
-                                            <el-input v-model="account.link" placeholder="收款帳戶名稱"
+                                            <el-input v-model="account.SortCode" placeholder="SWIFT / ABA no / SortCode"
+                                            style="width: 100%; margin-bottom: 22px"></el-input>
+                                            <el-input v-model="account.enName" placeholder="銀行英文名稱"
+                                            style="width: 100%; margin-bottom: 22px"></el-input>
+                                            <el-input v-model="account.account" placeholder="銀行帳號"
+                                            style="width: 100%; margin-bottom: 22px"></el-input>
+                                            <el-input v-model="account.user" placeholder="戶名"
+                                            style="width: 100%; margin-bottom: 22px"></el-input>
+                                            <el-input v-model="account.phone" placeholder="收款人聯絡電話"
+                                            style="width: 100%; margin-bottom: 22px"></el-input>
+                                            <el-input v-model="account.address" placeholder="收款人聯絡地址"
                                             style="width: 100%; margin-bottom: 22px"></el-input>
                                             <div>
                                                 帳戶幣別 : USD
@@ -151,7 +161,14 @@
         },
         account: {
             area: '',
-            link: ''
+            link: '',
+            ISBN: '',
+            SortCode: '',
+            enName: '',
+            account: '',
+            user: '',
+            phone: '',
+            address: ''
         },
         options: [{
           value: '1',
