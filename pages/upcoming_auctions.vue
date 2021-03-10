@@ -7,7 +7,7 @@
             class="title-m"
             style="font-weight: bold; font-size: 2.2rem; line-height: 55px; margin-bottom: 1.5rem;"
           >
-            Auction Results
+            Upcoming Auctions
           </h2>
           <div style="background-color: #F2F2F2; padding: 60px;">
             <div v-for="(item,index) in data" :key="index" style="margin-bottom: 30px">
@@ -32,21 +32,11 @@
                                     {{ item.title }}
                                 </h2>
                                 <span>{{ item.date }}</span>
-                                <div
-                                    class="btn btn-solid"
-                                    style="
-                                    background-color: #BABABA;
-                                    height: 25px;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    font-size: 8px;
-                                    width: 20%;
-                                    padding: 0.3rem 0rem;
-                                    margin: 8px 0px;
-                                    "
-                                >
-                                    {{ item.bidding }} Bids
+                                <div>
+                                    <i
+                                        class="el-icon-date"
+                                        style="color: #dd6d7b;"
+                                    ></i>
                                 </div>
                             </div>
                             <div>
@@ -89,7 +79,6 @@ export default {
     },
     methods: {
         onSubmit() {
-            localStorage.setItem('history-auction', 'auction_results')
             this.$router.push({ path:'auction' })
         }
     }

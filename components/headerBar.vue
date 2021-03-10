@@ -68,7 +68,7 @@
                 <nav class="header__navBar">
                     <div class="container flexBetween">
                         <ul class="nav-pc">
-                            <li class="nav-pc__item" 
+                            <!-- <li class="nav-pc__item" 
                             @click="toggle = toggle !== 'AboutGemCard' ? 'AboutGemCard' : null">
                                 <a class="Label" href="javascript:;">
                                     {{ $t('menu.AboutGemCard') }}
@@ -77,21 +77,27 @@
                                     <li class="dropDown__item"><nuxt-link :to="localePath('howitworks')">How To Sell & Buy Cards</nuxt-link></li>
                                     <li class="dropDown__item"><nuxt-link :to="localePath('about_us')">About Us</nuxt-link></li>
                                 </ul>  
-                            </li>
+                            </li> -->
                             <li class="nav-pc__item" @click="toggle = toggle !== 'Auction' ? 'Auction' : null">
                                 <a class="Label" href="javascript:;">
                                     Auctions
                                 </a>
                                 <ul class="nav-pc__dropDown" :class="{'isOpen': toggle === 'Auction' & showNavbar}">
                                     <li class="dropDown__item">
-                                        <nuxt-link :to="localePath('auction')">Current Auction</nuxt-link>
+                                        <nuxt-link :to="localePath('auction_results')">Auction Results</nuxt-link>
                                     </li>
                                     <li class="dropDown__item">
-                                        <nuxt-link :to="localePath('auction_results')">Auction Results</nuxt-link>
+                                        <nuxt-link :to="localePath('featuring_items')">Featuring Items</nuxt-link>
+                                    </li>
+                                     <li class="dropDown__item">
+                                        <nuxt-link :to="localePath('current_auction')">Current Auction</nuxt-link>
+                                    </li>
+                                     <li class="dropDown__item">
+                                        <nuxt-link :to="localePath('upcoming_auctions')">Upcoming Auctions</nuxt-link>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-pc__item" 
+                            <!-- <li class="nav-pc__item" 
                             @click="toggle = toggle !== 'FAQ' ? 'FAQ' : null">
                                 <a class="Label" href="javascript:;">
                                     {{ $t('menu.FAQ') }}
@@ -100,9 +106,9 @@
                                     <li class="dropDown__item"><nuxt-link :to="localePath('faq')" title="FAQ">{{ $t('menu.FAQ') }}</nuxt-link></li>
                                     <li class="dropDown__item"><nuxt-link :to="localePath('policy')" title="Policy">{{ $t('menu.Policy') }}</nuxt-link></li>
                                 </ul>  
-                            </li>
+                            </li> -->
                             <li class="nav-pc__item" style="margin-right: 20px"><nuxt-link :to="localePath('consign')" title="Consign">Consign</nuxt-link></li>
-                            <li class="btn btn-line highlight" v-on:click="open_popup_DowloadApp() ; gtagTrack('Download_SellNow')"> <nuxt-link to="">Join Now</nuxt-link></li>
+                            <!-- <li class="btn btn-line highlight" v-on:click="open_popup_DowloadApp() ; gtagTrack('Download_SellNow')"> <nuxt-link to="">Join Now</nuxt-link></li> -->
                         </ul>
                         <div class="nav-mobile">
                             <span class="menuPanel-hamburguer" v-on:click="menuToggleOpen"></span>
@@ -123,27 +129,29 @@
                     <nuxt-link to="/" title="GemCard"><img src="~assets/images/logo_vertical.svg"></nuxt-link>
                 </div>
                 <ul class="menuPanel__nestedList">
-                    <li class="list__item nestedList__item">
+                    <!-- <li class="list__item nestedList__item">
                             <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">{{ $t('menu.AboutGemCard') }}</a>
                             <ul class="dropdown">
                                 <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('howitworks')" title="How To Sell & Buy Cards">How To Sell & Buy Cards</nuxt-link></li>
                                 <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('about_us')" title="About Us">About Us</nuxt-link></li>
                             </ul>
-                    </li>
+                    </li> -->
                     <li class="list__item nestedList__item">
                         <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">Auctions</a>
                         <ul class="dropdown">
-                            <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('auction')">Current Auction</nuxt-link></li>
                             <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('auction_results')">Auction Results</nuxt-link></li>
+                            <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('featuring_items')">Featuring Items</nuxt-link></li>
+                            <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('current_auction')">Current Auction</nuxt-link></li>
+                            <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('upcoming_auctions')">Upcoming Auctions</nuxt-link></li>
                         </ul>
                     </li>
-                    <li class="list__item nestedList__item">
+                    <!-- <li class="list__item nestedList__item">
                         <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">{{ $t('menu.FAQ') }}</a>
                         <ul class="dropdown">
                             <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('faq')" title="FAQ">{{ $t('menu.FAQ') }}</nuxt-link></li>
                             <li class="list__item dropdown__item" v-on:click="menuToggleOpen"><nuxt-link :to="localePath('policy')" title="Policy">{{ $t('menu.Policy') }}</nuxt-link></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="list__item nestedList__item">
                         <nuxt-link :to="localePath('consign')" title="Consign">
                             <span class="Label title-m">Consign</span>

@@ -10,7 +10,8 @@
                         <overview style="padding: 80px 150px;"></overview>
                     </el-tab-pane>
                     <el-tab-pane label="VIEW COLLECTION" name="COLLECTION">
-                        <collection style="padding: 50px 90px;"></collection>
+                        <historyCollection style="padding: 50px 90px;" v-if="ifHistoryAuction"></historyCollection>
+                        <collection style="padding: 50px 90px;" v-else></collection>
                     </el-tab-pane>
                 </el-tabs>
             </div>
@@ -23,11 +24,13 @@
 <script>
 import overview from '~/components/auctionOverview'
 import collection from '~/components/auctionCollections'
+import historyCollection from '~/components/historyCollections'
 
   export default {
     components: {
       overview,
-      collection
+      collection,
+      historyCollection
     },
     data () {
       return {				
@@ -36,12 +39,24 @@ import collection from '~/components/auctionCollections'
         navbarFixed: false,
         lastScrollPosition: 0,
         scrollValue: 0,
+        ifHistoryAuction: false
       }
+    },
+    created() {
+        if(process.browser) {
+            if(localStorage.getItem('history-auction') === 'auction_results') {
+                this.ifHistoryAuction = true
+            }
+        }
     },
     mounted () {
         // this.lastScrollPosition = window.pageYOffset
         window.addEventListener('scroll', this.onScroll);
-        
+        if(process.browser) {
+            this.timeout = setTimeout(() => {
+                localStorage.setItem('history-auction', '')
+            }, 3000 * Math.random());
+        }
     },
     beforeDestroy(){
         window.removeEventListener('scroll', this.onScroll);
