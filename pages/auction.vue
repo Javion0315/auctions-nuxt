@@ -1,17 +1,24 @@
 <template>
   <div>
-      <section class="policy mainContent">
+      <section class="policy mainContent" style="margin-top: 70px">
           <section class="Privacy" style="padding: 0px">
-            <div style="background-color: darkgray; width: 100%; height: 350px"></div>
+            <div style="width: 100%; height: 350px">
+                <el-image :src="imgPath + storyList.image"> </el-image>
+            </div>
             <div class="container">
                 <el-tabs v-model="activeName" class="tabStyle"
-                style="margin: 35px 0px;">
+                style="margin: 165px 0px 35px 0px;">
                     <el-tab-pane label="OVERVIEW" name="OVERVIEW">
-                        <overview style="padding: 80px 150px;"></overview>
+                        <overview style="padding: 80px 150px;"
+                        :storyList="storyList"
+                        :itemList="itemList"
+                        :overview="overview"
+                        :storyList2="storyList2"></overview>
                     </el-tab-pane>
                     <el-tab-pane label="VIEW COLLECTION" name="COLLECTION">
                         <historyCollection style="padding: 50px 90px;" v-if="ifHistoryAuction"></historyCollection>
-                        <collection style="padding: 50px 90px;" v-else></collection>
+                        <collection style="padding: 50px 90px;" v-else
+                        :collections="collections"></collection>
                     </el-tab-pane>
                 </el-tabs>
             </div>
@@ -25,6 +32,7 @@
 import overview from '~/components/auctionOverview'
 import collection from '~/components/auctionCollections'
 import historyCollection from '~/components/historyCollections'
+import { getAuctionData } from '~/api/auction';
 
   export default {
     components: {
@@ -39,7 +47,14 @@ import historyCollection from '~/components/historyCollections'
         navbarFixed: false,
         lastScrollPosition: 0,
         scrollValue: 0,
-        ifHistoryAuction: false
+        ifHistoryAuction: false,
+        special_id: '',
+        collections: [],
+        overview: [],
+        storyList: [],
+        storyList2: [],
+        itemList: [],
+        imgPath: ''
       }
     },
     created() {
@@ -48,6 +63,9 @@ import historyCollection from '~/components/historyCollections'
                 this.ifHistoryAuction = true
             }
         }
+        this.special_id = this.$route.params.id
+        this.getInit()
+        this.imgPath = process.env.IMAGE_DOMAIN;
     },
     mounted () {
         // this.lastScrollPosition = window.pageYOffset
@@ -62,6 +80,18 @@ import historyCollection from '~/components/historyCollections'
         window.removeEventListener('scroll', this.onScroll);
     },
     methods: {
+        getInit() {
+            const data = {
+                special_id: this.special_id
+            }
+            getAuctionData(data).then((res) => {
+                this.collections = res.data.auctionList;
+                this.overview = res.data.specialData;
+                this.storyList = this.overview.storyList[0]
+                this.storyList2 = this.overview.storyList[1]
+                this.itemList = this.storyList.itemList          
+            })            
+        },
         anchorScroll(){
           $(".tab-anchor-tabs").on('click',".tab-anchor", function(){
               var attr = this.getAttribute("data-goHash");

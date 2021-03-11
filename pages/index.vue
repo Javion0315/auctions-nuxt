@@ -120,8 +120,7 @@
                                     </nuxt-link>
                                   </div>
                                   <div class="rookieList__item productList__item" v-else>
-                                    <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.id }})" 
-                                    @click.native="gtagTrack('HomePage_Rookie_Player')">
+                                    <nuxt-link :to="localePath({ name: 'auction-id', params: { id: item.id }})">
                                       <div class="product__imgMask"><img :src="imgPath + item.image" :alt="item.title"></div>
                                       <div class="text">
                                         <h4 class="title ellipsis" style="color: #001939">{{ item.title }}</h4>
@@ -162,8 +161,7 @@
                                     </nuxt-link>
                                   </div>
                                   <div class="rookieList__item productList__item" v-else>
-                                    <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.id }})" 
-                                    @click.native="gtagTrack('HomePage_Rookie_Player')">
+                                    <nuxt-link :to="localePath({ name: 'auction-id', params: { id: item.id }})">
                                       <div class="product__imgMask"><img :src="imgPath + item.image" :alt="item.title"></div>
                                       <div class="text">
                                         <h4 class="title ellipsis" style="color: #001939">{{ item.title }}</h4>

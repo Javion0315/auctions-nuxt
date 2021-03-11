@@ -3,15 +3,15 @@
     <el-row :gutter="120">
       <el-col
         :span="8"
-        v-for="(item, index) in data.items"
+        v-for="(item, index) in collections"
         :key="index"
-        style="margin: 20px 0px"
+        style="margin: 0px 0px 45px; height: 520px;"
       >
         <div
           class="productList__item__img product__imgMask"
           style="margin-bottom: -20px"
         >
-          <img :src="item.image" :alt="item.title" />
+          <img :src="imgPath + item.images[0]" :alt="item.title" style="height: 336px" />
           <svg class="clip-svg imgMask" width="0" height="0">
             <defs>
               <clipPath id="clip-shape" clipPathUnits="objectBoundingBox">
@@ -27,8 +27,13 @@
               font-weight: bold;
               font-size: 1.5rem;
               line-height: 55px;
-              margin-bottom: 0px;
+              margin-bottom: -12px;
               color: #001939;
+              display : inline-block;
+              overflow : hidden;
+              text-overflow : ellipsis;
+              white-space : nowrap;
+              width : 240px;
             "
           >
             {{ item.title }}
@@ -57,7 +62,7 @@
               margin: 8px 0px;
             "
           >
-            {{ item.bidding }} Bids
+            {{ item.bids }} Bids
           </div>
           <div
             style="
@@ -86,40 +91,14 @@
 
 <script>
 export default {
+  props: ['collections'],
   data() {
     return {
-      data: {
-        items: [{
-          id: 1,
-          image: 'https://images.squarespace-cdn.com/content/v1/5b341a41fcf7fd930ebee505/1591640531713-CVRIV6Q8NX02UMDF9BUT/ke17ZwdGBToddI8pDm48kK60W-ob1oA2Fm-j4E_9NQB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kD6Ec8Uq9YczfrzwR7e2Mh5VMMOxnTbph8FXiclivDQnof69TlCeE0rAhj6HUpXkw/dayzee.jpg',
-          title: 'Item002',
-          estimated_price: '999,999',
-          current_price: '999,999',
-          bidding: 20,
-        }, {
-          id: 2,
-          image: 'https://images.squarespace-cdn.com/content/v1/5b341a41fcf7fd930ebee505/1591640531713-CVRIV6Q8NX02UMDF9BUT/ke17ZwdGBToddI8pDm48kK60W-ob1oA2Fm-j4E_9NQB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kD6Ec8Uq9YczfrzwR7e2Mh5VMMOxnTbph8FXiclivDQnof69TlCeE0rAhj6HUpXkw/dayzee.jpg',
-          title: 'Item003',
-          estimated_price: '999,999',
-          current_price: '999,999',
-          bidding: 30,
-        }, {
-          id: 3,
-          image: 'https://images.squarespace-cdn.com/content/v1/5b341a41fcf7fd930ebee505/1591640531713-CVRIV6Q8NX02UMDF9BUT/ke17ZwdGBToddI8pDm48kK60W-ob1oA2Fm-j4E_9NQB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kD6Ec8Uq9YczfrzwR7e2Mh5VMMOxnTbph8FXiclivDQnof69TlCeE0rAhj6HUpXkw/dayzee.jpg',
-          title: 'Item004',
-          estimated_price: '999,999',
-          current_price: '999,999',
-          bidding: '1,000',
-        }, {
-          id: 4,
-          image: 'https://images.squarespace-cdn.com/content/v1/5b341a41fcf7fd930ebee505/1591640531713-CVRIV6Q8NX02UMDF9BUT/ke17ZwdGBToddI8pDm48kK60W-ob1oA2Fm-j4E_9NQB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kD6Ec8Uq9YczfrzwR7e2Mh5VMMOxnTbph8FXiclivDQnof69TlCeE0rAhj6HUpXkw/dayzee.jpg',
-          title: 'Item005',
-          estimated_price: '999,999',
-          current_price: '999,999',
-          bidding: 100,
-        }]
-      },
+      imgPath: ''
     }
+  },
+  created() {
+    this.imgPath = process.env.IMAGE_DOMAIN;
   }
 }
 </script>
