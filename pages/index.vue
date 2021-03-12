@@ -111,7 +111,7 @@
                       </div>
                   </div>
                   <div class="rookieList slideList">
-                      <div class="swiper swiperBox" v-swiper:swiper3="swiperOption_Current" ref="swiperBox3">
+                      <div class="swiper swiperBox" v-swiper:swiper3="swiperOption_Current" ref="swiperBox3" style="height: 310px">
                           <div class="swiper-wrapper">
                               <div class="swiper-slide" v-for="(item, index) in currentList" :key="index">
                                   <div class="rookieList__item productList__item" v-if="index == 10">
@@ -152,7 +152,7 @@
                       </div>
                   </div>
                   <div class="rookieList slideList">
-                      <div class="swiper swiperBox" v-swiper:swiper4="swiperOption_Upcoming" ref="swiperBox4">
+                      <div class="swiper swiperBox" v-swiper:swiper4="swiperOption_Upcoming" ref="swiperBox4" style="height: 310px">
                           <div class="swiper-wrapper">
                               <div class="swiper-slide" v-for="(item, index) in upcomingList" :key="index">
                                   <div class="rookieList__item productList__item" v-if="index == 10">

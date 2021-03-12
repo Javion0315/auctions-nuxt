@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="border-bottom: 1px solid #797979; padding-bottom: 25px">
+    <div style="border-bottom: 1px solid #797979; padding-bottom: 25px" v-if="overview">
       <h2
         class="title-m"
         style="
@@ -52,13 +52,13 @@
       </span>
     </div>
     <div style="margin: 30px 0px">
-      <el-row>
+      <el-row v-if="itemList">
         <el-col :span="10" style="padding: 18px">
           <div v-for="(item,index) in itemList.slice(0,1)" :key="index" style="text-align: center">
             <el-image style="width: 60%; height: auto" :src="imgPath + item.images[0]"> </el-image>
           </div>
         </el-col>
-        <el-col :span="14">
+        <el-col :span="14" v-if="itemList">
           <div v-for="(item,index) in itemList.slice(0,1)" :key="index">
             <h2
               class="title-m"
@@ -104,11 +104,11 @@
       </el-row>
     </div>
 
-    <div>
+    <div v-if="overview">
       <el-image :src="imgPath + overview.image"></el-image>
     </div>
 
-    <div style="margin: 50px 0px">
+    <div style="margin: 50px 0px" v-if="storyList2">
       <h2
         class="title-m"
         style="
@@ -125,7 +125,7 @@
       </span>
     </div>
 
-    <div>
+    <div v-if="itemList">
       <div class="mvp hotProduct__section">
         <div class="mvpList slideList">
           <div

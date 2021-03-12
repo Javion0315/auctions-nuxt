@@ -2,7 +2,7 @@
   <div>
       <section class="policy mainContent" style="margin-top: 70px">
           <section class="Privacy" style="padding: 0px">
-            <div style="width: 100%; height: 350px">
+            <div style="width: 100%; height: 350px" v-if="storyList">
                 <el-image :src="imgPath + storyList.image"> </el-image>
             </div>
             <div class="container">
@@ -85,11 +85,17 @@ import { getAuctionData } from '~/api/auction';
                 special_id: this.special_id
             }
             getAuctionData(data).then((res) => {
-                this.collections = res.data.auctionList;
-                this.overview = res.data.specialData;
-                this.storyList = this.overview.storyList[0]
-                this.storyList2 = this.overview.storyList[1]
-                this.itemList = this.storyList.itemList          
+                if (res.data) {
+                    this.collections = res.data.auctionList;
+                    this.overview = res.data.specialData;
+                    if (this.overview) {
+                        this.storyList = this.overview.storyList[0]
+                        this.storyList2 = this.overview.storyList[1]
+                        if (this.storyList) {
+                            this.itemList = this.storyList.itemList          
+                        }
+                    }
+                }
             })            
         },
         anchorScroll(){

@@ -23,7 +23,7 @@
       </div>
     </section>
     <div class="containerElse" v-else style="text-align: center; margin: 100px 0px 20px 0px">
-        <h1>An error as occured.</h1>
+        <h1>SORRY, NO DATA AVAILABLE</h1>
         <h1> <span class="ascii">(╯°□°）╯︵ ┻━┻</span></h1>
         <NuxtLink to="/">
             <h1 style="font-size: 40px; color: #DAC187; margin-top: 20px; font-weight: bold">Home page</h1>

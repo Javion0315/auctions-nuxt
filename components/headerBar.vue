@@ -68,6 +68,7 @@
                 <nav class="header__navBar">
                     <div class="container flexBetween">
                         <ul class="nav-pc">
+                            <li class="nav-pc__item" style="margin-right: 20px"><nuxt-link :to="localePath('/')" title="HOME">HOME</nuxt-link></li>
                             <li class="nav-pc__item" @click="toggle = toggle !== 'AUCTION' ? 'AUCTION' : null">
                                 <a class="Label" href="javascript:;">
                                     AUCTION
@@ -110,6 +111,11 @@
                     <nuxt-link to="/" title="GemCard"><img src="~assets/images/logo_vertical.svg"></nuxt-link>
                 </div>
                 <ul class="menuPanel__nestedList">
+                    <li class="list__item nestedList__item">
+                        <nuxt-link :to="localePath('/')" title="HOME">
+                            <span class="Label title-m">HOME</span>
+                        </nuxt-link>
+                    </li>
                     <li class="list__item nestedList__item">
                         <a href="#" class="Label title-m dropdown-trigger" v-on:click="menuDropDown">AUCTION</a>
                         <ul class="dropdown">

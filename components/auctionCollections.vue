@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row :gutter="120">
+    <el-row :gutter="120" v-if="collections">
       <el-col
         :span="8"
         v-for="(item, index) in collections"
