@@ -14,3 +14,9 @@ export function getcurrentAuctionData(data) {
 export function getUpcomingAuctionData(data) {
     return request.post('/auction/upcomingSpecialList.do', data);
 }
+
+// 已完成專場頁
+export function getFinishAuctionData(data) {
+    return request.post('/auction/finishSpecialList.do', data);
+}
+

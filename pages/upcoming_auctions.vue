@@ -9,7 +9,7 @@
           >
             Upcoming Auctions
           </h2>
-          <div style="background-color: #F2F2F2; padding: 60px;">
+          <div style="background-color: #F2F2F2; padding: 60px;" v-if="data.length > 0">
             <div v-for="(item,index) in data" :key="index" style="margin-bottom: 30px">
                 <el-row :gutter="20">
                     <el-col :span="6">
@@ -50,6 +50,11 @@
                     </el-col>
                 </el-row>
             </div>
+          </div>
+
+          <div style="background-color: #F2F2F2; padding: 60px; text-align: center" v-else>
+                <h1 style="font-size: 2.5rem;">SORRY, NO DATA AVAILABLE</h1>
+                <h1 style="font-size: 2rem;"> <span class="ascii">(╯°□°）╯︵ ┻━┻</span></h1>
           </div>
         </div>
       </section>

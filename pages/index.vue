@@ -105,7 +105,7 @@
                   <div class="hotProduct__section__head flexBetween">
                       <h3 class="title-m" style="font-weight: bold; font-size: 1.8rem; margin-bottom: 0.5rem;">Current Auctions</h3>
                       <div class="showall">
-                        <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="showall" @click.native="gtagTrack('HomePage_Rookie_SeeAll')">
+                        <nuxt-link :to="localePath('current_auction')" class="showall">
                             Show all <i class="icon icon-arrow-right"></i>
                         </nuxt-link>
                       </div>
@@ -146,7 +146,7 @@
                   <div class="hotProduct__section__head flexBetween">
                       <h3 class="title-m" style="font-weight: bold; font-size: 1.8rem; margin-bottom: 0.5rem;">Upcoming Auctions</h3>
                       <div class="showall">
-                        <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="showall" @click.native="gtagTrack('HomePage_Rookie_SeeAll')">
+                        <nuxt-link :to="localePath('upcoming_auctions')" class="showall">
                             Show all <i class="icon icon-arrow-right"></i>
                         </nuxt-link>
                       </div>
