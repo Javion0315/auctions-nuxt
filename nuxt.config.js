@@ -67,7 +67,7 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    ['@nuxtjs/dotenv', { filename: '.env.' + process.env.ENV }],
+    ['@nuxtjs/dotenv'],
   ],
   /*
   ** Nuxt.js modules
