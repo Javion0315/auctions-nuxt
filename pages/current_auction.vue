@@ -97,6 +97,7 @@ export default {
     created() {
         this.getInit(this.page)
         this.imgPath = process.env.IMAGE_DOMAIN;
+        console.log(process.env.BASE_API_URL)
     },
     methods: {
         onSubmit(id) {
