@@ -50,9 +50,11 @@
                                 </div>
                             </div>
                             <div>
-                                <el-button type="primary" @click="onSubmit(item.id)" style="background-color: #0C4C78; border-radius: 5px" size="mini">
-                                    <span style="font-size: 1.6rem; padding: 0px 20px; letter-space: 1px">View</span>
-                                </el-button>
+                                <nuxt-link :to="localePath({ name: 'auction-id', params: { id: item.id }})">
+                                    <el-button type="primary" @click="onSubmit(item.id)" style="background-color: #0C4C78; border-radius: 5px" size="mini">
+                                        <span style="font-size: 1.6rem; padding: 0px 20px; letter-space: 1px">View</span>
+                                    </el-button>
+                                </nuxt-link>
                             </div>
                         </div>                    
                     </el-col>
@@ -84,7 +86,7 @@ export default {
         return {
             total: 0,
             page: 1,
-            pageSize: 3,
+            pageSize: 10,
             data: [],
             imgPath: ''
         }
@@ -96,18 +98,16 @@ export default {
     methods: {
         onSubmit(id) {
             console.log(id)
-            this.$router.push({ path:'auction' })
         },
         getInit(page) {
             const data = {
                 lang: "zh-CN",
                 platform: "h5",
                 page: page,
-                limit: 3,
+                limit: 10,
             }
             getcurrentAuctionData(data).then((res) => {
                 this.data = res.data.specialList
-                console.log(this.data)
                 this.total = res.data.total
             })
         },
