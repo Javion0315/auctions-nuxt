@@ -20,3 +20,8 @@ export function getFinishAuctionData(data) {
     return request.post('/auction/finishSpecialList.do', data);
 }
 
+
+// 推薦商品列表
+export function getRecommendAuctionData(data) {
+    return request.post('/auction/recommendGoodsList.do', data);
+}

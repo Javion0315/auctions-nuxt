@@ -14,7 +14,7 @@
           >
             Featuring Items
           </h2>
-          <div style="background-color: #f2f2f2; padding: 60px">
+          <div style="background-color: #f2f2f2; padding: 60px" v-if="data.length > 0">
             <div
               v-for="(item, index) in data"
               :key="index"
@@ -22,7 +22,7 @@
             >
               <el-row :gutter="20">
                 <el-col :span="6">
-                  <el-image :src="item.url"></el-image>
+                  <el-image :src="imgPath + item.images[0]" style="width: 100%"></el-image>
                 </el-col>
                 <el-col :span="18">
                   <div style="display: flex; justify-content: space-around">
@@ -40,7 +40,7 @@
                       >
                         {{ item.title }}
                       </h2>
-                      <span>{{ item.date }}</span>
+                      <span>{{ item.start_time }} - {{ item.end_time }}</span>
                       <div
                         style="
                           display: flex;
@@ -75,68 +75,109 @@
                             margin: 10px 0px;
                           "
                         >
-                          {{ item.bidding }} Bids
+                          {{ item.bids }} Bids
                         </div>
                       </div>
-                      <div class="price" style="margin-bottom: 8px"><span class="lastSale">預估價: USD${{ item.estimated_price }}</span></div>
+                      <div class="price" style="margin-bottom: 8px"><span class="lastSale">預估價: USD {{ item.estimated_price }}</span></div>
                     </div>
                     <div>
-                      <el-button
-                        type="primary"
-                        @click="onSubmit"
-                        style="background-color: #0c4c78; border-radius: 5px"
-                        size="mini"
-                      >
-                        <span
-                          style="
-                            font-size: 1.6rem;
-                            padding: 0px 20px;
-                            letter-space: 1px;
-                          "
-                          >View</span
+                      <!-- <nuxt-link :to="localePath({ name: 'auction-id', params: { id: item.id }})"> -->
+                        <el-button
+                          type="primary"
+                          @click="onSubmit(item.id)"
+                          style="background-color: #0c4c78; border-radius: 5px"
+                          size="mini"
                         >
-                      </el-button>
+                          <span
+                            style="
+                              font-size: 1.6rem;
+                              padding: 0px 20px;
+                              letter-space: 1px;
+                            "
+                            >View</span
+                          >
+                        </el-button>
+                      <!-- </nuxt-link> -->
                     </div>
                   </div>
                 </el-col>
               </el-row>
             </div>
           </div>
+          <div style="background-color: #F2F2F2; padding: 60px; text-align: center" v-else>
+            <h1 style="font-size: 2.5rem;">SORRY, NO DATA AVAILABLE</h1>
+            <h1 style="font-size: 2rem;"> <span class="ascii">(╯°□°）╯︵ ┻━┻</span></h1>
+          </div>
         </div>
       </section>
     </section>
+    <div style="text-align: center; margin-bottom: 23px;">
+        <el-pagination
+        class="pageStyle"
+        layout="prev, pager, next"
+        :page-size="pageSize"
+        @current-change="handleCurrentChange"
+        :total="total">
+        </el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
+import { getRecommendAuctionData } from '~/api/auction'
+
 export default {
   data() {
     return {
-      data: [{
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-        title: '5 Valuable Panini Prizm Basketball Cards',
-        date: '2021/02/09 - 2021/02/10  (CST)',
-        bidding: '123',
-        estimated_price: '999,999'
-      }, {
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-        title: '5 Valuable Panini Prizm Basketball Cards',
-        date: '2021/02/09 - 2021/02/10  (CST)',
-        bidding: '10',
-        estimated_price: '999,999'
-      }, {
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-        title: '5 Valuable Panini Prizm Basketball Cards',
-        date: '2021/02/09 - 2021/02/10  (CST)',
-        bidding: '3',
-        estimated_price: '999,999'
-      }]
+      total: 0,
+      page: 1,
+      pageSize: 10,
+      data: [],
+      imgPath: ''
     }
   },
+  created() {
+      this.getInit(this.page)
+      this.imgPath = process.env.IMAGE_DOMAIN;
+  },
   methods: {
-    onSubmit() {
-      this.$router.push({ path: 'auction' })
+        onSubmit(id) {
+            console.log(id)
+        },
+        getInit(page) {
+            const data = {
+                lang: "zh-CN",
+                platform: "h5",
+                page: page,
+                limit: 10,
+            }
+            getRecommendAuctionData(data).then((res) => {
+                this.data = res.data.goodsList
+                this.total = res.data.total
+            })
+        },
+        // 分頁換頁
+        handleCurrentChange(val) {
+            this.page = val
+            this.getInit(val)
+        }
     }
-  }
 }
 </script>
+
+<style scoped>
+  .pageStyle >>> .el-pager >>> li {
+    font-size: 20px !important;
+  }
+  .pageStyle >>> .el-icon {
+    font-size: 23px !important;
+  }
+  .pageStyle >>> .el-pager li.active {
+    font-size: 20px;
+    color: #CBB885 !important;
+  }
+  .pageStyle >>> li:hover {
+    color: #CBB885
+  }
+
+</style>

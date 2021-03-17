@@ -30,7 +30,8 @@
                     </div>
                       
                       <div class="showall">
-                        <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="showall" @click.native="gtagTrack('HomePage_Rookie_SeeAll')">
+                        
+                        <nuxt-link :to="localePath('featuring_items')" class="showall">
                             Show all <i class="icon icon-arrow-right"></i>
                         </nuxt-link>
                       </div>
