@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="policy mainContent" style="margin: 70px">
+    <section class="mainContent" style="margin: 70px 70px 0px 70px">
       <section class="Privacy" style="padding: 0px">
         <div class="container">
           <h2
@@ -13,7 +13,7 @@
             <div v-for="(item,index) in data" :key="index" style="margin-bottom: 30px">
                 <el-row :gutter="20">
                     <el-col :span="6">
-                        <el-image :src="item.url"></el-image>
+                        <el-image :src="imgPath + item.image"></el-image>
                     </el-col>
                     <el-col :span="18">
                         <div style="display: flex; justify-content: space-around;">
@@ -31,7 +31,7 @@
                                 >
                                     {{ item.title }}
                                 </h2>
-                                <span>{{ item.date }}</span>
+                                <span>{{ item.start_time }} - {{ item.end_time }}</span>
                                 <div
                                     class="btn btn-solid"
                                     style="
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div>
-                                <el-button type="primary" @click="onSubmit" style="background-color: #0C4C78; border-radius: 5px" size="mini">
+                                <el-button type="primary" @click="onSubmit(item.id)" style="background-color: #0C4C78; border-radius: 5px" size="mini">
                                     <span style="font-size: 1.6rem; padding: 0px 20px; letter-space: 1px">View</span>
                                 </el-button>
                             </div>
@@ -59,38 +59,80 @@
                 </el-row>
             </div>
           </div>
+          
+
         </div>
-      </section>
+      </section> 
     </section>
+    <div style="text-align: center; margin-bottom: 23px;">
+        <el-pagination
+        class="pageStyle"
+        layout="prev, pager, next"
+        :page-size="pageSize"
+        @current-change="handleCurrentChange"
+        :total="total">
+        </el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
+import { getcurrentAuctionData } from '~/api/auction'
+
 export default {
     data() {
         return {
-            data: [{
-                url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', 
-                title: '5 Valuable Panini Prizm Basketball Cards',
-                date: '2021/02/09 - 2021/02/10  (CST)',
-                bidding: '123'
-            }, {
-                url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', 
-                title: '5 Valuable Panini Prizm Basketball Cards',
-                date: '2021/02/09 - 2021/02/10  (CST)',
-                bidding: '10'
-            }, {
-                url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', 
-                title: '5 Valuable Panini Prizm Basketball Cards',
-                date: '2021/02/09 - 2021/02/10  (CST)',
-                bidding: '3'
-            }]
+            total: 0,
+            page: 1,
+            pageSize: 3,
+            data: [],
+            imgPath: ''
         }
     },
+    created() {
+        this.getInit(this.page)
+        this.imgPath = process.env.IMAGE_DOMAIN;
+    },
     methods: {
-        onSubmit() {
+        onSubmit(id) {
+            console.log(id)
             this.$router.push({ path:'auction' })
+        },
+        getInit(page) {
+            const data = {
+                lang: "zh-CN",
+                platform: "h5",
+                page: page,
+                limit: 3,
+            }
+            getcurrentAuctionData(data).then((res) => {
+                this.data = res.data.specialList
+                console.log(this.data)
+                this.total = res.data.total
+            })
+        },
+        // 分頁換頁
+        handleCurrentChange(val) {
+            this.page = val
+            this.getInit(val)
         }
     }
 }
 </script>
+
+<style scoped>
+  .pageStyle >>> .el-pager >>> li {
+    font-size: 20px !important;
+  }
+  .pageStyle >>> .el-icon {
+    font-size: 23px !important;
+  }
+  .pageStyle >>> .el-pager li.active {
+    font-size: 20px;
+    color: #CBB885 !important;
+  }
+  .pageStyle >>> li:hover {
+    color: #CBB885
+  }
+
+</style>
