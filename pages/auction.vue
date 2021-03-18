@@ -13,6 +13,7 @@
                         :storyList="storyList"
                         :itemList="itemList"
                         :overview="overview"
+                        :time="time"
                         :storyList2="storyList2"></overview>
                     </el-tab-pane>
                     <el-tab-pane label="VIEW COLLECTION" name="COLLECTION">
@@ -54,7 +55,13 @@ import { getAuctionData } from '~/api/auction';
         storyList: [],
         storyList2: [],
         itemList: [],
-        imgPath: ''
+        imgPath: '',
+        time: {
+            day: 0,
+            hr: 0,
+            min: 0,
+            sec: 0,
+        }
       }
     },
     created() {
@@ -88,6 +95,7 @@ import { getAuctionData } from '~/api/auction';
                 if (res.data) {
                     this.collections = res.data.auctionList;
                     this.overview = res.data.specialData;
+                    this.countdown()
                     if (this.overview) {
                         this.storyList = this.overview.storyList[0]
                         this.storyList2 = this.overview.storyList[1]
@@ -117,6 +125,23 @@ import { getAuctionData } from '~/api/auction';
           this.navbarFixed = window.pageYOffset > OFFSET && window.pageYOffset < this.lastScrollPosition
           this.showNavbar = window.pageYOffset < this.lastScrollPosition
           this.lastScrollPosition = window.pageYOffset
+        },
+        countdown() {
+            const end = new Date(this.overview.end_time).getTime()
+            const now = new Date().getTime()
+            const msec = end - now
+            let day = parseInt(msec / 1000 / 60 / 60 / 24)
+            let hr = parseInt(msec / 1000 / 60 / 60 % 24)
+            let min = parseInt(msec / 1000 / 60 % 60)
+            let sec = parseInt(msec / 1000 % 60)
+            this.time.day = day
+            this.time.hr = hr > 9 ? hr : '0' + hr
+            this.time.min = min > 9 ? min : '0' + min
+            this.time.sec = sec > 9 ? sec : '0' + sec
+            const that = this
+            setTimeout(function () {
+                that.countdown()
+            }, 1000)
         },
     },
       

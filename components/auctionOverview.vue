@@ -20,9 +20,10 @@
           margin-bottom: 1rem;
           color: #d1ab71;
         "
+        v-if="time.min > 0"
       >
         Lots Closing in
-        <span style="font-weight: bold">{{ data.closing_time }}</span>
+        <span style="font-weight: bold">{{ time.day }}天 {{ time.hr }}時 {{ time.min }}分 {{ time.sec }}秒</span>
       </h2>
       <h5 style="font-size: 1.2rem">
         Online Auction :
@@ -235,7 +236,7 @@
 
 <script>
 export default {
-  props: ['overview', 'itemList', 'storyList', 'storyList2'],
+  props: ['overview', 'itemList', 'storyList', 'storyList2', 'time'],
   data() {
     return {
       imgPath: '',

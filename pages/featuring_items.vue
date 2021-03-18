@@ -81,7 +81,7 @@
                       <div class="price" style="margin-bottom: 8px"><span class="lastSale">預估價: USD {{ item.estimated_price }}</span></div>
                     </div>
                     <div>
-                      <!-- <nuxt-link :to="localePath({ name: 'auction-id', params: { id: item.id }})"> -->
+                      <nuxt-link :to="localePath({ name: 'product-id', params: { id: item.id }})">
                         <el-button
                           type="primary"
                           @click="onSubmit(item.id)"
@@ -97,7 +97,7 @@
                             >View</span
                           >
                         </el-button>
-                      <!-- </nuxt-link> -->
+                      </nuxt-link>
                     </div>
                   </div>
                 </el-col>
