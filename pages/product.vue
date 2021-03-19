@@ -26,8 +26,12 @@
                           <div class="swiper-button-prev swp_Items" slot="button-prev"></div>
                           <div class="swiper-button-next swp_Items" slot="button-next"></div> 
                       </div>
+
+                      <div style="margin-top: 20px">
+                          <bidsHistory></bidsHistory>
+                      </div>
                 </el-col>
-                <el-col :span="10">
+                <el-col :span="10" style="padding-left: 50px">
                     <h2
                         class="title-m"
                         style="
@@ -68,6 +72,13 @@
                              </div>
                         </div>
                     </div>
+
+                    <div style="display: flex; flex-direction: column; width: 70%; margin-top: 60px">
+                        <el-button class="btnStyle" plain><i class="el-icon-s-promotion iconStyle"></i> Share To</el-button>
+                        <el-button class="btnStyle" plain><i class="el-icon-date iconStyle"></i> Add Calander</el-button>
+                        <el-button class="btnStyle" plain><span class="iconStyle"><font-awesome-icon  :icon="['far', 'heart']" /></span> Follow</el-button>
+                        <el-button class="btnStyle" plain><i class="el-icon-message iconStyle"></i> E-mail Notifications</el-button>
+                    </div>
                 </el-col>
             </el-row>    
         </div>
@@ -78,8 +89,12 @@
 
 <script>
 import { getProductInfo } from '~/api/product';
+import bidsHistory from '~/components/bidsHistory'
 
 export default {
+  components: {
+      bidsHistory,
+  },
   data() {
     return {
       productID: '',
@@ -169,5 +184,15 @@ export default {
 <style scoped>
     .radioStyle >>> .el-radio__label {
         font-size: 1rem !important;
+    }
+    .btnStyle {
+        margin-left: 0px;
+        margin-bottom: 20px;
+        padding-left: 50px;
+        text-align: left;
+        font-size: 1rem;
+    }
+    .iconStyle {
+        margin-right: 15px
     }
 </style>

@@ -56,50 +56,54 @@
       <el-row v-if="itemList">
         <el-col :span="10" style="padding: 18px">
           <div v-for="(item,index) in itemList.slice(0,1)" :key="index" style="text-align: center">
-            <el-image style="width: 60%; height: auto" :src="imgPath + item.images[0]"> </el-image>
+            <nuxt-link :to="localePath({ name: 'product-id', params: { id: item.id }})">
+              <el-image style="width: 60%; height: auto" :src="imgPath + item.images[0]"> </el-image>
+            </nuxt-link>
           </div>
         </el-col>
         <el-col :span="14" v-if="itemList">
           <div v-for="(item,index) in itemList.slice(0,1)" :key="index">
-            <h2
-              class="title-m"
-              style="
-                font-weight: 300;
-                font-size: 2.2rem;
-                line-height: 55px;
-                margin-bottom: 1.5rem;
+            <nuxt-link :to="localePath({ name: 'product-id', params: { id: item.id }})">
+              <h2
+                class="title-m"
+                style="
+                  font-weight: 300;
+                  font-size: 2.2rem;
+                  line-height: 55px;
+                  margin-bottom: 1.5rem;
+                  display : inline-block;
+                  overflow : hidden;
+                  text-overflow : ellipsis;
+                  white-space : nowrap;
+                  width : 100%;
+                "
+              >
+                {{ item.title }}
+              </h2>
+              <span style="
                 display : inline-block;
                 overflow : hidden;
                 text-overflow : ellipsis;
                 white-space : nowrap;
-                width : 100%;
-              "
-            >
-              {{ item.title }}
-            </h2>
-            <span style="
-              display : inline-block;
-              overflow : hidden;
-              text-overflow : ellipsis;
-              white-space : nowrap;
-              width : 100%;">
-              {{ item.description }}
-            </span>
-            <div style="margin-top: 80px">
-              <span>預估價<span style="margin-left: 43px">NTD {{ item.estimated_price }}</span></span
-              ><br />
-              <span
-                >目前出價 <span style="margin-left: 20px">NTD$ {{ item.current_price }}</span></span
-              >
-              <div>
-                <font-awesome-icon :icon="['far', 'heart']" />
-                Follow
-                <i
-                  class="el-icon-date"
-                  style="color: #dd6d7b; margin-left: 15px"
-                ></i>
+                width : 100%;">
+                {{ item.description }}
+              </span>
+              <div style="margin-top: 80px">
+                <span>預估價<span style="margin-left: 43px">NTD {{ item.estimated_price }}</span></span
+                ><br />
+                <span
+                  >目前出價 <span style="margin-left: 20px">NTD$ {{ item.current_price }}</span></span
+                >
+                <div>
+                  <font-awesome-icon :icon="['far', 'heart']" />
+                  Follow
+                  <i
+                    class="el-icon-date"
+                    style="color: #dd6d7b; margin-left: 15px"
+                  ></i>
+                </div>
               </div>
-            </div>
+            </nuxt-link>
           </div>
         </el-col>
       </el-row>
@@ -153,14 +157,7 @@
                 </div>
                 <div class="mvpList__item productList__item" v-else>
                   <nuxt-link
-                    :to="
-                      localePath({
-                        name: 'product-pid',
-                        params: { pid: item.id },
-                      })
-                    "
-                    @click.native="gtagTrack('HomePage_HotSale_Player')"
-                  >
+                    :to="localePath({ name: 'product-id', params: { id: item.id }})">
                     <div class="productList__item__img product__imgMask" style="margin-bottom: -35px;">
                       <img :src="imgPath + item.images[0]" :alt="item.title" />
                       <svg class="clip-svg imgMask" width="0" height="0">

@@ -46,8 +46,7 @@
                                       </nuxt-link>
                                   </div>
                                    <div class="mvpList__item productList__item" v-else>
-                                      <nuxt-link :to="localePath({ name: 'product-pid', params: { pid: item.id }})" 
-                                      @click.native="gtagTrack('HomePage_HotSale_Player')">
+                                      <nuxt-link :to="localePath({ name: 'product-id', params: { id: item.id }})">
                                           <div class="productList__item__img product__imgMask">
                                               <img :src="imgPath + item.images[0]" :alt="item.title">
                                               <svg class="clip-svg imgMask" width="0" height="0">

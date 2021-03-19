@@ -7,6 +7,7 @@
         :key="index"
         style="margin: 0px 0px 45px; height: 520px;"
       >
+      <nuxt-link :to="localePath({ name: 'product-id', params: { id: item.id }})">
         <div
           class="productList__item__img product__imgMask"
           style="margin-bottom: -20px"
@@ -84,6 +85,7 @@
             </div>
           </div>
         </div>
+      </nuxt-link>
       </el-col>
     </el-row>
   </div>
