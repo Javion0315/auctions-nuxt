@@ -4,14 +4,10 @@
             <div class="black-overlay" v-on:click="closeAlert"></div>
             <div class="maskDark" v-on:click="MaskHide"></div>
             <div id="downloadme" class="flexCenter animated fadeIn">
-                <!-- <div class="close_btn" v-on:click="closeTopDownload">
-                <span class="icon-close"></span>
-                </div> -->
                 <div id="download_content" class="flexCenter">
                 <div id="download_logo"></div>
                 <div id="download_text">
                     <div class="bold">GemCard App Download</div>
-                    <!-- <div class="price mobileBlock">Open</div> -->
                 </div>
                 <div class="download_icon mobileHide">
                     <a href="https://apps.apple.com/us/app/id1527395702" 
@@ -37,31 +33,11 @@
                 <div class="header__toolBar">
                     <div class="container flexBetween">
                         <div class="logo_Horizontal header__toolBar__logo">
-                            <!-- <nuxt-link to="/" title="GemCard"></nuxt-link> -->
-                            <nuxt-link :to="localePath('index')" title="GemCard"></nuxt-link>
+                            <nuxt-link :to="localePath('index')" title="GemCard"><h1 class="logoName">GemCard</h1></nuxt-link>
                         </div>
                         <div class="header__toolBar__tool">
                             <div class="searchBar">
-                                <!--  上線前隱藏未開發功能
-                                <form class="pc-search">
-                                    <input type="text" placeholder="2009 Topps Stephen Curry" value="" class="searchInput">
-                                    <button class="icon icon-search" type="submit" v-on:click="showMobileSearch"></button>
-                                </form> -->
-                                <!--  上線前隱藏未開發功能
-                                <form class="mobile-search flexBetween">
-                                    <input type="text" placeholder="2009 Topps Stephen Curry" value="" class="searchInput">
-                                    <button class="icon icon-search" type="submit"></button>
-                                </form> -->
-                            </div>
-                           <!--  上線前隱藏未開發功能                              -->
-                            <!-- <form class="language btn btn-line">
-                                <select name="language__select">
-                                　<option value="English">English</option>
-                                　<option value="繁體中文">繁體中文</option>
-                                　<option value="简体中文">简体中文</option>
-                                </select>
-                            </form> -->
-                            <!-- <LangSwitcher /> -->
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -77,6 +53,9 @@
                                     <li class="dropDown__item">
                                         <nuxt-link :to="localePath('auction_results')">Auction Results</nuxt-link>
                                     </li>
+                                    <!-- <li class="dropDown__item">
+                                        <nuxt-link :to="localePath('auction_results')">Account</nuxt-link>
+                                    </li> -->
                                     <li class="dropDown__item">
                                         <nuxt-link :to="localePath('featuring_items')">Featuring Items</nuxt-link>
                                     </li>
@@ -90,7 +69,6 @@
                             </li>
                             <li class="nav-pc__item" style="margin-right: 20px"><nuxt-link :to="localePath('register')" title="REGISTER">REGISTER</nuxt-link></li>
                             <li class="nav-pc__item" style="margin-right: 20px"><nuxt-link :to="localePath('consign')" title="CONSIGN">CONSIGN</nuxt-link></li>
-                            <!-- <li class="btn btn-line highlight" v-on:click="open_popup_DowloadApp() ; gtagTrack('Download_SellNow')"> <nuxt-link to="">Join Now</nuxt-link></li> -->
                         </ul>
                         <div class="nav-mobile">
                             <span class="menuPanel-hamburguer" v-on:click="menuToggleOpen"></span>
@@ -103,9 +81,7 @@
             <span class="icon-close" v-on:click="menuToggleOpen"></span>
             <div class="container clearfix">
                 <div class="logo">
-                    <!-- <nuxt-link to="/" title="GemCard"></nuxt-link> -->
                     <nuxt-link :to="localePath('index')" title="GemCard"></nuxt-link>
-
                 </div>
                 <div class="logo-vertical">
                     <nuxt-link to="/" title="GemCard"><img src="~assets/images/logo_vertical.svg"></nuxt-link>

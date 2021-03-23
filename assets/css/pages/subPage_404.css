@@ -60,6 +60,28 @@
   justify-content: space-between;
 }
 
+
+.flexRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+
+.flexColumn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .subHeading:before, .toolbar .text, .shareLink, .icon-location, .floatBanner-download__text #download_logo, .floatBanner-download__text .slogan {
   display: inline-block;
   vertical-align: middle;
@@ -131,6 +153,28 @@
   justify-content: space-between;
 }
 
+
+.flexRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+
+.flexColumn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .subHeading:before, .toolbar .text, .shareLink, .icon-location, .floatBanner-download__text #download_logo, .floatBanner-download__text .slogan {
   display: inline-block;
   vertical-align: middle;
@@ -200,6 +244,28 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+}
+
+
+.flexRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+
+.flexColumn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .subHeading:before, .toolbar .text, .shareLink, .icon-location, .floatBanner-download__text #download_logo, .floatBanner-download__text .slogan {
@@ -564,7 +630,7 @@ label {
   position: absolute;
   right: 0;
   bottom: 1rem;
-  color: #979797;
+  color: darkgray;
   font-size: 15px;
 }
 
@@ -861,6 +927,28 @@ label {
   justify-content: space-between;
 }
 
+
+.flexRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+
+.flexColumn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .subHeading:before, .toolbar .text, .shareLink, .icon-location, .floatBanner-download__text #download_logo, .floatBanner-download__text .slogan {
   display: inline-block;
   vertical-align: middle;
@@ -981,7 +1069,7 @@ label {
 @media (max-width: 768px) {
   .subHeading + .description {
     font-size: 85%;
-    color: #979797;
+    color: darkgray;
   }
 }
 
@@ -1051,7 +1139,7 @@ label {
 }
 
 .toolbar .text {
-  color: #979797;
+  color: darkgray;
   padding-left: 1rem;
   border-left: 1px solid #ccc;
   margin-left: 1rem;
@@ -1231,7 +1319,7 @@ label {
 }
 
 .location {
-  color: #979797;
+  color: darkgray;
   float: right;
 }
 
@@ -1715,7 +1803,7 @@ footer a {
 
 .footermap dt {
   font-size: 0.95em;
-  border-bottom: 1px solid #979797;
+  border-bottom: 1px solid darkgray;
   padding: 1rem 0;
 }
 
@@ -1747,7 +1835,7 @@ footer a {
 .footermap .ftnav.article dd {
   font-size: 0.9em;
   padding: 1rem 0;
-  border-bottom: 1px dashed #979797;
+  border-bottom: 1px dashed darkgray;
 }
 
 .footermap .ftnav.article dd:last-child {

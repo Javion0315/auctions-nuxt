@@ -20,17 +20,15 @@
 
     <section> 
           <div class="container">
-            <h1 class="heading-l txtCenter">GemCard Auction</h1>
+            <div class="pageTitle">
+              <h1 class="heading-l txtCenter">GemCard Auction</h1>
+              <h2 class="txtCenter">BASEBALL CARDS / SPORT COLLECTIBLES / MEMORABILIA</h2>
+            </div>
             <!-- Featuring Auction Items -->
-              <div class="mvp hotProduct__section">
-                  <div class="hotProduct__section__head flexBetween">
-                    <div>
-                      <h2 class="title-m" style="font-weight: bold; font-size: 1.8rem; margin-bottom: 0.5rem;">Featuring Auction Items</h2>
-                      <h5>BASEBALL CARDS / SPORT COLLECTIBLES / MEMORABILIA</h5>
-                    </div>
-                      
+              <div class="FeaturingItem highlightItem__section highlightItem product">
+                  <div class="highlightItem__section__head flexBetween">
+                      <h3 class="title-m">Featuring Items</h3>
                       <div class="showall">
-                        
                         <nuxt-link :to="localePath('featuring_items')" class="showall">
                             Show all <i class="icon icon-arrow-right"></i>
                         </nuxt-link>
@@ -47,47 +45,22 @@
                                   </div>
                                    <div class="mvpList__item productList__item" v-else>
                                       <nuxt-link :to="localePath({ name: 'product-id', params: { id: item.id }})">
-                                          <div class="productList__item__img product__imgMask">
+                                          <div class="productList__item__img ">
                                               <img :src="imgPath + item.images[0]" :alt="item.title">
-                                              <svg class="clip-svg imgMask" width="0" height="0">
-                                                <defs>
-                                                  <clipPath id="clip-shape" clipPathUnits="objectBoundingBox" >
-                                                    <polygon points="0.02 0.06, 0.98 0.06, 0.98 0.93, 0.02 0.93" />
-                                                  </clipPath>
-                                                </defs>
-                                              </svg>
                                           </div>
                                           <div class="text">
                                             <h4 class="title ellipsis" style="color: #001939">{{ item.title }}</h4>
                                             <div class="row">
-                                              <div class="price" style="margin-bottom: 8px"><span class="lastSale">預估價: US{{ item.estimated_price }}</span>
-                                              </div>
-                                              <div style="display: flex; justify-content: space-between; width: 86%; height: 30px;">
-                                                <div class="btn btn-solid" v-if="item.status === 1"
-                                                  style="background-color: #C9B57E;
-                                                    height: 25px;
-                                                    display: flex;
-                                                    justify-content: center;
-                                                    align-items: center;
-                                                    font-size: 12px;
-                                                    margin: 10px 0px">
+                                              <div class="price">預估價: US{{ item.estimated_price }}</div>
+                                              <div class="row statusTag">
+                                                <div class="btn btn-solid btn-solid-gold" v-if="item.status === 1">
                                                   Bidding
                                                 </div>
-                                                <div class="btn btn-solid"
-                                                  style="background-color: lightgray;
-                                                    height: 25px;
-                                                    display: flex;
-                                                    justify-content: center;
-                                                    align-items: center;
-                                                    font-size: 12px;
-                                                    margin: 10px 0px">
+                                                <div class="btn btn-solid btn-solid-gray">
                                                   {{ item.bids }} Bids
                                                 </div>
                                               </div>
-                                              <div>
-                                                <span class="lastSale" style="color: darkgray">{{ item.special_name }}                                          
-                                                </span>
-                                              </div>
+                                              <small class="text-gray">{{ item.special_name }}</small>
                                               
                                             </div>
                                         </div>
@@ -101,33 +74,33 @@
                   </div>
               </div>
               <!-- Current Auctions -->
-              <div class="rookie hotProduct__section">
-                  <div class="hotProduct__section__head flexBetween">
-                      <h3 class="title-m" style="font-weight: bold; font-size: 1.8rem; margin-bottom: 0.5rem;">Current Auctions</h3>
+              <div class="CurrentAuction highlightItem__section highlightItem">
+                  <div class="highlightItem__section__head flexBetween">
+                      <h3 class="title-m">Current Auctions</h3>
                       <div class="showall">
                         <nuxt-link :to="localePath('current_auction')" class="showall">
                             Show all <i class="icon icon-arrow-right"></i>
                         </nuxt-link>
                       </div>
                   </div>
-                  <div class="rookieList slideList">
+                  <div class="CurrentAuctionList slideList">
                       <div class="swiper swiperBox" v-swiper:swiper3="swiperOption_Current" ref="swiperBox3" style="height: 310px">
                           <div class="swiper-wrapper">
                               <div class="swiper-slide" v-for="(item, index) in currentList" :key="index">
-                                  <div class="rookieList__item productList__item" v-if="index == 10">
+                                  <div class="CurrentAuctionList__item" v-if="index == 10">
                                     <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="seeMore">
                                       <span class="seeMore__text">See More</span>
                                     </nuxt-link>
                                   </div>
-                                  <div class="rookieList__item productList__item" v-else>
+                                  <div class="CurrentAuctionList__item" v-else>
                                     <nuxt-link :to="localePath({ name: 'auction-id', params: { id: item.id }})">
-                                      <div class="product__imgMask"><img :src="imgPath + item.image" :alt="item.title"></div>
+                                      <div class=""><img :src="imgPath + item.image" :alt="item.title"></div>
                                       <div class="text">
                                         <h4 class="title ellipsis" style="color: #001939">{{ item.title }}</h4>
                                         <div class="row">
                                           <div class="price" style="margin-bottom: 8px">
-                                            <span class="lastSale" style="color: darkgray">{{ item.start_time }}-{{ item.end_time }}                                              
-                                            </span>
+                                            <small class="text-gray">{{ item.start_time }}-{{ item.end_time }}                                              
+                                            </small>
                                           </div>
                                         </div>
                                       </div> 
@@ -142,33 +115,33 @@
               </div>
 
               <!-- Upcoming Auctions -->
-               <div class="rookie hotProduct__section">
-                  <div class="hotProduct__section__head flexBetween">
-                      <h3 class="title-m" style="font-weight: bold; font-size: 1.8rem; margin-bottom: 0.5rem;">Upcoming Auctions</h3>
+               <div class="UpcomingAuction highlightItem__section highlightItem">
+                  <div class="highlightItem__section__head flexBetween">
+                      <h3 class="title-m">Upcoming Auctions</h3>
                       <div class="showall">
                         <nuxt-link :to="localePath('upcoming_auctions')" class="showall">
                             Show all <i class="icon icon-arrow-right"></i>
                         </nuxt-link>
                       </div>
                   </div>
-                  <div class="rookieList slideList">
+                  <div class="UpcomingAuctionList slideList">
                       <div class="swiper swiperBox" v-swiper:swiper4="swiperOption_Upcoming" ref="swiperBox4" style="height: 310px">
                           <div class="swiper-wrapper">
                               <div class="swiper-slide" v-for="(item, index) in upcomingList" :key="index">
-                                  <div class="rookieList__item productList__item" v-if="index == 10">
+                                  <div class="UpcomingAuctionList__item" v-if="index == 10">
                                     <nuxt-link :to="localePath('/product_ranking/rookie/silver')" class="seeMore">
                                       <span class="seeMore__text">See More</span>
                                     </nuxt-link>
                                   </div>
-                                  <div class="rookieList__item productList__item" v-else>
+                                  <div class="UpcomingAuctionList__item" v-else>
                                     <nuxt-link :to="localePath({ name: 'auction-id', params: { id: item.id }})">
-                                      <div class="product__imgMask"><img :src="imgPath + item.image" :alt="item.title"></div>
+                                      <div class=""><img :src="imgPath + item.image" :alt="item.title"></div>
                                       <div class="text">
                                         <h4 class="title ellipsis" style="color: #001939">{{ item.title }}</h4>
                                         <div class="row">
                                           <div class="price" style="margin-bottom: 8px">
-                                            <span class="lastSale" style="color: darkgray">{{ item.start_time }}-{{ item.end_time }}                                              
-                                            </span>
+                                            <small class="text-gray">{{ item.start_time }}-{{ item.end_time }}                                              
+                                            </small>
                                           </div>
                                         </div>
                                       </div> 
@@ -317,7 +290,7 @@ const moment = require('moment');
         },
         swiperOption_Items: {
             speed:1000,
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween : 25,
             centeredSlides: false,
             pagination: {
@@ -333,16 +306,16 @@ const moment = require('moment');
             lazy: true,
             breakpoints: {
               768:{
-                spaceBetween : 30,
-                centeredSlides: true,
-                slidesOffsetBefore: -270,
-                slidesPerView: 3.5,
+                spaceBetween : 15,
+                // centeredSlides: true,
+                // slidesOffsetBefore: -270,
+                slidesPerView: 2.5,
                 // initialSlide: 1,
               },
               450:{
-                spaceBetween : 25,
-                centeredSlides: true,
-                slidesOffsetBefore: -70,
+                spaceBetween : 15,
+                // centeredSlides: true,
+                // slidesOffsetBefore: -70,
                 slidesPerView: 1.7,
                 // initialSlide: 1,
               }
@@ -367,16 +340,16 @@ const moment = require('moment');
             lazy: true,
             breakpoints: {
               768:{
-                spaceBetween : 28,
-                centeredSlides: true,
-                slidesOffsetBefore: -280,
-                slidesPerView: 4.5,
+                spaceBetween : 15,
+                // centeredSlides: true,
+                // slidesOffsetBefore: -280,
+                slidesPerView: 1.7,
               },
               450:{
-                spaceBetween : 20,
-                centeredSlides: true,
-                slidesOffsetBefore: -105,
-                slidesPerView: 2.7,
+                spaceBetween : 15,
+                // centeredSlides: true,
+                // slidesOffsetBefore: -105,
+                slidesPerView: 1.2,
               }
             }
         },
@@ -398,16 +371,16 @@ const moment = require('moment');
             lazy: true,
             breakpoints: {
               768:{
-                spaceBetween : 28,
-                centeredSlides: true,
-                slidesOffsetBefore: -280,
-                slidesPerView: 4.5,
+                spaceBetween : 15,
+                // centeredSlides: true,
+                // slidesOffsetBefore: -280,
+                slidesPerView: 1.7,
               },
               450:{
-                spaceBetween : 20,
-                centeredSlides: true,
-                slidesOffsetBefore: -105,
-                slidesPerView: 2.7,
+                spaceBetween : 15,
+                // centeredSlides: true,
+                // slidesOffsetBefore: -105,
+                slidesPerView: 1.2,
               }
             }
         },

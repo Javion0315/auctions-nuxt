@@ -1,0 +1,174 @@
+/* ------------------------------------
+ *  Width and Height
+ * ------------------------------------ */
+/*wrap*/
+/* ------------------------------------
+ *  Color
+ * ------------------------------------ */
+/* ------------------------------------
+ *  Font
+ * ------------------------------------ */
+/* ------------------------------------
+ *  page
+ * ------------------------------------ */
+/* product_ranking */
+/* ----------------------------------------------------------------------------------- */
+/* fix the mobile without hover */
+/* ----------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------- */
+/* UI style component */
+/* ----------------------------------------------------------------------------------- */
+/* extend */
+/* ----------------------------------------------------------------------------------- */
+
+.flexCenter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+
+.flexBetween {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+
+.flexRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+
+.flexColumn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+/* ----------------------------------------------------------------------------------- */
+/*  */
+/* ----------------------------------------------------------------------------------- */
+.aboutUs .img {
+  width: 60%;
+  -webkit-clip-path: polygon(23% 0, 100% 0, 79% 100%, 0 101%);
+          clip-path: polygon(23% 0, 100% 0, 79% 100%, 0 101%);
+}
+
+@media (max-width: 851px) {
+  .aboutUs .img {
+    width: 100%;
+    background: #0e284b;
+    -webkit-clip-path: inherit;
+            clip-path: inherit;
+  }
+}
+
+@media (max-width: 851px) {
+  .aboutUs img {
+    -webkit-transform: translateX(0) !important;
+            transform: translateX(0) !important;
+  }
+}
+
+.aboutUs .text {
+  width: 35%;
+}
+
+@media (max-width: 851px) {
+  .aboutUs .text {
+    width: 100%;
+    padding: 4% 6%;
+  }
+}
+
+@media (max-width: 851px) {
+  .aboutUs .flexRow {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+  }
+}
+
+@media (max-width: 851px) {
+  .aboutUs .fullWidthBg {
+    background: none !important;
+  }
+}
+
+.keyCards .fullWidthBg {
+  background: -webkit-gradient(linear, left top, right top, color-stop(35%, #0e284b), color-stop(0%, transparent));
+  background: linear-gradient(to right, #0e284b 35%, transparent 0%);
+}
+
+.marketTrend .flexRow {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.marketTrend .fullWidthBg {
+  background: -webkit-gradient(linear, right top, left top, color-stop(35%, #0e284b), color-stop(0%, transparent));
+  background: linear-gradient(to left, #0e284b 35%, transparent 0%);
+}
+
+.marketTrend img {
+  -webkit-transform: translateX(3%);
+          transform: translateX(3%);
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* animation */
+/* ----------------------------------------------------------------------------------- */
+.text_anime {
+  position: relative;
+  overflow: hidden;
+}
+
+.text_anime::after {
+  content: "";
+  background-color: #fff;
+  display: block;
+  width: 150%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-animation-name: img_anime;
+          animation-name: img_anime;
+  -webkit-animation-duration: 1.3s;
+          animation-duration: 1.3s;
+  -webkit-animation-delay: .5s;
+          animation-delay: .5s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+}
+/*# sourceMappingURL=subPage_aboutus.css.map */

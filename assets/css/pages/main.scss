@@ -229,11 +229,37 @@
 }
 
 /* ----------------------------------------------------------------------------------- */
-/* hotProduct */
+/* FeaturingItems */
 /* ----------------------------------------------------------------------------------- */
-.hotProduct{
+.pageTitle{
+    margin: 4vw 0;
+    .heading-l{
+        margin-bottom: 0.2rem;
+    }
+}
+
+.productList__item__img{
+    border: 1px solid #BCBCBC;
+    padding: 1.5vw;
+    border-radius: 7px;
+    text-align: center;
+    height: calc(64vw / 3);
+    max-height: 257px;
+    margin-bottom: 1rem;
+    @include media('below-tablet') {
+        height: 40vw; 
+    }
+    @include media('below-mobile') {
+        height: 50vw; 
+   }
+    img{
+        height: 100%;
+        width: auto;
+    }
+}
+.highlightItem{
     color: #fff;
-    .hotProduct__section{
+    .highlightItem__section{
         margin: 3rem 0;
         &.rookie{
            margin: -1rem 0 7rem; 
@@ -242,9 +268,10 @@
            }
         }
     }
-    .hotProduct__section__head{
+    .highlightItem__section__head{
         margin-bottom: 1rem;
     }
+   
     .heading-l{
         // font-family: Rockwell-BoldItalic;
         // font-family: 'Roboto Slab', serif;
@@ -258,11 +285,12 @@
         }
     }
     .title-m{
-        color: $textcColor-highlight;
-        font-size: 1.6vw;
-        margin-bottom: 0;
+        color: $web-mainColor;
+        font-weight: bold;
+        font-size: 2.1rem;
+        margin-bottom: 0.4vw;
         @include media('below-mediumDesktop') {
-            font-size: 2.7vw;
+            font-size: 3.5vw;
         }
         @include media('below-tablet') {
             font-size: 4.7vw;
@@ -277,13 +305,21 @@
     .swiper-slide{
         // width: auto;
         width: calc(100% / 5 - 0.7rem); 
-        overflow-x: hidden;       
+        // overflow-x: hidden;       
     }
     .btn{
         cursor: default;
     }
+    .statusTag{
+        width: 100%;
+        justify-content: flex-start !important;
+    }
+    small.text-gray{
+        color: $textcColor-gray;
+        font-size: 90%;
+        line-height: 1.4rem;
+    }
 }
-
 
 .popular{
     background: #fff;
@@ -421,14 +457,7 @@
             
         }
     }
-    .product__imgMask{
-        width: 10%;
-        margin-right: 4vw;
-        @include media('below-tablet') {
-            width: 30%;
-            max-width: 50px;
-        }
-    }
+   
     .text{
         font-size: 1.2rem;
         line-height: 2rem;

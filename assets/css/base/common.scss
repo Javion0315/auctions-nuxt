@@ -225,6 +225,9 @@ p{
 /* ----------------------------------------------------------------------------------- */
 /* logo */
 /* ----------------------------------------------------------------------------------- */
+h1.logoName{
+    font-size: 0;
+}
 .logo_Horizontal{
     a{
         display: block;
@@ -1043,7 +1046,7 @@ p{
         // @extend %inlineBlock-top;
     }
 }
-.productList__item{
+.highlightItem{
     .seeMore{
         position: relative;
         display: inline-block;
@@ -1064,94 +1067,32 @@ p{
 /* productList */
 /* ----------------------------------------------------------------------------------- */
 .product{
-    color: #fff;
-    background-image: url(~assets/images/hotProduct_title_bg.png),linear-gradient(to bottom, #001633 0%,#00214c 100%);
-        background-position: top center;
-        background-repeat: no-repeat;
-        height: 100%;
-        @include media('below-below-mediumDesktop') {
-            background-size: 60%;
-        }
-        @include media('below-tablet') {
-            background-size: 100%;
-        }
-        @include media('below-mobile') {
-            background-size: 150%;
-        }
-    .heading-bg{
-        background-image: url(~assets/images/hotProduct_title_bg.png);
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-size: 53%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
-        @include media('below-below-mediumDesktop') {
-            background-size: 60%;
-        }
-        @include media('below-tablet') {
-            background-size: 100%;
-        }
-        @include media('below-mobile') {
-            background-size: 150%;
-        }
-    }
-    padding: 5rem 0 4rem;
-    // background: linear-gradient(to bottom, #001633 0%,#00214c 100%);
-    @include media('below-mobile') {
-        padding: 4rem 0 0.2rem;
-    }
-    .heading-l{
-        position: relative;
-        font-family: $font-family-special;
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #F9F7F5;
-        text-shadow: 0 4px 4px #664B00;
-        @include media('below-tablet') {
-            font-size: 8vw;
-        }
-    }
     .btn-solid{
-        // font-size: 90%;
-        padding: 2px 7px;
+        padding: 0.5vw 1.5vw;
         font-size: 80%;
         @include media('below-mobile') {
             font-size: 3vw;
         }
-        &.priceDown{
-            background: #C90000;
+        &-gold{
+            background: $web-secondaryColor;
         }
-        &.priceUp{
-            background: #009D3D;
+        &-gray{
+            background: lightgray;
         }
     }
 }
 
-.product__imgMask{
-    text-align: center; 
-    img{
-        width:100%;
-        // clip-path: polygon(2% 0, 98% 0%, 98% 100%, 2% 100%);
-        clip-path: polygon(2% 6%, 98% 6%, 98% 93%, 2% 93%);
-        clip-path: url("#clip-shape");
-
-    }
-}
-.productList__item{
-    
+.highlightItem{
+    margin-bottom: 2vw;
     @extend %inlineBlock-top;
+    width: 100%;
     @include media('below-mobile') {
         font-size: 3.8vw;
     } 
     a{
         display: block;
         width: 100%;
-        // max-width: $productList__item-width;
         margin: 0 auto;
-        // @include maxWidth-image("hotpd_mvp_01.png");
     }
     .row{
         align-items: flex-end;
@@ -1160,28 +1101,27 @@ p{
     }
     .text{
         letter-spacing: normal;
+        margin-top: 1rem;
         @include media('below-mobile') {
             font-size: 89%;
         }
     }
     .title{
-        line-height: 1.4rem;
-        // margin-top: 1rem;
-        color: #fff;
-        height: 2.8rem;;
+        line-height: 1.5rem;
+        font-size: $font-Large;
         @include media('below-mobile') {
-            line-height: 1.2rem;
-            height: 2.6rem;;
+            line-height: 1.4rem;
+            height: 2.5rem;;
         }
     }
     .price{
         color: $textcColor-highlight;
     }
-    .lastSale{
+    .price{
         display: block;
-        font-size: 85%;
+        // font-size: 85%;
         // margin: 0.5rem 0 -5px;
-        margin: 0.5rem 5px -5px 0;
+        margin: 0.5rem 0 5px;
         width: 100%;
     }
     .dollar{
