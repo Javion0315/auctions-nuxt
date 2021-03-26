@@ -1,26 +1,42 @@
 <template>
-  <div>
+  <div v-if="auth">
     <headerBar v-if="params !== 'app'" />
     <nuxt/>
     <footerMap v-if="params !== 'app'"/>
+  </div>
+  <div v-else>
+    <login></login>
   </div>
 </template>
 
 <script>
 import footerMap from '~/components/footerMap';
 import headerBar from '~/components/headerBar';
+import login from '~/pages/login';
 import {getHomePageData} from '~/api/homePage.js';
 
 export default {
     components: {
       headerBar,
       footerMap,
+      login
     },
     data () {
       return {
+          auth: false,
           params : this.$route.query.app
       }
-    }, 
+    },
+    mounted() {
+      if (process.client) {
+        let token = localStorage.getItem('token')
+        if (token !== null && token !== 'undefined') {
+          this.auth = true
+        } else {
+          this.auth = false
+        }
+      }
+    }
 }
 </script>
 
