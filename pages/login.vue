@@ -46,7 +46,7 @@
                 border: 1px solid #C9B57E;
                 font-weight: bold;
                 font-size: 1.1rem
-                " @click="login">LOG IN</el-button>
+                " @click.prevent="login">LOG IN</el-button>
             </div>
             <p style="color: white; font-size: 0.9rem; font-weight: 300;">Don't have an account?
                 <span style="color: #C9B57E; font-weight: bold;"><u>  Sign up</u></span>！
@@ -109,7 +109,8 @@ export default {
                 if (res.data.code === 1) {
                     token = res.data.user.token
                     localStorage.setItem('token', token)
-                    location.reload()
+                    this.$router.push({path: '/'})
+                    // location.reload()
                 } else {
                     this.$message.error(res.data.msg);
                 }

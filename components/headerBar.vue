@@ -36,10 +36,21 @@
                             <nuxt-link :to="localePath('index')" title="GemCard"><h1 class="logoName">GemCard</h1></nuxt-link>
                         </div>
                         <div style="border: 1px solid black; padding: 6px 20px; border-radius: 10px">
-                            <el-link href="https://element.eleme.io" target="_blank">REGISTER</el-link>
+                            <div style="display: inline-block">
+                                <nuxt-link :to="localePath('register')" title="REGISTER">REGISTER</nuxt-link>
+                            </div>
                             <span>/</span>
-                            <el-link href="https://element.eleme.io" target="_blank" v-if="auth">LOG OUT</el-link>
-                            <el-link href="https://element.eleme.io" target="_blank" v-else>LOG IN</el-link>
+                            <div v-if="auth" style="display: inline-block"
+                            @click="logout">
+                                <nuxt-link :to="localePath('login')" title="LOG OUT">
+                                    LOG OUT
+                                </nuxt-link>
+                            </div>
+                            <div v-else style="display: inline-block"> 
+                                <nuxt-link :to="localePath('login')" title="LOG IN">
+                                    LOG IN
+                                </nuxt-link>
+                            </div>
                         </div>
                         <!-- <div class="header__toolBar__tool">
                             <div class="searchBar"> -->
@@ -202,6 +213,9 @@ import {closeAlert} from 'assets/js/common.js';
     created() {
     },
     methods: {
+        logout() {
+            localStorage.setItem('token', null)
+        },
         gtagTrack(eventName){
             gtag('event', eventName);
         },
