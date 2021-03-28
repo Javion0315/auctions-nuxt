@@ -167,6 +167,7 @@ import {open_popup_DowloadApp} from 'assets/js/common.js';
 import {openApp} from 'assets/js/common.js';
 import {showBlackOverlay} from 'assets/js/common.js';
 import {closeAlert} from 'assets/js/common.js';
+import Cookies from 'js-cookie';
 
   export default {
     components: {
@@ -197,13 +198,11 @@ import {closeAlert} from 'assets/js/common.js';
         //                 'scrollTop' : st
         //         });
         // });
-        if (process.client) {
-            const auth = localStorage.getItem('token')
-            if (auth !== null && auth !== 'undefined') {
-                this.auth = true
-            } else {
-                this.auth = false
-            }
+        const auth = Cookies.get('token')
+        if (auth !== null && auth !== 'undefined') {
+            this.auth = true
+        } else {
+            this.auth = false
         }
     },
     beforeDestroy(){
@@ -214,7 +213,7 @@ import {closeAlert} from 'assets/js/common.js';
     },
     methods: {
         logout() {
-            localStorage.setItem('token', null)
+            this.$store.dispatch('auth/logout')
         },
         gtagTrack(eventName){
             gtag('event', eventName);

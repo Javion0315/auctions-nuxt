@@ -105,13 +105,21 @@ export default {
                 }
             }
             Object.assign(this.form, {uuid: uuid})
-            login(this.form).then((res) => {
-                if (res.data.code === 1) {
-                    token = res.data.user.token
-                    localStorage.setItem('token', token)
-                    this.$router.push({path: '/'})
-                    // location.reload()
+            // login(this.form).then((res) => {
+            //     if (res.data.code === 1) {
+            //         token = res.data.user.token
+            //         localStorage.setItem('token', token)
+            //         this.$router.push({path: '/'})
+            //     } else {
+            //         this.$message.error(res.data.msg);
+            //     }
+            // })
+            this.$store.dispatch('auth/authlogin', this.form).then(() => {
+                const status = this.$store.state.auth.status
+                if (status === 'success') {
+                    this.$router.push({ path: '/' })
                 } else {
+                    this.$store.dispatch('auth/logout')
                     this.$message.error(res.data.msg);
                 }
             })
