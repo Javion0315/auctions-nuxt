@@ -39,8 +39,8 @@ export default {
   ** Global CSS
   */
  css: [
-    'swiper/dist/css/swiper.css' ,
-    'element-ui/lib/theme-chalk/index.css'
+    'swiper/swiper-bundle.css' ,
+    'element-ui/lib/theme-chalk/index.css',
   ],
   /*
   ** Plugins to load before mounting the App
@@ -59,9 +59,8 @@ export default {
     { src: '~/plugins/vue-mq.js', ssr: false },//Handle Media Queries and Responsive Design
     { src: '~/plugins/vue-social-sharing.js', ssr: false },//for sharing links to social networks
     { src: '~/plugins/firebase.js', ssr: false ,/*mode: 'server' ,*/  mode: 'client' },//Firebase SDK
-    // { src: '~/plugins/vue- faq-accordion.js', ssr: false , mode: 'client' },
     { src: '~/plugins/element-ui/element-ui' },
-    { src: '~/plugins/font-awesome' }
+    { src: '~/plugins/font-awesome' },
  ],
  /*
   ** Nuxt.js dev-modules
@@ -85,13 +84,7 @@ export default {
     credentials: true,
   },
   proxy: {
-    // '/api/': { 
-    //   target: 'https://dev.2bite.com:14719/cardCool/api',
-    //   pathRewrite: {
-    //     '^/api/': '/',
-    //     changeOrigin: true
-    //   },
-    // },
+    
   },
   /*
   ** Build configuration
@@ -107,12 +100,6 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    // extend (config, { isDev, isClient }) {
-    //       if (!isDev) {
-    //           config.output.publicPath = '../_nuxt/'
-    //       }
-    //       return config;
-    //   }
     vendor: ['element-ui']
   },
   server: { //Nuxt Server    

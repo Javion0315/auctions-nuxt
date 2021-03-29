@@ -1,37 +1,40 @@
 <template>
   <div>
-    <section class="policy mainContent" style="margin: 70px">
+    <section class="mainContent" style="margin: 70px">
       <section class="Privacy" style="padding: 0px">
         <div class="container">
             <el-row :gutter="20">
-                <el-col :span="14">
-                    <div class="swiper swiperBox" v-swiper:swiper2="swiperOption_Items" ref="swiperBox2"
-                    style="width: 50%; height: 450px">
-                          <div class="swiper-wrapper">
-                              <div class="swiper-slide" v-for="(item, index) in data.images" :key="index">
-                                   <div class="mvpList__item productList__item">
-                                        <div class="productList__item__img product__imgMask">
-                                            <img :src="imgPath + item" :alt="item.title">
-                                            <svg class="clip-svg imgMask" width="0" height="0">
-                                            <defs>
-                                                <clipPath id="clip-shape" clipPathUnits="objectBoundingBox" >
-                                                <polygon points="0.02 0.06, 0.98 0.06, 0.98 0.93, 0.02 0.93" />
-                                                </clipPath>
-                                            </defs>
-                                            </svg>
-                                        </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="swiper-button-prev swp_Items" slot="button-prev"></div>
-                          <div class="swiper-button-next swp_Items" slot="button-next"></div> 
-                      </div>
+                <el-col :span="24" :sm="14">
+                    <div class="pdImg">
+                        <el-carousel :autoplay="false" indicator-position="outside" arrow="always">
+                            <el-carousel-item v-for="(item, index) in pdImg" :key="index">
+                                <el-image 
+                                    :src="pdImg[index]" 
+                                    :preview-src-list="pdImg">
+                                </el-image>
+                            </el-carousel-item>
+                        </el-carousel>
 
-                      <div style="margin-top: 20px">
-                          <bidsHistory></bidsHistory>
-                      </div>
+                        <!-- <div class="swiper swiperBox" v-swiper:swiper2="swiperOption_Items" ref="swiperBox2">
+                            <div class="swiper-wrapper"> 
+                                <div class="swiper-slide" v-for="(item, index) in pdImg" :key="index">
+                                    <el-carousel>
+                                        <el-carousel-item v-for="item in imgs" v-bind:key="item.url">
+                                            <el-image 
+                                                :src="pdImg[0]" 
+                                                :preview-src-list="pdImg">
+                                            </el-image>
+                                        </el-carousel-item>
+                                    </el-carousel>
+                                </div>  
+                            </div>
+                            <div class="swiper-button-prev swp_Items" slot="button-prev"></div>
+                            <div class="swiper-button-next swp_Items" slot="button-next"></div>
+                         </div>
+                        <i class="el-icon-zoom-in iconStyle" style="cursor: pointer;" @click="viewerShow()"></i> -->
+                    </div>
                 </el-col>
-                <el-col :span="10" style="padding-left: 50px">
+                <el-col :span="24" :sm="10" style="padding-left: 50px">
                     <h2
                         class="title-m"
                         style="
@@ -60,27 +63,33 @@
                             <span class="lastSale">剩餘時間: {{ day }}天 {{ hr }}時 {{ min }}分 {{ sec }}秒</span>
                         </div>
                     </div>
-                    <div style="margin-top: 50px">
-                        <div class="radioStyle" style="background-color: #F2F2F2; padding: 25px;">
-                             <el-radio v-model="radio" label="Auto" style="font-size: 1.1rem">自動出價</el-radio>
-                             <el-radio v-model="radio" label="unAuto" style="font-size: 1.1rem">直接出價</el-radio>
-                             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px">
-                                 <div><el-input v-model="placeBids" placeholder="輸入出價上限"></el-input></div>
-                                 <el-button type="primary" @click="bid" style="background-color: #0C4C78; border-radius: 5px;" size="medium">
-                                    <span style="font-size: 1.1rem; padding: 0px 20px; letter-space: 1px">Place Bid</span>
-                                </el-button>
-                             </div>
-                        </div>
+                    <div class="bidStyle" style="margin-top: 50px;background-color: #F2F2F2; padding: 25px;">
+                        <el-radio v-model="radio" label="Auto">自動出價</el-radio>
+                        <el-radio v-model="radio" label="unAuto">直接出價</el-radio>
+                        <el-row class="bidStyle__Btn row flexBetween">
+                            <el-col :span="12">
+                                <el-input class="col" v-model="placeBids" placeholder="輸入出價上限"></el-input>
+                            </el-col>
+                                <div class="col btn btn-solid-primary" @click="bid">Place Bid</div>
+                            <!-- <el-col :span="10"> -->
+                            <!-- </el-col> -->
+                        </el-row>
                     </div>
-
-                    <div style="display: flex; flex-direction: column; width: 70%; margin-top: 60px">
+                </el-col>
+            </el-row> 
+            <el-row :gutter="20" style="margin-top: 20px">
+                <el-col :span="24" :sm="14">
+                    <bidsHistory></bidsHistory>
+                </el-col>
+                <el-col :span="24" :sm="10" style="padding-left: 50px">
+                    <div style="display: flex; flex-direction: column; width: 100%; margin-top: 60px">
                         <el-button class="btnStyle" plain><i class="el-icon-s-promotion iconStyle"></i> Share To</el-button>
                         <el-button class="btnStyle" plain><i class="el-icon-date iconStyle"></i> Add Calander</el-button>
                         <el-button class="btnStyle" plain><span class="iconStyle"><font-awesome-icon  :icon="['far', 'heart']" /></span> Follow</el-button>
                         <el-button class="btnStyle" plain><i class="el-icon-message iconStyle"></i> E-mail Notifications</el-button>
                     </div>
                 </el-col>
-            </el-row>    
+            </el-row>   
         </div>
       </section>
     </section>
@@ -99,6 +108,7 @@ export default {
     return {
       productID: '',
       data: [],
+      pdImg: [],
       imgPath: '',
       day: 0,
       hr: 0,
@@ -120,6 +130,7 @@ export default {
             prevEl: '.swiper-button-prev.swp_Items',
         },
         // mousewheel: true,
+        // autoplay: true,
         preloadImages: false,
         lazy: true,
         breakpoints: {
@@ -154,6 +165,14 @@ export default {
         getProductInfo(data).then((res) => {
             this.data = res.data.goodsData
             this.countdown()
+
+            //取得產品圖
+            const pdImgLength = this.data.images.length;
+            for (let i = 0; i <= pdImgLength-1; i++) {
+                let getPdImg = [];
+                getPdImg = process.env.IMAGE_DOMAIN + this.data.images[i];
+                this.pdImg.push(getPdImg);
+            }
         })
         
     },
@@ -176,6 +195,10 @@ export default {
     },
     bid() {
         console.log('bids')
+    },
+    viewerShow() {
+        const viewer = this.$el.querySelector('.v-viewer-box').$viewer
+        viewer.show()
     }
   }
 }
@@ -195,4 +218,9 @@ export default {
     .iconStyle {
         margin-right: 15px
     }
+</style>
+<style lang="scss">
+  @import "assets/css/base/default.scss";
+  @import "assets/css/pages/subPage_product.scss";
+  
 </style>

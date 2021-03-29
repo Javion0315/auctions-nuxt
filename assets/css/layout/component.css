@@ -86,7 +86,7 @@
 /* btn */
 /* ----------------------------------------------------------------------------------- */
 .btn {
-  border-radius: 7px;
+  border-radius: 4px;
   padding: 0.3rem 1.2rem;
   text-align: center;
   display: inline-block;
@@ -121,15 +121,6 @@
   color: #fff;
 }
 
-.btn-primary {
-  background: #001939;
-  color: #fff;
-}
-
-.btn-primary a {
-  color: #fff;
-}
-
 .btn-secondary {
   color: #001939;
   background: #fff5db;
@@ -149,7 +140,6 @@
 
 .btn-solid {
   color: #fff;
-  padding: 2px 7px;
 }
 
 .btn-solid a {
@@ -160,6 +150,15 @@
   .btn-solid {
     font-size: 3vw;
   }
+}
+
+.btn-solid-primary {
+  background: #001939;
+  color: #fff;
+}
+
+.btn-solid-primary a {
+  color: #fff;
 }
 
 .btn-solid-gold {

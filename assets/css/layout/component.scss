@@ -11,7 +11,7 @@
 /* ----------------------------------------------------------------------------------- */
 
 .btn{
-    border-radius: 7px;
+    border-radius: 4px;
     padding: 0.3rem 1.2rem;
     text-align: center;
     display: inline-block;
@@ -38,13 +38,7 @@
             color: #fff;
         }
     }
-    &-primary{
-        background: $web-mainColor;
-        color: #fff;
-        a{
-            color: #fff;
-        }
-    }
+    
     &-secondary {
         color: $web-mainColor;
         background: #fff5db; /* Old browsers */
@@ -61,9 +55,15 @@
         a{
             color: #fff;
         }
-        padding: 2px 7px;
         @include media('below-mobile') {
             font-size: 3vw;
+        }
+        &-primary{
+            background: $web-mainColor;
+            color: #fff;
+            a{
+                color: #fff;
+            }
         }
         &-gold{
             background: $web-secondaryColor;
