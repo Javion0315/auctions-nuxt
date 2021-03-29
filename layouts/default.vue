@@ -1,8 +1,8 @@
 <template>
   <div>
-    <headerBar v-if="params !== 'app'" />
+    <headerBar v-if="params !== 'app' && $route.path !== '/login'" />
     <nuxt/>
-    <footerMap v-if="params !== 'app'"/>
+    <footerMap v-if="params !== 'app' && $route.path !== '/login'"/>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
       return {
           params : this.$route.query.app
       }
-    }, 
+    },
 }
 </script>
 

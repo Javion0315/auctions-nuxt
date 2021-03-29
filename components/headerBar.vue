@@ -35,10 +35,46 @@
                         <div class="logo_Horizontal header__toolBar__logo">
                             <nuxt-link :to="localePath('index')" title="GemCard"><h1 class="logoName">GemCard</h1></nuxt-link>
                         </div>
-                        <div class="header__toolBar__tool">
-                            <div class="searchBar">
+                        <div style="border: 1px solid black; padding: 6px 20px; border-radius: 10px">
+                            <div style="display: inline-block">
+                                <nuxt-link :to="localePath('register')" title="REGISTER">REGISTER</nuxt-link>
+                            </div>
+                            <span>/</span>
+                            <div v-if="auth" style="display: inline-block"
+                            @click="logout">
+                                <nuxt-link :to="localePath('login')" title="LOG OUT">
+                                    LOG OUT
+                                </nuxt-link>
+                            </div>
+                            <div v-else style="display: inline-block"> 
+                                <nuxt-link :to="localePath('login')" title="LOG IN">
+                                    LOG IN
+                                </nuxt-link>
+                            </div>
                         </div>
-                        </div>
+                        <!-- <div class="header__toolBar__tool">
+                            <div class="searchBar"> -->
+                                <!--  上線前隱藏未開發功能
+                                <form class="pc-search">
+                                    <input type="text" placeholder="2009 Topps Stephen Curry" value="" class="searchInput">
+                                    <button class="icon icon-search" type="submit" v-on:click="showMobileSearch"></button>
+                                </form> -->
+                                <!--  上線前隱藏未開發功能
+                                <form class="mobile-search flexBetween">
+                                    <input type="text" placeholder="2009 Topps Stephen Curry" value="" class="searchInput">
+                                    <button class="icon icon-search" type="submit"></button>
+                                </form> -->
+                            <!-- </div> -->
+                           <!--  上線前隱藏未開發功能                              -->
+                            <!-- <form class="language btn btn-line">
+                                <select name="language__select">
+                                　<option value="English">English</option>
+                                　<option value="繁體中文">繁體中文</option>
+                                　<option value="简体中文">简体中文</option>
+                                </select>
+                            </form> -->
+                            <!-- <LangSwitcher /> -->
+                        <!-- </div> -->
                     </div>
                 </div>
                 <nav class="header__navBar">
@@ -131,6 +167,7 @@ import {open_popup_DowloadApp} from 'assets/js/common.js';
 import {openApp} from 'assets/js/common.js';
 import {showBlackOverlay} from 'assets/js/common.js';
 import {closeAlert} from 'assets/js/common.js';
+import Cookies from 'js-cookie';
 
   export default {
     components: {
@@ -145,6 +182,7 @@ import {closeAlert} from 'assets/js/common.js';
         scrollValue: 0,
         // menu toggle open
         toggle: null,
+        auth: true
       }
     },
     mounted () {
@@ -160,6 +198,12 @@ import {closeAlert} from 'assets/js/common.js';
         //                 'scrollTop' : st
         //         });
         // });
+        const auth = Cookies.get('token')
+        if (auth !== null && auth !== 'undefined') {
+            this.auth = true
+        } else {
+            this.auth = false
+        }
     },
     beforeDestroy(){
         window.removeEventListener('scroll', this.onScroll);
@@ -168,6 +212,9 @@ import {closeAlert} from 'assets/js/common.js';
     created() {
     },
     methods: {
+        logout() {
+            this.$store.dispatch('auth/logout')
+        },
         gtagTrack(eventName){
             gtag('event', eventName);
         },
