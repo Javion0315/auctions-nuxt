@@ -105,7 +105,7 @@ export default {
             const data = {
                 lang: "zh-CN",
                 platform: "h5",
-                page: page,
+                page: this.page,
                 limit: 10,
             }
             getFinishAuctionData(data).then((res) => {

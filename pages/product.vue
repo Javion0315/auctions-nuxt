@@ -51,7 +51,7 @@
                             <span class="lastSale">預估價: USD {{ data.estimated_price }}</span>
                         </div>
                         <div class="price" style="margin-bottom: 8px">
-                            <span class="lastSale" style="margin-right: 30px">當前出價: USD {{ data.current_price }}</span>
+                            <span class="lastSale" style="margin-right: 30px">當前出價: USD ${{ data.current_price }}</span>
                             <span style="color: #979797">({{ data.bids }}Bids)</span>
                         </div>
                         <div class="price" style="margin-bottom: 8px">
@@ -68,18 +68,32 @@
                         <el-radio v-model="radio" label="unAuto">直接出價</el-radio>
                         <el-row class="bidStyle__Btn row flexBetween">
                             <el-col :span="12">
-                                <el-input class="col" v-model="placeBids" placeholder="輸入出價上限"></el-input>
+                                <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm col">
+                                    <el-form-item prop="placeAutoBids" v-if="radio === 'Auto'" style="margin-bottom: 0px">
+                                        <el-input v-model="ruleForm.placeAutoBids" placeholder="輸入出價上限" :disabled="radio === ''"></el-input>
+                                    </el-form-item>
+                                    <el-form-item prop="placeBids" v-else style="margin-bottom: 0px">
+                                        <el-input v-model="ruleForm.placeBids" placeholder="輸入出價上限" :disabled="radio === ''"></el-input>
+                                    </el-form-item>
+                                </el-form>
                             </el-col>
-                                <div class="col btn btn-solid-primary" @click="bid">Place Bid</div>
+                            <div class="col btn btn-solid-primary" @click="bid('ruleForm')">Place Bid</div>
                             <!-- <el-col :span="10"> -->
                             <!-- </el-col> -->
                         </el-row>
+                        <div v-if="radio === 'Auto'"
+                        style="color: #979797; font-size: 0.9rem;
+                        margin-left: 15px; margin-top: 15px">系統將按增額，依序遞補出價至上限金額為止</div>
+                        <div v-else
+                        style="color: #979797; font-size: 0.9rem;
+                        margin-left: 15px; margin-top: 15px">最低出價金額：${{ data.current_price }}</div>
+                        <!-- auto_bid_price -->
                     </div>
                 </el-col>
             </el-row> 
             <el-row :gutter="20" style="margin-top: 20px">
                 <el-col :span="24" :sm="14">
-                    <bidsHistory></bidsHistory>
+                    <bidsHistory ref="list"></bidsHistory>
                 </el-col>
                 <el-col :span="24" :sm="10" style="padding-left: 50px">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-top: 60px">
@@ -97,7 +111,8 @@
 </template>
 
 <script>
-import { getProductInfo } from '~/api/product';
+import Cookies from 'js-cookie';
+import { getProductInfo, bidGoods, autoBidGoods } from '~/api/product';
 import bidsHistory from '~/components/bidsHistory'
 
 export default {
@@ -105,6 +120,13 @@ export default {
       bidsHistory,
   },
   data() {
+    var validatePrice = (rule, value, callback) => {
+        if (value <= this.data.current_price && this.radio !== '') {
+          callback(new Error('請高於當前出價'));
+        } else {
+          callback();
+        }
+    };
     return {
       productID: '',
       data: [],
@@ -115,7 +137,18 @@ export default {
       min: 0,
       sec: 0,
       radio: '',
-      placeBids: '',
+      ruleForm: {
+        placeBids: '',
+        placeAutoBids: ''
+      },
+      rules: {
+        placeAutoBids: [
+            { validator: validatePrice, trigger: ['blur', 'change'] }
+        ],
+        placeBids: [
+            { validator: validatePrice, trigger: ['blur', 'change'] }
+        ],
+      },
       swiperOption_Items: {
         speed:1000,
         slidesPerView: 1,
@@ -193,8 +226,57 @@ export default {
             that.countdown()
         }, 1000)
     },
-    bid() {
-        console.log('bids')
+    bid(formName) {
+        const data = {
+            token: Cookies.get('token'),
+            goods_id: this.productID,
+            bid_price: this.radio === 'Auto' ? this.ruleForm.placeAutoBids : this.ruleForm.placeBids
+        }
+
+        this.$refs[formName].validate((valid) => {
+            if (valid && this.radio === 'unAuto') {
+                bidGoods(data).then((res) => {
+                    if (res.data.code === 1) {
+                        this.$notify({
+                            title: '成功',
+                            message: res.data.msg,
+                            type: 'success'
+                        });
+                        this.$refs.list.getInit();
+                        this.getInit()
+                    } else {
+                        this.$notify({
+                            title: res.data.msg,
+                            type: 'error'
+                        });
+                    }
+                    this.$refs[formName].resetFields()
+                })
+            } else if (valid && this.radio === 'Auto') {
+                autoBidGoods(data).then((res) => {
+                    if (res.data.code === 1) {
+                        this.$notify({
+                            title: '成功',
+                            message: res.data.msg,
+                            type: 'success'
+                        });
+                    } else {
+                        this.$notify({
+                            title: res.data.msg,
+                            type: 'error'
+                        });
+                    }
+                    this.$refs[formName].resetFields()
+                })
+            } else {
+                this.$notify.error({
+                    title: '錯誤',
+                    message: '請檢查填寫金額有無錯誤',
+                    duration: 2500
+                });
+                this.$refs[formName].resetFields()
+            }
+        });
     },
     viewerShow() {
         const viewer = this.$el.querySelector('.v-viewer-box').$viewer

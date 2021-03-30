@@ -182,7 +182,7 @@ import Cookies from 'js-cookie';
         scrollValue: 0,
         // menu toggle open
         toggle: null,
-        auth: true
+        auth: false
       }
     },
     mounted () {
@@ -198,18 +198,19 @@ import Cookies from 'js-cookie';
         //                 'scrollTop' : st
         //         });
         // });
-        const auth = Cookies.get('token')
-        if (auth !== null && auth !== 'undefined') {
-            this.auth = true
-        } else {
-            this.auth = false
-        }
+        
     },
     beforeDestroy(){
         window.removeEventListener('scroll', this.onScroll);
         window.removeEventListener('click', this.closeElement);
     },
     created() {
+        const auth = Cookies.get('token')
+        if (auth !== null && auth !== undefined) {
+            this.auth = true
+        } else {
+            this.auth = false
+        }
     },
     methods: {
         logout() {
