@@ -52,7 +52,7 @@
                         </div>
                         <div class="price" style="margin-bottom: 8px">
                             <span class="lastSale" style="margin-right: 30px">當前出價: USD ${{ data.current_price }}</span>
-                            <span style="color: #979797">({{ data.bids }}Bids)</span>
+                            <span style="color: #979797">({{ data.bids }} Bids)</span>
                         </div>
                         <div class="price" style="margin-bottom: 8px">
                             <span class="lastSale">拍賣會結束於: 
@@ -129,6 +129,7 @@ export default {
     };
     return {
       productID: '',
+      autobid: 0,
       data: [],
       pdImg: [],
       imgPath: '',
@@ -198,6 +199,8 @@ export default {
         getProductInfo(data).then((res) => {
             this.data = res.data.goodsData
             this.countdown()
+            this.autobid = res.data.auto_bid_price
+            console.log(res.data)
 
             //取得產品圖
             const pdImgLength = this.data.images.length;
@@ -260,6 +263,7 @@ export default {
                             message: res.data.msg,
                             type: 'success'
                         });
+                        console.log(res)
                     } else {
                         this.$notify({
                             title: res.data.msg,

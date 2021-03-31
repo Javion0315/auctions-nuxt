@@ -11,6 +11,7 @@
             <el-table
                 :data="tableData"
                 class="tableStyle"
+                :default-sort = "{prop: 'bid_price', order: 'descending'}"
                 style="width: 100%; background-color: transparent">
                 <el-table-column
                     prop="user.name"
