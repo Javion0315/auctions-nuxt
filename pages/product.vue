@@ -66,10 +66,10 @@
                     <div class="bidStyle" style="margin-top: 50px;background-color: #F2F2F2; padding: 25px;">
                         <el-radio v-model="radio" label="Auto">自動出價</el-radio>
                         <el-radio v-model="radio" label="unAuto">直接出價</el-radio>
-                        <el-row class="bidStyle__Btn row flexBetween">
+                        <el-row class="bidStyle__Btn row flexBetween" v-if="autobid === 0">
                             <el-col :span="12">
                                 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm col">
-                                    <el-form-item prop="placeAutoBids" v-if="radio === 'Auto'" style="margin-bottom: 0px">
+                                    <el-form-item prop="placeAutoBids" v-if="radio === 'Auto' && autobid === 0" style="margin-bottom: 0px">
                                         <el-input v-model="ruleForm.placeAutoBids" placeholder="輸入出價上限" :disabled="radio === ''"></el-input>
                                     </el-form-item>
                                     <el-form-item prop="placeBids" v-else style="margin-bottom: 0px">
@@ -77,13 +77,25 @@
                                     </el-form-item>
                                 </el-form>
                             </el-col>
-                            <div class="col btn btn-solid-primary" @click="bid('ruleForm')">Place Bid</div>
+                            <div class="col btn btn-solid-primary" v-if="autobid === 0" @click="bid('ruleForm')">Place Bid</div>
                             <!-- <el-col :span="10"> -->
                             <!-- </el-col> -->
                         </el-row>
-                        <div v-if="radio === 'Auto'"
+                         <div v-else style="background-color: white; border: 2px solid #D12558; color: #D12558;
+                            padding: 0px 20px; border-radius: 5px; text-align: center; height: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin: 15px 0px;">您已設置自動出價</div>
+                        <div v-if="radio === 'Auto' && autobid === 0"
                         style="color: #979797; font-size: 0.9rem;
                         margin-left: 15px; margin-top: 15px">系統將按增額，依序遞補出價至上限金額為止</div>
+                        <div v-else-if="autobid > 0">
+                            <div style="color: #979797; font-size: 0.9rem;
+                            margin-left: 15px; margin-top: 15px">必須等到自動出價上限被超越，才能調高出價</div>
+                            <div style="color: #D12558; font-size: 0.9rem; margin-left: 15px;">目前出價：${{ data.current_price }}</div>
+                            <div style="color: #D12558; font-size: 0.9rem; margin-left: 15px;">您的自動出價上限：${{ autobid }}</div>
+                        </div>                        
                         <div v-else
                         style="color: #979797; font-size: 0.9rem;
                         margin-left: 15px; margin-top: 15px">最低出價金額：${{ data.current_price }}</div>
@@ -194,13 +206,16 @@ export default {
   methods: {
     getInit() {
         const data = {
+            token: Cookies.get('token'),
             goods_id: this.productID
         }
         getProductInfo(data).then((res) => {
             this.data = res.data.goodsData
             this.countdown()
             this.autobid = res.data.auto_bid_price
-            console.log(res.data)
+            if (this.autobid > 0 ) {
+                this.radio = 'Auto'
+            }
 
             //取得產品圖
             const pdImgLength = this.data.images.length;
@@ -263,7 +278,7 @@ export default {
                             message: res.data.msg,
                             type: 'success'
                         });
-                        console.log(res)
+                        this.getInit()
                     } else {
                         this.$notify({
                             title: res.data.msg,
@@ -282,6 +297,27 @@ export default {
             }
         });
     },
+    // cancel() {
+    //     const data = {
+    //         token: Cookies.get('token'),
+    //         goods_id: this.productID
+    //     }
+    //     cancelAutoBidGoods(data).then((res) => {
+    //         if (res.data.code === 1) {
+    //             this.$notify({
+    //                 title: '成功',
+    //                 message: res.data.msg,
+    //                 type: 'success'
+    //             });
+    //             this.getInit()
+    //         } else {
+    //             this.$notify({
+    //                 title: res.data.msg,
+    //                 type: 'error'
+    //             });
+    //         }
+    //     })
+    // },
     viewerShow() {
         const viewer = this.$el.querySelector('.v-viewer-box').$viewer
         viewer.show()
