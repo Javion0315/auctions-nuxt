@@ -5,19 +5,7 @@
 @import "~assets/css/utilities/_media-queries";
 
 
-/* ----------------------------------------------------------------------------------- */
-/* location */
-/* ----------------------------------------------------------------------------------- */
-.location{
-   color: hsla(0, 0%, 100%, 0.5);
-   padding-top: 1.5rem;
-   a{
-       color: hsla(0, 0%, 100%, 0.5);
-   }
-   .current{
-       color: #fff;
-   }
-}
+
 /* ----------------------------------------------------------------------------------- */
 /*  */
 /* ----------------------------------------------------------------------------------- */
@@ -34,7 +22,39 @@
 /* ----------------------------------------------------------------------------------- */
 /* right bolck */
 /* ----------------------------------------------------------------------------------- */
-.bidStyle{
+.pdInfo{
+    .title-m{
+        font-weight: bold;
+        line-height: 2rem;
+        margin-bottom: 1.5rem;
+    }
+}
+.pdInfo__detail{
+    .text{
+        line-height: 2.3rem;
+    }
+    .price{
+        line-height: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    .text-gray{
+        margin-left: 1rem;
+    }
+    .btn-secondary{
+        width: 100%;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+        line-height: 2rem;
+        
+    }
+    .btn-text{
+        font-size: 1.4rem;
+        text-shadow: 0 0 10px #00000030;
+        
+    }
+}
+.pdInfo__bidStyle{
     &__Btn{
         margin-top: 1.5rem;
         .btn{
@@ -48,37 +68,70 @@
         width: 100%;
     }
 }
-
-
-
-/* ----------------------------------------------------------------------------------- */
-/* custom Element UI ： 「 Carousel走馬燈 」 */
-/* ----------------------------------------------------------------------------------- */
-.el-carousel__container{
-    padding-bottom: 110%;
+.pdDescription__bidSum{
+    padding-left: 0.5rem;
+    .bidders{
+        margin-right: 1.5rem;
+        font-weight: bolder;
+    }
+    .bids{
+        font-weight: bolder;
+    }
+    
 }
-
-.el-carousel__indicator{
-    &.is-active{
-        button{
-            width: 23px;
-            border-radius: 7px; 
+.pdTool{
+    padding: 1rem;
+}
+/* ----------------------------------------------------------------------------------- */
+/* pd Description */
+/* ----------------------------------------------------------------------------------- */
+.pdDescription{
+    .tableStyle{
+        width: 100%;
+        background-color: transparent;
+    }
+    .tableWp{
+        margin-top: 2rem;
+    }
+}
+.privateSaleForm{
+    .title-m{
+        color: $web-secondaryColor;
+        font-size: $font-XLarge;
+    }
+    .el-form{
+        padding: 2rem;
+        background: lighten(gray, 46%);
+    }
+}
+/* ----------------------------------------------------------------------------------- */
+/* pdTool */
+/* ----------------------------------------------------------------------------------- */
+.social_sharing{
+    // display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 998;
+    span{
+        display: inline-block;
+        padding: 5px 1rem;
+        border: 1px solid #fff;
+        background: $web-mainColor;
+        border-radius: 5px;
+        margin: 0.5rem;
+        cursor: pointer;
+        color: #fff;
+    }
+    .icon{
+        &:before{
+            color: #fff;
         }
     }
-    &--outside{
-        button{
-            background-color: $web-secondaryColor; 
-        }
-    }
 }
-
-.el-carousel__arrow{
-    background: none;
-    color: $web-secondaryColor;
-    &:hover{
-        background: none;
-    }
-    i{
-        font-size: xx-large;
+.follow{
+    &.active{
+        
     }
 }

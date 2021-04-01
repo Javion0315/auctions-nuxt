@@ -1,7 +1,12 @@
 <template>
   <div>
-    <section class="mainContent" style="margin: 70px">
-      <section class="Privacy" style="padding: 0px">
+    <section class="mainContent">
+        <el-breadcrumb class="location container" separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/' }">首頁</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/' }">專場頁</el-breadcrumb-item>
+            <el-breadcrumb-item class="current">{{ data.title }}</el-breadcrumb-item>
+        </el-breadcrumb>
+        
         <div class="container">
             <el-row :gutter="20">
                 <el-col :span="24" :sm="14">
@@ -14,61 +19,46 @@
                                 </el-image>
                             </el-carousel-item>
                         </el-carousel>
-
-                        <!-- <div class="swiper swiperBox" v-swiper:swiper2="swiperOption_Items" ref="swiperBox2">
-                            <div class="swiper-wrapper"> 
-                                <div class="swiper-slide" v-for="(item, index) in pdImg" :key="index">
-                                    <el-carousel>
-                                        <el-carousel-item v-for="item in imgs" v-bind:key="item.url">
-                                            <el-image 
-                                                :src="pdImg[0]" 
-                                                :preview-src-list="pdImg">
-                                            </el-image>
-                                        </el-carousel-item>
-                                    </el-carousel>
-                                </div>  
-                            </div>
-                            <div class="swiper-button-prev swp_Items" slot="button-prev"></div>
-                            <div class="swiper-button-next swp_Items" slot="button-next"></div>
-                         </div>
-                        <i class="el-icon-zoom-in iconStyle" style="cursor: pointer;" @click="viewerShow()"></i> -->
                     </div>
                 </el-col>
-                <el-col :span="24" :sm="10" style="padding-left: 50px">
-                    <h2
-                        class="title-m"
-                        style="
-                        font-weight: bold;
-                        font-size: 1.4rem;
-                        line-height: 30px;
-                        margin-bottom: 1.5rem;
-                        "
-                    >
-                        {{ data.title }}
-                    </h2>
-                    <div style="font-size: 1.1rem">
-                        <div class="price" style="margin-bottom: 8px">
-                            <span class="lastSale">預估價: USD {{ data.estimated_price }}</span>
-                        </div>
-                        <div class="price" style="margin-bottom: 8px">
-                            <span class="lastSale" style="margin-right: 30px">當前出價: USD ${{ data.current_price }}</span>
-                            <span style="color: #979797">({{ data.bids }} Bids)</span>
-                        </div>
-                        <div class="price" style="margin-bottom: 8px">
-                            <span class="lastSale">拍賣會結束於: 
-                                <span style="font-weight: bold; font-size: 1.2rem">{{ data.end_time }}</span>
-                            </span>
-                        </div>
-                        <div class="price" style="margin-bottom: 8px" v-if="min > 0">
-                            <span class="lastSale">剩餘時間: {{ day }}天 {{ hr }}時 {{ min }}分 {{ sec }}秒</span>
+                <el-col class="pdInfo" :span="24" :sm="10">
+                    <h1 class="title-m">{{ data.title }}</h1>
+                    <div class="pdInfo__detail">
+                        <div class="text">
+                            <el-row class="price estimate" >
+                                 <el-col :span="4">預估價:</el-col>
+                                 <el-col :span="20">
+                                     USD {{ data.estimated_price }}<br>
+                                     TWD {{ data.estimated_price }}<br>
+                                     HKD {{ data.estimated_price }}<br>
+                                     CNY {{ data.estimated_price }}
+                                 </el-col>
+                            </el-row>
+                            <el-row class="price SoldPrice" >
+                                 <el-col :span="4">成交價:</el-col>
+                                 <el-col :span="20">
+                                     USD {{ data.estimated_price }}<br>
+                                     TWD {{ data.estimated_price }}<br>
+                                     HKD {{ data.estimated_price }}<br>
+                                     CNY {{ data.estimated_price }}
+                                 </el-col>
+                            </el-row>
+                            <el-button class="btn btn-secondary tab-anchor" type="text" @click="anchorScroll" data-goHash="privateSaleForm">
+                                <span class="btn-text">Private Sale</span>
+                            </el-button>
+                            <div>
+                                當前出價: USD {{ data.current_price }}<span class="text-gray">({{ data.bids }}Bids)</span><br>
+                                拍賣會結束於: <span style="font-weight: bold; font-size: 1.2rem">{{ data.end_time }}</span><br>
+                                剩餘時間: {{ day }}天 {{ hr }}時 {{ min }}分 {{ sec }}秒
+                            </div>
                         </div>
                     </div>
-                    <div class="bidStyle" style="margin-top: 50px;background-color: #F2F2F2; padding: 25px;">
+                    <div class="pdInfo__bidStyle" style="margin-top: 50px;background-color: #F2F2F2; padding: 25px;">
                         <el-radio v-model="radio" label="Auto">自動出價</el-radio>
                         <el-radio v-model="radio" label="unAuto">直接出價</el-radio>
                         <el-row class="bidStyle__Btn row flexBetween" v-if="autobid === 0">
                             <el-col :span="12">
-                                <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm col">
+                               <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm col">
                                     <el-form-item prop="placeAutoBids" v-if="radio === 'Auto' && autobid === 0" style="margin-bottom: 0px">
                                         <el-input v-model="ruleForm.placeAutoBids" placeholder="輸入出價上限" :disabled="radio === ''"></el-input>
                                     </el-form-item>
@@ -78,10 +68,9 @@
                                 </el-form>
                             </el-col>
                             <div class="col btn btn-solid-primary" v-if="autobid === 0" @click="bid('ruleForm')">Place Bid</div>
-                            <!-- <el-col :span="10"> -->
-                            <!-- </el-col> -->
+
                         </el-row>
-                         <div v-else style="background-color: white; border: 2px solid #D12558; color: #D12558;
+                        <div v-else style="background-color: white; border: 2px solid #D12558; color: #D12558;
                             padding: 0px 20px; border-radius: 5px; text-align: center; height: 40px;
                             display: flex;
                             align-items: center;
@@ -104,20 +93,54 @@
                 </el-col>
             </el-row> 
             <el-row :gutter="20" style="margin-top: 20px">
-                <el-col :span="24" :sm="14">
+                <el-col class="pdDescription" :span="24" :sm="14">
                     <bidsHistory ref="list"></bidsHistory>
+                    <!-- <productDescription></productDescription> -->
+                    <!-- <privateSaleForm></privateSaleForm> -->
                 </el-col>
-                <el-col :span="24" :sm="10" style="padding-left: 50px">
+                <el-col class="pdTool" :span="24" :sm="10">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-top: 60px">
-                        <el-button class="btnStyle" plain><i class="el-icon-s-promotion iconStyle"></i> Share To</el-button>
+                        <el-button class="btnStyle" plain @click="social_sharing"><i class="el-icon-s-promotion iconStyle"></i> Share To</el-button>
                         <el-button class="btnStyle" plain><i class="el-icon-date iconStyle"></i> Add Calander</el-button>
-                        <el-button class="btnStyle" plain><span class="iconStyle"><font-awesome-icon  :icon="['far', 'heart']" /></span> Follow</el-button>
-                        <el-button class="btnStyle" plain><i class="el-icon-message iconStyle"></i> E-mail Notifications</el-button>
+                        <el-button class="btnStyle follow" plain><span class="iconStyle"><font-awesome-icon  :icon="['far', 'heart']" /></span>Follow</el-button>
+                        <el-button class="btnStyle" plain @click="open_msgBox"><i class="el-icon-message iconStyle"></i> E-mail Notifications</el-button>
                     </div>
                 </el-col>
-            </el-row>   
+            </el-row> 
+            <div class="social_sharing alert">
+                <social-sharing url="https://vuejs.org/" inline-template>
+                    <div>
+                        <!-- <network network="email">
+                            <i class="icon icon-mail" title="Email"></i> Email
+                        </network> -->
+                        <network network="facebook">
+                        <i class="icon icon-fb" title="Facebook"></i> Facebook
+                        </network>
+                        <network network="googleplus">
+                        <i class="icon icon-google-plus" title="Google +"></i> Google +
+                        </network>
+                        <network network="reddit">
+                        <i class="icon icon-reddit" title="Reddit"></i> Reddit
+                        </network>
+                        <network network="twitter">
+                        <i class="icon icon-twitter" title="Twitter"></i> Twitter
+                        </network>
+                        <!-- <network network="skype">
+                        <i class="icon icon-skype" title="Skype"></i> Skype
+                        </network>
+                        <network network="whatsapp">
+                        <i class="icon icon-whatsapp" title="Whatsapp"></i> Whatsapp
+                        </network> -->
+                        <network network="line">
+                        <i class="icon icon-chat" title="Line"></i> Line
+                        </network>
+                        <network network="weibo">
+                        <i class="icon icon-sina-weibo" title="Weibo"></i> Weibo
+                        </network> 
+                    </div>
+                </social-sharing>  
+            </div>
         </div>
-      </section>
     </section>
   </div>
 </template>
@@ -126,13 +149,18 @@
 import Cookies from 'js-cookie';
 import { getProductInfo, bidGoods, autoBidGoods } from '~/api/product';
 import bidsHistory from '~/components/bidsHistory'
+// import productDescription from '~/components/productDescription'
+// import privateSaleForm from '~/components/privateSaleForm'
+import {showBlackOverlay} from 'assets/js/common.js';
 
 export default {
   components: {
       bidsHistory,
+    //   productDescription,
+    //   privateSaleForm
   },
   data() {
-    var validatePrice = (rule, value, callback) => {
+      var validatePrice = (rule, value, callback) => {
         if (value <= this.data.current_price && this.radio !== '') {
           callback(new Error('請高於當前出價'));
         } else {
@@ -155,48 +183,13 @@ export default {
         placeAutoBids: ''
       },
       rules: {
-        placeAutoBids: [
-            { validator: validatePrice, trigger: ['blur', 'change'] }
-        ],
-        placeBids: [
-            { validator: validatePrice, trigger: ['blur', 'change'] }
-        ],
-      },
-      swiperOption_Items: {
-        speed:1000,
-        slidesPerView: 1,
-        spaceBetween : 25,
-        centeredSlides: false,
-        pagination: {
-            el: '.swiper-pagination.swp_Items',
-            clickable: true
-        },
-        navigation: {
-            nextEl: '.swiper-button-next.swp_Items',
-            prevEl: '.swiper-button-prev.swp_Items',
-        },
-        // mousewheel: true,
-        // autoplay: true,
-        preloadImages: false,
-        lazy: true,
-        breakpoints: {
-            768:{
-            spaceBetween : 30,
-            centeredSlides: true,
-            slidesOffsetBefore: -270,
-            slidesPerView: 3.5,
-            // initialSlide: 1,
-            },
-            450:{
-            spaceBetween : 25,
-            centeredSlides: true,
-            slidesOffsetBefore: -70,
-            slidesPerView: 1.7,
-            // initialSlide: 1,
-            }
-        },
-    },
-    }
+            placeAutoBids: [
+                { validator: validatePrice, trigger: ['blur', 'change'] }
+            ],
+            placeBids: [
+                { validator: validatePrice, trigger: ['blur', 'change'] }
+            ],
+      },          }
   },
   created() {
       this.imgPath = process.env.IMAGE_DOMAIN;
@@ -216,6 +209,7 @@ export default {
             if (this.autobid > 0 ) {
                 this.radio = 'Auto'
             }
+
 
             //取得產品圖
             const pdImgLength = this.data.images.length;
@@ -318,9 +312,44 @@ export default {
     //         }
     //     })
     // },
-    viewerShow() {
-        const viewer = this.$el.querySelector('.v-viewer-box').$viewer
-        viewer.show()
+    anchorScroll(){
+        $(".text").on('click',".tab-anchor", function(){
+              var attr = this.getAttribute("data-goHash");
+              var target_top = document.getElementById(attr).offsetTop;
+              $("html,body").animate({scrollTop: target_top + 800}, 700);
+        });
+    },
+    social_sharing(){
+        showBlackOverlay();
+        $(".social_sharing").addClass('active');
+    },
+    open_msgBox(){
+        this.$prompt('請輸入您的Email，競投開始前，我們將以Email通知您', ' E-mail Notifications', {
+          confirmButtonText: '確定',
+          cancelButtonText: '取消',
+          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+          inputErrorMessage: 'Email格式不正確'
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: '你的Email是: ' + value
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消輸入'
+          });       
+        });
+    },
+    following(){
+        if($(".follow").hasclass(".active")){
+            console.log(1)
+            this.following = true;
+            this.followText = 'Following';
+        }else{
+            this.following = false;
+            this.followText = 'Follow';
+        }
     }
   }
 }

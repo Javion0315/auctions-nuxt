@@ -28,7 +28,6 @@ export default {
     //  { src: 'https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js', /*mode: 'server',*/    mode: 'client' ,  type: "text/javascript" },
     //  { src: 'https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js', /*mode: 'server',*/    mode: 'client' , type: "text/javascript" },
      { src: 'https://www.googletagmanager.com/gtag/js', /*mode: 'server', */   mode: 'client' , type: "text/javascript" },
-      // { src:'common.js' }
     ],
   },
   /*

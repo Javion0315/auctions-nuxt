@@ -190,7 +190,7 @@
 /* btn */
 /* ----------------------------------------------------------------------------------- */
 .btn {
-  border-radius: 7px;
+  border-radius: 4px;
   padding: 0.3rem 1.2rem;
   text-align: center;
   display: inline-block;
@@ -209,11 +209,11 @@
 }
 
 .btn-line.highlight {
-  border: 1px solid #B40917;
+  border: 1px solid #527BB0;
 }
 
 .btn-line.highlight a {
-  color: #B40917;
+  color: #527BB0;
 }
 
 .btn-white {
@@ -225,17 +225,8 @@
   color: #fff;
 }
 
-.btn-primary {
-  background: #001939;
-  color: #fff;
-}
-
-.btn-primary a {
-  color: #fff;
-}
-
 .btn-secondary {
-  color: #001939;
+  color: #fff;
   background: #fff5db;
   /* Old browsers */
   /* FF3.6-15 */
@@ -248,7 +239,7 @@
 }
 
 .btn-secondary a {
-  color: #001939;
+  color: #fff;
 }
 
 .btn-solid {
@@ -259,9 +250,37 @@
   color: #fff;
 }
 
+@media (max-width: 551px) {
+  .btn-solid {
+    font-size: 3vw;
+  }
+}
+
+.btn-solid-primary {
+  background: #001939;
+  color: #fff;
+}
+
+.btn-solid-primary a {
+  color: #fff;
+}
+
+.btn-solid-gold {
+  background: #C7B179;
+}
+
+.btn-solid-gray {
+  background: lightgray;
+}
+
 .btn-biggest {
   padding: 0.3rem 2.6rem;
   font-weight: bold;
+}
+
+.statusTag .btn {
+  font-size: 80%;
+  margin-right: 1vw;
 }
 
 /* ----------------------------------------------------------------------------------- */

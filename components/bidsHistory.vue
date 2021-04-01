@@ -1,18 +1,18 @@
 <template>
-    <div>
-        <h1 style="font-size: 2rem; font-weight: 300;">Bid History</h1>
-        <el-divider></el-divider>
-        <div style="font-size: 1rem; font-wight: bold">
-            Bidders : {{ bidder }}<span style="margin-left: 30px">Bids : {{ total }}</span> 
+    <div class="pdDescription">
+        <h2 style="font-size: 2rem; font-weight: 300;">Bid History</h2>
+        <el-divider style="background-color: #6d6d6d;"></el-divider>
+        <div class="pdDescription__bidSum" >
+            <span class="bidders"> Bidders : {{ bidder }}</span>
+            <span class="bids">Bids : {{ total }}</span> 
+        <div class="text-point">If two people bid the same amount, the first bid has priority.</div>
         </div>
-        <div style="color: #527BB0">If two people bid the same amount, the first bid has priority.</div>
 
-        <div style="background-color: #F2F2F2; padding: 10px 20px; margin-top: 15px;">
+        <div class="tableWp">
             <el-table
                 :data="tableData"
                 class="tableStyle"
-                :default-sort = "{prop: 'bid_price', order: 'descending'}"
-                style="width: 100%; background-color: transparent">
+                :default-sort = "{prop: 'bid_price', order: 'descending'}">
                 <el-table-column
                     prop="user.name"
                     label="Bidder"
@@ -49,7 +49,6 @@
 <script>
 import Cookies from 'js-cookie';
 import { bidRecordList } from '~/api/product';
-
 export default {
     data() {
         return {
@@ -60,7 +59,7 @@ export default {
             tableData: [],
             bidder: 0
         }
-    },
+        },
     created() {
         this.productID = this.$route.path.split('product/')[1]
         this.getInit()

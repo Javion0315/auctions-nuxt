@@ -40,20 +40,25 @@
     }
     
     &-secondary {
-        color: $web-mainColor;
+        color: #fff;
         background: #fff5db; /* Old browsers */
         background: -moz-linear-gradient(left, #fff5db 0%, #c3ad72 80%, #f0e6c3 100%); /* FF3.6-15 */
         background: -webkit-linear-gradient(left, #fff5db 0%,#c3ad72 80%,#f0e6c3 100%); /* Chrome10-25,Safari5.1-6 */
         background: linear-gradient(to right, #fff5db 0%,#c3ad72 80%,#f0e6c3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff5db', endColorstr='#f0e6c3',GradientType=1 ); /* IE6-9 */
+        transition: .1s;
+        &:hover,&:focus{
+            color: #fff;
+            // background: #f1e4c3;
+        }
         a{
-            color: $web-mainColor;
+            color: #fff;
         }
     }
     &-solid{
-        color: #fff;
+        color: #fff !important;
         a{
-            color: #fff;
+            color: #fff !important;
         }
         @include media('below-mobile') {
             font-size: 3vw;
@@ -67,13 +72,19 @@
         }
         &-gold{
             background: $web-secondaryColor;
+            border:none;
+            color: #fff;
+            &:hover,&:focus,&:active{
+                background: darken($web-secondaryColor,10%) ;
+                color: #fff;
+            }
         }
         &-gray{
             background: lightgray;
         }
     }
     &-biggest{
-        padding: 0.3rem 2.6rem;
+        padding: 0.6rem 4rem;    
         font-weight: bold ;
     }
 }
@@ -85,6 +96,7 @@
         margin-right: 1vw;
     }
 }
+
 
 /* ----------------------------------------------------------------------------------- */
 /* title style */

@@ -105,11 +105,11 @@
 }
 
 .btn-line.highlight {
-  border: 1px solid #B40917;
+  border: 1px solid #527BB0;
 }
 
 .btn-line.highlight a {
-  color: #B40917;
+  color: #527BB0;
 }
 
 .btn-white {
@@ -122,7 +122,7 @@
 }
 
 .btn-secondary {
-  color: #001939;
+  color: #fff;
   background: #fff5db;
   /* Old browsers */
   /* FF3.6-15 */
@@ -132,18 +132,24 @@
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff5db', endColorstr='#f0e6c3',GradientType=1 );
   /* IE6-9 */
+  -webkit-transition: .1s;
+  transition: .1s;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  color: #fff;
 }
 
 .btn-secondary a {
-  color: #001939;
+  color: #fff;
 }
 
 .btn-solid {
-  color: #fff;
+  color: #fff !important;
 }
 
 .btn-solid a {
-  color: #fff;
+  color: #fff !important;
 }
 
 @media (max-width: 551px) {
@@ -163,6 +169,13 @@
 
 .btn-solid-gold {
   background: #C7B179;
+  border: none;
+  color: #fff;
+}
+
+.btn-solid-gold:hover, .btn-solid-gold:focus, .btn-solid-gold:active {
+  background: #b89c55;
+  color: #fff;
 }
 
 .btn-solid-gray {
@@ -170,7 +183,7 @@
 }
 
 .btn-biggest {
-  padding: 0.3rem 2.6rem;
+  padding: 0.6rem 4rem;
   font-weight: bold;
 }
 

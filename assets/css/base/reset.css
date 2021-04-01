@@ -99,7 +99,6 @@ input {
 
 input[type=submit], input[type=text], input[type=email] {
   -webkit-appearance: none;
-  border-radius: 0;
 }
 
 select {

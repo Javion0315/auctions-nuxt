@@ -6,7 +6,11 @@
 @import "../utilities/_extend";
 @import "../utilities/_media-queries";
 
-
+/* ----------------------------------------------------------------------------------- */
+/* custom Element UI */
+/* ----------------------------------------------------------------------------------- */
+/* 改变主题色变量 */
+$--color-primary: $web-mainColor;
 
 /* ----------------------------------------------------------------------------------- */
 /* build */
@@ -150,8 +154,20 @@ body{
 .zindex-999{
     z-index: 999;
 }
-
-
+.text{
+    &-gray{
+        color: $textcColor-gray;
+        line-height: 1.4rem;
+    }
+    &-point{
+        color: $web-pointColor;
+    }
+}
+textarea,input{
+    &:focus{
+        border-color: $web-secondaryColor !important;
+    }
+}
 /* ----------------------------------------------------------------------------------- */
 /* media screen */
 /* ----------------------------------------------------------------------------------- */
@@ -1360,11 +1376,21 @@ h1.logoName{
 /* ----------------------------------------------------------------------------------- */
 /* location */
 /* ----------------------------------------------------------------------------------- */
-
 .location{
+    margin: 1.5rem auto !important;
+    color: $textcColor-gray;
+    a{
+        color: $textcColor-gray;
+        &:hover{
+            color: $web-mainColor;
+        }
+    }
+   .current{
+    //    color: $web-secondaryColor;
     @include media('below-tablet') {
         display: none;
     } 
+   }
 }
 /* ----------------------------------------------------------------------------------- */
 /* article common style */
@@ -1461,4 +1487,52 @@ h1.logoName{
             bottom: calc(100vw / 2.14 / 4.5) !important;
         }
     }
+}
+
+
+/* ----------------------------------------------------------------------------------- */
+/* custom Element UI  */
+/* ----------------------------------------------------------------------------------- */
+
+/*「 button 」-----------  */
+/*--------------------------------*/
+.el-button.is-plain{
+    &:focus,&:hover{
+        border-color: $web-mainColor;
+        color: $web-mainColor;
+    }
+}
+/*「 Carousel走馬燈 」-----------  */
+/*--------------------------------*/
+.el-carousel__container{
+    padding-bottom: 110%;
+}
+
+.el-carousel__indicator{
+    &.is-active{
+        button{
+            width: 23px;
+            border-radius: 7px; 
+        }
+    }
+    &--outside{
+        button{
+            background-color: $web-secondaryColor; 
+        }
+    }
+}
+
+.el-carousel__arrow{
+    background: none;
+    color: $web-secondaryColor;
+    &:hover{
+        background: none;
+    }
+    i{
+        font-size: xx-large;
+    }
+}
+
+.el-form-item__content{
+    margin-left: 0 !important;
 }
