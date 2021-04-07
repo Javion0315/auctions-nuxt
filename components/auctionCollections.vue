@@ -73,7 +73,8 @@
               align-items: center;
             "
           >
-            <div>
+            <div><i class="fas fa-info-circle"></i>
+              <font-awesome-icon :icon="['fas', 'info-circle']" />
               <font-awesome-icon :icon="['far', 'heart']" />
               <span style="font-size: 0.9rem">Follow</span>
             </div>

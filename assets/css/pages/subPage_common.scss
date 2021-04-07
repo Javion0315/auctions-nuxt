@@ -310,8 +310,8 @@
     position: relative;
     z-index: 5;
     @extend %flexCenter;
-    background-image: url('~assets/images/footerBanner_bg.png');
-    // background-image: url(../../images/footerBanner_bg.png);
+    background-image: url('~assets/images/footerBanner-bg.png');
+    // background-image: url(../../images/footerBanner-bg.png);
     background-repeat: no-repeat;
     background-position: bottom left;
     @include media('below-desktop') {

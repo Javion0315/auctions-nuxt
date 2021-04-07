@@ -185,6 +185,99 @@
   vertical-align: top;
 }
 
+/* ------------------------------------
+ *  Width and Height
+ * ------------------------------------ */
+/*wrap*/
+/* ------------------------------------
+ *  Color
+ * ------------------------------------ */
+/* ------------------------------------
+ *  Font
+ * ------------------------------------ */
+/* ------------------------------------
+ *  page
+ * ------------------------------------ */
+/* product_ranking */
+/* ----------------------------------------------------------------------------------- */
+/* fix the mobile without hover */
+/* ----------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------- */
+/* UI style component */
+/* ----------------------------------------------------------------------------------- */
+/* extend */
+/* ----------------------------------------------------------------------------------- */
+.topicHashtag, .TopicHashTag {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pic-cricle img, .subMainVisual .bg .bg__img__visual {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.banner, .downloadBtn,
+.flexCenter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+
+.flexBetween {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+
+.flexRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+
+.flexColumn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.subHeading:before, .toolbar .text, .shareLink, .icon-location, .floatBanner-download__text #download_logo, .floatBanner-download__text .slogan {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tabs-component.tab-sty1 li.tabs-component-tab, .btn-track, .banner .pic-mobile, .banner .pic-animate, .banner__slogan {
+  display: inline-block;
+  vertical-align: top;
+}
+
 /* component : */
 /* ----------------------------------------------------------------------------------- */
 /* btn */
@@ -1662,4 +1755,160 @@ label {
   -webkit-animation: swing 5s 0s infinite;
           animation: swing 5s 0s infinite;
 }
-/*# sourceMappingURL=subPage_common.css.map */
+
+/* ----------------------------------------------------------------------------------- */
+/* build */
+/* ----------------------------------------------------------------------------------- */
+.grayBg {
+  background: #f2f2f2;
+}
+
+.account .sectionBox {
+  background: #fff;
+  padding: 2rem;
+  margin: 3rem 0;
+}
+
+.account .sectionBox:first-child {
+  margin-top: 2rem;
+}
+
+.account .sectionBox .title-m {
+  margin-bottom: 2rem;
+}
+
+.account .content {
+  margin-left: 2rem;
+}
+
+.account .fa-info-circle {
+  cursor: pointer;
+}
+
+.account .el-dialog {
+  padding: 2rem;
+}
+
+.account .el-dialog__body {
+  font-size: 1rem;
+}
+
+.account .el-dialog__title {
+  font-size: 1.6rem;
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* profile__Buy */
+/* ----------------------------------------------------------------------------------- */
+.myBids .el-icon-arrow-right:before,
+.myFavorite .el-icon-arrow-right:before {
+  content: "\e6d9";
+}
+
+.myBids .el-icon-arrow-right.is-active:before,
+.myFavorite .el-icon-arrow-right.is-active:before {
+  content: "\e6d8";
+}
+
+.myBids .el-collapse-item__arrow.is-active,
+.myFavorite .el-collapse-item__arrow.is-active {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.myBids .el-collapse,
+.myFavorite .el-collapse {
+  border-top: none;
+}
+
+.myBids .el-collapse-item,
+.myFavorite .el-collapse-item {
+  margin-bottom: 1rem;
+}
+
+.myBids .el-collapse-item__wrap,
+.myFavorite .el-collapse-item__wrap {
+  border-bottom: none;
+}
+
+.myBids .el-collapse-item__header,
+.myFavorite .el-collapse-item__header {
+  border-bottom: none;
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+
+/* dialog */
+/* ------------------------------- */
+.paymentMethod-wp .btn {
+  width: 100%;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.paymentMethod-wp .text-gray {
+  display: block;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  text-align: center;
+}
+
+.paymentMethod-wp .leftBox {
+  border-right: 1px solid;
+}
+
+.orderDetail__head .col {
+  border: 1px solid;
+  padding: 1rem;
+  width: 50%;
+}
+
+.orderDetail__head .col:first-child {
+  -webkit-transform: translateX(1px);
+          transform: translateX(1px);
+}
+
+.orderDetail__head .title {
+  font-weight: bolder;
+}
+
+.orderDetail__list {
+  margin-top: 1rem;
+}
+
+.orderDetail__list dt {
+  width: 30%;
+  margin-right: 1rem;
+  text-align: left;
+}
+
+.orderDetail__list dd {
+  width: 65%;
+  text-align: right;
+}
+
+.orderDetail__list dt, .orderDetail__list dd {
+  display: inline-block;
+  line-height: 2rem;
+}
+
+.orderDetail__list .el-divider--horizontal {
+  margin: 1rem 0;
+}
+
+.ReceivedPayment__list dt {
+  width: 30%;
+  margin-right: 1rem;
+  text-align: left;
+}
+
+.ReceivedPayment__list dd {
+  width: 65%;
+  text-align: right;
+}
+
+.ReceivedPayment__list dt, .ReceivedPayment__list dd {
+  display: inline-block;
+  line-height: 2rem;
+}
+/*# sourceMappingURL=subPage_account.css.map */
