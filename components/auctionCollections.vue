@@ -9,10 +9,9 @@
       >
       <nuxt-link :to="localePath({ name: 'product-id', params: { id: item.id }})">
         <div
-          class="productList__item__img product__imgMask"
-          style="margin-bottom: -20px"
+          class="productList__item__img product__imgMask"          
         >
-          <img :src="imgPath + item.images[0]" :alt="item.title" style="height: 336px" />
+          <img :src="imgPath + item.images[0]" :alt="item.title" />
           <svg class="clip-svg imgMask" width="0" height="0">
             <defs>
               <clipPath id="clip-shape" clipPathUnits="objectBoundingBox">

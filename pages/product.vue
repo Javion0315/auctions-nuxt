@@ -102,7 +102,12 @@
                     <div style="display: flex; flex-direction: column; width: 100%; margin-top: 60px">
                         <el-button class="btnStyle" plain @click="social_sharing"><i class="el-icon-s-promotion iconStyle"></i> Share To</el-button>
                         <el-button class="btnStyle" plain><i class="el-icon-date iconStyle"></i> Add Calander</el-button>
-                        <el-button class="btnStyle follow" plain><span class="iconStyle"><font-awesome-icon  :icon="['far', 'heart']" /></span>Follow</el-button>
+                        <el-button class="btnStyle follow" plain @click="addFavorite">
+                            <span class="iconStyle">
+                                <font-awesome-icon  :icon="['far', 'heart']" v-if="shoppingcartCount === 0" />
+                                <font-awesome-icon  :icon="['fas', 'heart']" v-else style="color: red" />
+                            </span>
+                            Follow</el-button>
                         <el-button class="btnStyle" plain @click="open_msgBox"><i class="el-icon-message iconStyle"></i> E-mail Notifications</el-button>
                     </div>
                 </el-col>
@@ -147,7 +152,7 @@
 
 <script>
 import Cookies from 'js-cookie';
-import { getProductInfo, bidGoods, autoBidGoods } from '~/api/product';
+import { getProductInfo, bidGoods, autoBidGoods, addShoppingcart, removeShoppingcart } from '~/api/product';
 import bidsHistory from '~/components/bidsHistory'
 // import productDescription from '~/components/productDescription'
 // import privateSaleForm from '~/components/privateSaleForm'
@@ -169,6 +174,7 @@ export default {
     };
     return {
       productID: '',
+      shoppingcartCount: 0,
       autobid: 0,
       data: [],
       pdImg: [],
@@ -197,6 +203,31 @@ export default {
       this.getInit()
   },
   methods: {
+    addFavorite() {
+        const data = {
+            token: Cookies.get('token'),
+            goods_id: this.productID
+        }
+        if (this.shoppingcartCount === 0) {
+            addShoppingcart(data).then((res) => {
+                this.$notify({
+                    title: '成功',
+                    message: res.data.msg,
+                    type: 'success'
+                });
+                this.getInit()
+            })
+        } else {
+            removeShoppingcart(data).then((res) => {
+                this.$notify({
+                    title: res.data.msg,
+                    type: 'error'
+                });
+                this.getInit()
+            })
+        }
+        
+    },
     getInit() {
         const data = {
             token: Cookies.get('token'),
@@ -204,6 +235,7 @@ export default {
         }
         getProductInfo(data).then((res) => {
             this.data = res.data.goodsData
+            this.shoppingcartCount = res.data.shoppingcartCount
             this.countdown()
             this.autobid = res.data.auto_bid_price
             if (this.autobid > 0 ) {

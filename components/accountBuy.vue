@@ -16,24 +16,24 @@
         </section>
         <section class="sectionBox myBids">
             <h2 class="title-m">My Bids</h2>
-            <el-collapse v-model="activeNames">
-                <el-collapse-item title="Active" name="1">
+            <el-collapse v-model="bidType" accordion>
+                <el-collapse-item title="Active" name="active">
                     <el-table
                         :data="activeData"
                         style="width: 100%">
                         <el-table-column
                             fixed
-                            prop="item"
+                            prop="title"
                             label="拍品名稱"
-                            width="180">
+                            width="300">
                         </el-table-column>
                         <el-table-column
-                            prop="myMaxBid"
+                            prop="my_max_bid_price"
                             label="My Max Bid"
                             width="180">
                         </el-table-column>
                         <el-table-column
-                            prop="currentBid"
+                            prop="current_price"
                             label="Current Bid">
                         </el-table-column>
                         <el-table-column
@@ -51,32 +51,33 @@
                         </el-table-column>
                     </el-table>
                 </el-collapse-item>
-                <el-collapse-item title="Ｗon" name="2">
+                <el-collapse-item title="Ｗon" name="won">
                     <el-table
                         :data="wonData"
                         style="width: 100%">
                         <el-table-column
                             fixed
-                            prop="item"
+                            prop="title"
                             label="拍品名稱"
-                            width="180">
+                            width="300">
                         </el-table-column>
                         <el-table-column
-                            prop="total"
+                            prop="total_cost"
                             label="訂單總額 (USD)"
                             width="180">
                         </el-table-column>
                         <el-table-column
-                            prop="paymentStatus"
+                            prop="status"
                             label="付款狀態">
+                            <!-- scope.row.status === '待付款' ? 'btn btn-solid-primary' : '' -->
                             <template slot-scope="scope">
-                                <div :class="scope.row.paymentStatus === '待付款' ? 'btn btn-solid-primary' : ''"
+                                <div :class="scope.row.status === 0 ? 'btn btn-solid-primary' : ''"
                                 disable-transitions>
-                                    <div v-if="scope.row.paymentStatus === '待付款'" 
+                                    <div v-if="scope.row.status === 0" 
                                     @click="dialogVisible_paymentMethod = true">
-                                        {{scope.row.paymentStatus}}
+                                        待付款
                                     </div>
-                                    <div v-else>{{scope.row.paymentStatus}}</div>
+                                    <div v-else>已付款</div>
                                 </div>
                             </template>
                         </el-table-column>
@@ -116,27 +117,27 @@
                         </el-table-column>
                     </el-table>
                 </el-collapse-item>
-                <el-collapse-item title="Lost" name="3">
+                <el-collapse-item title="Lost" name="lost">
                     <el-table
                         :data="lostData"
                         style="width: 100%">
                         <el-table-column
                             fixed
-                            prop="item"
+                            prop="title"
                             label="拍品名稱"
                             width="180">
                         </el-table-column>
                         <el-table-column
-                            prop="minimumBid"
+                            prop="my_max_bid_price"
                             label="Minimum Bid"
                             width="180">
                         </el-table-column>
                         <el-table-column
-                            prop="myMaxBid"
+                            prop="my_max_bid_price"
                             label="My Max Bid">
                         </el-table-column>
                         <el-table-column
-                            prop="salePrice"
+                            prop="current_price"
                             label="成交價">
                         </el-table-column>
                     </el-table>
@@ -153,14 +154,17 @@
                         style="width: 100%">
                         <el-table-column
                             fixed
-                            prop="item"
+                            prop="title"
                             label="拍品名稱"
-                            width="180">
+                            width="350">
                         </el-table-column>
                         <el-table-column
                             prop="time"
                             label="競投期間"
-                            width="180">
+                            width="400">
+                            <template slot-scope="scope">
+                                <div>{{ scope.row.start_time }} - {{ scope.row.end_time }}</div>
+                            </template>
                         </el-table-column>
                         <el-table-column
                             prop="status"
@@ -189,7 +193,7 @@
                 <el-row :gutter="60">
                     <el-col :span="12" class="leftBox">
                         <div class="btn btn-line">PayPal (需付手續費)</div>
-                        <div class="btn btn-line"> <font-awesome-icon :icon="['far', 'fa-envelope']"/>接洽客服</div>
+                        <div class="btn btn-line"> <i class="el-icon-message iconStyle"></i> 接洽客服</div>
                         <small class="text-gray">（當訂單金額超過信用卡、銀行轉帳支付額度)</small>
                     </el-col>
                     <el-col :span="12" class="rightBox">
@@ -243,6 +247,9 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+import { getBidList } from '~/api/bids';
+import { getShoppingcart } from '~/api/product';
 
 export default {
     components: {
@@ -252,80 +259,63 @@ export default {
             dialogVisible_creditLimit: false,
             dialogVisible_paymentMethod: false,
             dialogVisible_orderDetail: false,
-            activeNames: ['1'],
+            bidType: 'active',
             activeNames2: ['1'],
             dialogVisible: false ,
-            activeData: [{
-                item: '2017 Michael Jordan Fleer #01',
-                myMaxBid: '50,000',
-                currentBid: '50,000',
-                status: 'Leading'
-            }, {
-                item: '2017 Michael Jordan Fleer #01',
-                myMaxBid: '50,000',
-                currentBid: '51,000',
-                status: 'Outbid',
-                bidAgain: 'Bid Again'
-            }],
-            wonData: [{
-                item: '2017 Michael Jordan Fleer #01',
-                total: '80,008',
-                paymentStatus: '待付款',
-                orderDetail: '訂單明細',
-                invoice: '申請發票',
-            }, {
-                item: '2017 Michael Jordan Fleer #01',
-                total: '80,008',
-                paymentStatus: '已付款',
-                orderDetail: '訂單明細',
-                invoice: '申請發票',
-                logistics: '運送中'
-            }, {
-                item: '2017 Michael Jordan Fleer #01',
-                total: '80,008',
-                paymentStatus: '款項確認中',
-                orderDetail: '訂單明細',
-                invoice: '申請發票',
-            } , {
-                item: '2017 Michael Jordan Fleer #01',
-                total: '80,008',
-                paymentStatus: '訂單確認中',
-                orderDetail: '訂單明細',
-                invoice: '申請發票',
-            }],
-            lostData: [{
-                item: '2000 Michael Jordan Fleer #15',
-                minimumBid: '30,000',
-                myMaxBid: '50,000',
-                salePrice: '51,000'
-            }],
-            myFavoriteData: [{
-                item: '2017 Michael Jordan Fleer #01',
-                time: '2021/05/01 -2021/05/03 ',
-                status: 'Bidding'
-            }, {
-                item: '1999 Michael Jordan Fleer #20',
-                time: '2021/05/01 -2021/05/03 ',
-                status: 'Upcomming',
-            }, {
-                item: '1999 Michael Jordan Fleer #20',
-                time: '2021/05/01 -2021/05/03 ',
-                status: 'Closed',
-            }],
-            
-
+            bidTotal: 0,
+            favoriteTotal: 0,
+            activeData: [],
+            wonData: [],
+            lostData: [],
+            myFavoriteData: [],
+            // 競拍成功的狀態有這四種 已付款 款項確認中 訂單確認中 待付款
             }
     },
     created() {
-       
+        this.bidData()
+        this.favoriteData()
+    },
+    watch: {
+        bidType() {
+            this.bidData()
+        }
     },
     methods: {
-       
+       bidData() {
+           const data = {
+               token: Cookies.get('token'),
+               type: this.bidType, // active進行中, won競拍成功, lost競拍失敗
+               page: 1,
+               limit: 5,
+           }
+           getBidList(data).then((res) => {
+               if (res.data.code === 1) {
+                   if (this.bidType === 'active') {
+                       this.activeData = res.data.myBidList
+                   } else if (this.bidType === 'won') {
+                       this.wonData = res.data.myBidList
+                   } else {
+                       this.lostData = res.data.myBidList
+                   }
+                   this.bidTotal = res.data.total
+               }
+               
+           })
+       },
+       favoriteData() {
+           const data = {
+                token: Cookies.get('token'),
+                page: 1,
+                limit: 5,
+            }
+           getShoppingcart(data).then((res) => {
+               if (res.data.code === 1) {
+                   this.myFavoriteData = res.data.shoppingcartList
+                   this.favoriteTotal = res.data.total
+               }
+           })
+       }
         
     },
 }
 </script>
-
-<style scoped>
-    
-</style>

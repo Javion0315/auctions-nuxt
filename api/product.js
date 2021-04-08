@@ -24,3 +24,19 @@ export function cancelAutoBidGoods(data) {
 export function bidRecordList(data) {
     return request.post('/auction/bidRecordList.do', data);
 }
+
+// 我的收藏
+export function getShoppingcart(data) {
+    return request.post('/shoppingcart/list.do', data);
+}
+
+// 加入收藏
+export function addShoppingcart(data) {
+    return request.post('/shoppingcart/add.do', data);
+}
+
+// 移除收藏
+export function removeShoppingcart(data) {
+    return request.post('/shoppingcart/remove.do', data);
+}
+
