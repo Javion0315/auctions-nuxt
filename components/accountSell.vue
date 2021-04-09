@@ -66,7 +66,7 @@
                         <el-image
                         style="width: 50px;"
                         :src='scope.row.itemPic'
-                        :fit="contain"></el-image>
+                        fit="contain"></el-image>
                     </template>
                 </el-table-column>
                 <el-table-column

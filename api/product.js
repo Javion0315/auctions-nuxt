@@ -40,3 +40,7 @@ export function removeShoppingcart(data) {
     return request.post('/shoppingcart/remove.do', data);
 }
 
+// 訂單詳情
+export function getOrderDetails(data) {
+    return request.post('/auction/orderDetails.do', data);
+}

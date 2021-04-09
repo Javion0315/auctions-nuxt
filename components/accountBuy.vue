@@ -83,12 +83,13 @@
                         </el-table-column>
                         <el-table-column
                             prop="orderDetail paymentStatus"
+                            align="center"
                             label="訂單明細">
                             <template slot-scope="scope">
                                 <div class="btn"
                                 :class="scope.row.paymentStatus === '訂單確認中' ? 'btn-solid-gray' : 'btn-solid-primary'">
                                     <div v-if="scope.row.paymentStatus !== '訂單確認中'" 
-                                    @click="dialogVisible_orderDetail = true">
+                                    @click="orderDetail(scope.row.id)">
                                         訂單明細
                                     </div>
                                     <div v-else>訂單明細</div>
@@ -97,6 +98,7 @@
                         </el-table-column>
                          <el-table-column
                             prop="invoice paymentStatus"
+                            align="center"
                             label="申請發票">
                             <template slot-scope="scope">
                                 <div class="btn"
@@ -220,21 +222,21 @@
                     </div>
                     <div class="col">
                         <div class="title">訂單編號</div>
-                        <div class="text">AVlskjflksdjflksdjflkj</div>
+                        <div class="text">{{ orderDetailData.id }}</div>
                     </div>
                 </div>
                 <dl class="orderDetail__list">
                     <dt>拍品名稱：</dt>
-                    <dd>1986 Michael Jordan Fleer #57</dd>
+                    <dd>{{ orderDetailData.title }}</dd>
                     <dt>拍品金額：</dt>
-                    <dd>USD $80,000</dd>
+                    <dd>USD $ {{ orderDetailData.current_price }}</dd>
                     <dt>運費：</dt>
-                    <dd>USD $6</dd>
+                    <dd>USD $ {{ orderDetailData.tran_costs }}</dd>
                     <dt>買家成交手續費（20%）：</dt>
-                    <dd>USD $16,000</dd>
+                    <dd>USD $ {{ orderDetailData.commission }}</dd>
                     <el-divider></el-divider>
                     <dt>訂單總額：</dt>
-                    <dd>USD $96,006</dd>
+                    <dd>USD $ {{ orderDetailData.total_cost }}</dd>
                 </dl> 
                 <p>寄送地址：</p>
             </div>
@@ -249,7 +251,7 @@
 <script>
 import Cookies from 'js-cookie';
 import { getBidList } from '~/api/bids';
-import { getShoppingcart } from '~/api/product';
+import { getShoppingcart, getOrderDetails } from '~/api/product';
 
 export default {
     components: {
@@ -268,6 +270,7 @@ export default {
             wonData: [],
             lostData: [],
             myFavoriteData: [],
+            orderDetailData: []
             // 競拍成功的狀態有這四種 已付款 款項確認中 訂單確認中 待付款
             }
     },
@@ -314,6 +317,19 @@ export default {
                    this.favoriteTotal = res.data.total
                }
            })
+       },
+       orderDetail(id) {
+           this.dialogVisible_orderDetail = true
+            const data = {
+                goods_id: id,
+                type: 'buyer',
+                token: Cookies.get('token'),
+            }
+            getOrderDetails(data).then((res) => {
+                if (res.data.code === 1) {
+                    this.orderDetailData = res.data.data
+                }
+            })
        }
         
     },
