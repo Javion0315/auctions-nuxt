@@ -120,7 +120,6 @@ input {
 
 input[type=submit], input[type=text], input[type=email] {
   -webkit-appearance: none;
-  border-radius: 0;
 }
 
 select {
@@ -242,6 +241,8 @@ section {
   margin: 10px auto;
   padding-right: 1rem;
   padding-left: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .container-mobileFullWidth {

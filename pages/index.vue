@@ -22,7 +22,7 @@
           <div class="container">
             <div class="pageTitle">
               <h1 class="heading-l txtCenter">GemCard Auction</h1>
-              <h2 class="txtCenter">BASEBALL CARDS / SPORT COLLECTIBLES / MEMORABILIA</h2>
+              <h2 class="title-m txtCenter">BASEBALL CARDS / SPORT COLLECTIBLES / MEMORABILIA</h2>
             </div>
             <!-- Featuring Auction Items -->
               <div class="FeaturingItem highlightItem__section highlightItem product">
@@ -56,7 +56,7 @@
                                                 <div class="btn btn-solid btn-solid-gold" v-if="item.status === 1">
                                                   Bidding
                                                 </div>
-                                                <div class="btn btn-solid btn-solid-gray">
+                                                <div class="btn btn-solid btn-solid-primary">
                                                   {{ item.bids }} Bids
                                                 </div>
                                               </div>

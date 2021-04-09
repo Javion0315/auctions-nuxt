@@ -96,6 +96,11 @@
 
 .btn-line {
   border: 1px solid #001939;
+  color: #001939;
+}
+
+.btn-line a {
+  color: #527BB0;
 }
 
 .btn-line:hover {
@@ -188,8 +193,18 @@
 }
 
 .statusTag .btn {
-  font-size: 80%;
-  margin-right: 1vw;
+  font-size: 90%;
+  margin: 0.5rem 1vw 0 0;
+  -webkit-transform: translateY(-7px);
+          transform: translateY(-7px);
+  padding: 0.2rem 0.8rem !important;
+}
+
+@media (max-width: 551px) {
+  .statusTag .btn {
+    -webkit-transform: translateY(-5px) scale(0.9);
+            transform: translateY(-5px) scale(0.9);
+  }
 }
 
 /* ----------------------------------------------------------------------------------- */

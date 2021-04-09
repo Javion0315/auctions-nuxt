@@ -1143,14 +1143,6 @@ h1.logoName{
         font-size: 130%;
         width: 100%;
     }
-    .btn{
-        // margin: 0.5rem 0 0 7px;
-        margin: 0.5rem 0 0 0;
-        transform: translateY(-7px);
-        @include media('below-mobile') {
-            transform: translateY(-5px) scale(0.9);
-        }
-    }
     
 }
 /* ----------------------------------------------------------------------------------- */
@@ -1377,20 +1369,19 @@ h1.logoName{
 /* location */
 /* ----------------------------------------------------------------------------------- */
 .location{
-    margin: 1.5rem auto !important;
+    margin: 1rem auto 2rem !important;
     color: $textcColor-gray;
+    float: none !important;
+    padding-top: 2rem;
     a{
         color: $textcColor-gray;
         &:hover{
             color: $web-mainColor;
         }
     }
-   .current{
-    //    color: $web-secondaryColor;
     @include media('below-tablet') {
         display: none;
     } 
-   }
 }
 /* ----------------------------------------------------------------------------------- */
 /* article common style */

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+// @import "compass/css3";
+@import "../utilities/_variable";
+@import "../utilities/_mixin";
+@import "../utilities/_extend";
+@import "../utilities/_media-queries";
+@import "../pages/subPage_common";
+
+/* ----------------------------------------------------------------------------------- */
+/* */
+/* ----------------------------------------------------------------------------------- */
+.auctionsList{
+    .heading-l{
+        font-style: inherit;
+        margin-bottom: 2rem;
+        line-height: 2rem;
+    }
+}
+.auctionsList__list{
+    .item{
+        margin-bottom: 2rem
+    }
+    .title-l{
+        margin-bottom: 0.6rem
+    }
+    .date{
+        margin-bottom: 0.8rem
+    }
+    .link{
+        width: 23%;
+        .btn{
+            width: 100%;
+            padding: 0.6rem;
+        }
+    }
+}

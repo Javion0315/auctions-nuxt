@@ -13,7 +13,7 @@
                 <dt>收款人聯絡地址：</dt><dd>skldj;alksdj;alksdj</dd>
             </dl>
         </section>
-        <section class="sectionBox ">
+        <section class="sectionBox transaction">
             <h2 class="title-m">您的交易收入</h2>
             <div class="income">USD $ 72,000</div>
             <small class="text-gray">交易結束的三日內，將由客服專員與您聯繫收款細節</small>
@@ -52,6 +52,36 @@
                 </el-table-column>
             </el-table>
         </section>
+        <section class="sectionBox Consigned">
+            <h2 class="title-m">Consigned</h2>
+            <el-table
+            :data="consignData"
+            style="width: 100%">
+                <el-table-column
+                    fixed
+                    prop="itemPic"
+                    label="拍品圖片"
+                    width="130">
+                    <template slot-scope="scope">
+                        <el-image
+                        style="width: 50px;"
+                        :src='scope.row.itemPic'
+                        :fit="contain"></el-image>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    prop="itemName"
+                    label="拍品名稱">
+                </el-table-column>
+                <el-table-column
+                    prop="status"
+                    label="審核進度">
+                </el-table-column>
+            </el-table>
+        </section>
+
+
+        
         <el-dialog
         title="訂單明細"
         :visible.sync="dialogVisible_orderDetail"
@@ -113,6 +143,19 @@ export default {
                 status: '拍賣中',
                 serviceCharges: ' - ',
                 orderDetail: '訂單明細',
+            }],
+            consignData: [{
+                itemPic: 'https://goldinauctions.com/ItemImages/000084/84388a_lg.jpeg',
+                itemName: '2000 Michael Jordan Fleer #15',
+                status: '審核中，請留意您的email',
+            }, {
+                itemPic: 'https://goldinauctions.com/ItemImages/000077/77806a_lg.jpeg',
+                itemName: '2000 Michael Jordan Fleer #15',
+                status: '審核通過',
+            }, {
+                itemPic: 'https://goldinauctions.com/ItemImages/000077/77806a_lg.jpeg',
+                itemName: '2000 Michael Jordan Fleer #15',
+                status: '審核未通過',
             }],
         }
         },

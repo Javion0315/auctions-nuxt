@@ -1,74 +1,42 @@
 <template>
   <div>
-    <section class="mainContent" style="margin: 70px 70px 0px 70px">
-      <section class="Privacy" style="padding: 0px">
-        <div class="container">
-          <h2
-            class="title-m"
-            style="font-weight: bold; font-size: 2.2rem; line-height: 55px; margin-bottom: 1.5rem;"
-          >
-            Current Auctions
-          </h2>
-          <div style="background-color: #F2F2F2; padding: 60px;" v-if="data.length > 0">
-            <div v-for="(item,index) in data" :key="index" style="margin-bottom: 30px">
-                <el-row :gutter="20">
-                    <el-col :span="6">
+    <div class="mainContent">
+      <el-breadcrumb class="location container" separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/' }">首頁</el-breadcrumb-item>
+          <el-breadcrumb-item class="current">Current Auctions</el-breadcrumb-item>
+      </el-breadcrumb>
+
+      <section class="container auctionsList">
+          <h2 class="heading-l">Current Auctions</h2>
+          <div class="auctionsList__list" v-if="data.length > 0">
+            <div class="item" v-for="(item,index) in data" :key="index">
+                <el-row :gutter="30">
+                    <el-col :span="7">
                         <el-image :src="imgPath + item.image"></el-image>
                     </el-col>
-                    <el-col :span="18">
-                        <div style="display: flex; justify-content: space-around;">
-                            <div style="margin-right: 15px">
-                                <h2
-                                    class="title-m"
-                                    style="
-                                    font-weight: bold;
-                                    font-size: 1.5rem;
-                                    line-height: 55px;
-                                    margin-bottom: 30px;
-                                    color: #001939;
-                                    margin-top: -16px
-                                    "
-                                >
-                                    {{ item.title }}
-                                </h2>
-                                <span>{{ item.start_time }} - {{ item.end_time }}</span>
-                                <div
-                                    class="btn btn-solid"
-                                    style="
-                                    background-color: #BABABA;
-                                    height: 25px;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    font-size: 8px;
-                                    width: 20%;
-                                    padding: 0.3rem 0rem;
-                                    margin: 8px 0px;
-                                    "
-                                >
-                                    {{ item.bidding }} Bids
-                                </div>
+                    <el-col :span="13">
+                        <div>
+                            <h2 class="title-l">{{ item.title }}</h2>
+                            <div class="date">{{ item.start_time }} - {{ item.end_time }}</div>
+                            <div class="row statusTag">
+                                <div class="btn btn-line">{{ item.bidding }} Bids</div>
                             </div>
-                            <div>
-                                <nuxt-link :to="localePath({ name: 'auction-id', params: { id: item.id }})">
-                                    <el-button type="primary" @click="onSubmit(item.id)" style="background-color: #0C4C78; border-radius: 5px" size="mini">
-                                        <span style="font-size: 1.6rem; padding: 0px 20px; letter-space: 1px">View</span>
-                                    </el-button>
-                                </nuxt-link>
-                            </div>
-                        </div>                    
+                        </div>
+                    </el-col>
+                    <el-col :span="4">
+                        <nuxt-link class="link" :to="localePath({ name: 'auction-id', params: { id: item.id }})">
+                            <div class="btn btn-solid btn-solid-primary" @click="onSubmit(item.id)">View</div>
+                        </nuxt-link>
                     </el-col>
                 </el-row>
             </div>
           </div>
           <div style="background-color: #F2F2F2; padding: 60px; text-align: center" v-else>
-                <h1 style="font-size: 2.5rem;">SORRY, NO DATA AVAILABLE</h1>
-                <h1 style="font-size: 2rem;"> <span class="ascii">(╯°□°）╯︵ ┻━┻</span></h1>
+                <p style="font-size: 1.2rem;">SORRY, NO DATA AVAILABLE</p>
+                <p style="font-size: 0.9rem;"> <span class="ascii">(╯°□°）╯︵ ┻━┻</span></p>
           </div>
-
-        </div>
-      </section> 
-    </section>
+      </section>
+    </div>
     <div style="text-align: center; margin-bottom: 23px;">
         <el-pagination
         class="pageStyle"
@@ -138,4 +106,9 @@ export default {
     color: #CBB885
   }
 
+</style>
+<style lang="scss">
+  @import "assets/css/base/default.scss";
+  @import "assets/css/pages/subPage_auctionsList.scss";
+  
 </style>

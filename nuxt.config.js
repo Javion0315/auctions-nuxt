@@ -28,6 +28,7 @@ export default {
     //  { src: 'https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js', /*mode: 'server',*/    mode: 'client' ,  type: "text/javascript" },
     //  { src: 'https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js', /*mode: 'server',*/    mode: 'client' , type: "text/javascript" },
      { src: 'https://www.googletagmanager.com/gtag/js', /*mode: 'server', */   mode: 'client' , type: "text/javascript" },
+    //  { src: 'https://static.zdassets.com/ekr/snippet.js?key=aef67e78-1c8e-4d1d-8ce0-31aced0255c9' , id:'ze-snippet' , type: "text/javascript" },/* Zendesk Widget */
     ],
   },
   /*

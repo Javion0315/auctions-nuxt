@@ -1,6 +1,6 @@
 <template>
   <div class="grayBg">
-      <section class="account mainContent" style="margin-top: 70px">
+      <div class="account mainContent" style="margin-top: 70px">
           <section class="Account" style="padding: 0px">
             <div class="heading container">
                 <h1 class="title-l">Account</h1>
@@ -19,7 +19,7 @@
                 </el-tabs>
             </div>
           </section>
-      </section>
+      </div>
 
   </div>
 </template>

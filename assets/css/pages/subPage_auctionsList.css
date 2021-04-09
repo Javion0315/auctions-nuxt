@@ -87,7 +87,7 @@
   vertical-align: middle;
 }
 
-.tabs-component.tab-sty1 li.tabs-component-tab, .btn-track, .banner .pic-mobile, .banner .pic-animate, .banner__slogan, .footermap dl {
+.tabs-component.tab-sty1 li.tabs-component-tab, .btn-track, .banner .pic-mobile, .banner .pic-animate, .banner__slogan {
   display: inline-block;
   vertical-align: top;
 }
@@ -180,7 +180,7 @@
   vertical-align: middle;
 }
 
-.tabs-component.tab-sty1 li.tabs-component-tab, .btn-track, .banner .pic-mobile, .banner .pic-animate, .banner__slogan, .footermap dl {
+.tabs-component.tab-sty1 li.tabs-component-tab, .btn-track, .banner .pic-mobile, .banner .pic-animate, .banner__slogan {
   display: inline-block;
   vertical-align: top;
 }
@@ -273,7 +273,7 @@
   vertical-align: middle;
 }
 
-.tabs-component.tab-sty1 li.tabs-component-tab, .btn-track, .banner .pic-mobile, .banner .pic-animate, .banner__slogan, .footermap dl {
+.tabs-component.tab-sty1 li.tabs-component-tab, .btn-track, .banner .pic-mobile, .banner .pic-animate, .banner__slogan {
   display: inline-block;
   vertical-align: top;
 }
@@ -1001,7 +1001,7 @@ label {
   vertical-align: middle;
 }
 
-.tabs-component.tab-sty1 li.tabs-component-tab, .btn-track, .banner .pic-mobile, .banner .pic-animate, .banner__slogan, .footermap dl {
+.tabs-component.tab-sty1 li.tabs-component-tab, .btn-track, .banner .pic-mobile, .banner .pic-animate, .banner__slogan {
   display: inline-block;
   vertical-align: top;
 }
@@ -1772,140 +1772,32 @@ label {
 }
 
 /* ----------------------------------------------------------------------------------- */
-/* erro404Page */
+/* */
 /* ----------------------------------------------------------------------------------- */
-.erro404Page {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  height: calc(100vh - 60px);
+.auctionsList .heading-l {
+  font-style: inherit;
+  margin-bottom: 2rem;
+  line-height: 2rem;
 }
 
-@media (max-width: 1200px) {
-  .erro404Page {
-    height: calc(140vh - 60px);
-  }
+.auctionsList__list .item {
+  margin-bottom: 2rem;
 }
 
-.erro404Page .pageTitle {
-  text-align: center;
+.auctionsList__list .title-l {
+  margin-bottom: 0.6rem;
 }
 
-.erro404Page .mainContainer {
-  margin: auto;
+.auctionsList__list .date {
+  margin-bottom: 0.8rem;
 }
 
-/* ----------------------------------------------------------------------------------- */
-/* footerMap */
-/* ----------------------------------------------------------------------------------- */
-footer {
+.auctionsList__list .link {
+  width: 23%;
+}
+
+.auctionsList__list .link .btn {
   width: 100%;
-  float: left;
-  color: #555;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  background: #e6e6e6;
-  margin-top: auto;
+  padding: 0.6rem;
 }
-
-footer a {
-  color: #555;
-}
-
-.footerblock {
-  max-width: 1300px;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  text-align: left !important;
-  padding: 2em 0;
-}
-
-@media (max-width: 1200px) {
-  .footerblock {
-    padding: 2em 1rem;
-  }
-}
-
-.footermap .ftnav {
-  float: left;
-  text-align: left !important;
-}
-
-.footermap .ftnav h3 {
-  color: #C9B57E;
-  font-size: 1.2rem;
-}
-
-.footermap dl {
-  margin: 0.5rem 0.7em;
-}
-
-.footermap dt {
-  font-size: 0.95em;
-  border-bottom: 1px solid darkgray;
-  padding: 1rem 0;
-}
-
-.footermap dt a {
-  color: #000;
-}
-
-.footermap dd {
-  font-size: 0.9em;
-  padding-top: 10px;
-}
-
-.footermap .ftnav.article {
-  width: 18%;
-  margin-left: 1.5rem;
-}
-
-@media (max-width: 1200px) {
-  .footermap .ftnav.article {
-    width: 100%;
-    margin: 1rem 0 0 0;
-  }
-}
-
-.footermap .ftnav.article dl {
-  list-style-type: disc;
-}
-
-.footermap .ftnav.article dd {
-  font-size: 0.9em;
-  padding: 1rem 0;
-  border-bottom: 1px dashed darkgray;
-}
-
-.footermap .ftnav.article dd:last-child {
-  border-bottom: none;
-}
-
-.footermap .ftnav.topic {
-  width: 80%;
-}
-
-@media (max-width: 1200px) {
-  .footermap .ftnav.topic {
-    width: 100%;
-  }
-}
-
-.footermap .ftnav.topic dl {
-  width: calc(100% / 5 - 1.7rem);
-}
-
-@media (max-width: 768px) {
-  .footermap .ftnav.topic dl {
-    width: calc(100% / 3 - 1.7rem);
-  }
-}
-/*# sourceMappingURL=subPage_404.css.map */
+/*# sourceMappingURL=subPage_auctionsList.css.map */
