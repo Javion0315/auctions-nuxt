@@ -1,19 +1,19 @@
 <template>
   <div>
-      <section class="policy mainContent">
+      <section class="policy mainContent" style="background-color: #001939">
           <section class="Privacy" style="padding: 0px">
             <a id="Privacy_zh" name="Privacy_zh"></a>
             <div class="container">
                 <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-                    <h1 class="heading-m" style="font-weight: 400; text-align: center; font-size: 2.5rem;">Consign Ｗith Us</h1>
-                    <span style="font-size: 1.6em; font-weight: 300; line-height: 45px; width: 57%;">
+                    <h1 class="heading-m" style="font-weight: 400; text-align: center; font-size: 2.5rem; color: #DAC287">Consign Ｗith Us</h1>
+                    <span style="font-size: 1.6em; font-weight: 300; line-height: 45px; width: 57%; color: #DAC287">
                         Do you have a high quality item that you would like to get the absolute maximum price possible?
                     </span>
                 </div>
-                <div style="border: 1px solid black; margin: 60px 0px;">
-                    <el-row style="padding: 65px 0px 0px;">
-                        <el-col :span="11">
-                            <div style="font-size: 1.5em; font-weight: 300; line-height: 45px; margin-left: 80px; margin-bottom: 10px;">
+                <div style="margin: 60px 0px; background-color: #152B48">
+                    <el-row style="padding: 65px 0px 0px; display: flex; justify-content: center;">
+                        <el-col :span="12">
+                            <div style="font-size: 1.5em; font-weight: 400; line-height: 45px; margin-bottom: 10px; color: #DAC287">
                                 Contact Information
                             </div>
                             <div>
@@ -35,16 +35,23 @@
                                         <el-input v-model="form.phone" placeholder="Phone Number"></el-input>
                                     </el-form-item>
                                     <el-form-item>
-                                        <el-input v-model="form.productName" placeholder="拍品名稱"></el-input>
+                                        <el-input v-model="form.item_name" placeholder="拍品名稱"></el-input>
                                     </el-form-item>
                                     <el-form-item>
                                         <span>上傳圖片</span>
-                                        <div style="border: 1px solid; padding: 20px 0px;">
+                                        <!-- :on-change="getFile" -->
+                                        <div style="border: 1px solid; padding: 20px 0px; border-radius: 5px; background-color: white">
                                             <el-upload
-                                                action="https://jsonplaceholder.typicode.com/posts/"
+                                                ref="upload"
+                                                action="none"
+                                                :limit="1"
+                                                class="uploadStyle"
+                                                :auto-upload="false"
                                                 list-type="picture-card"
+                                                :on-remove="handleRemove"
+                                                :on-change="getFile"
                                                 :on-preview="handlePictureCardPreview"
-                                                :on-remove="handleRemove">
+                                            >
                                                 <i class="el-icon-plus"></i>
                                             </el-upload>
                                             <el-dialog :visible.sync="dialogVisible">
@@ -54,13 +61,13 @@
                                     </el-form-item>
                                     <el-form-item>
                                         <el-checkbox v-model="form.checked">
-                                            <span style="font-size: 1rem">同意<span style="color: #26A6FB">委託拍賣協議</span></span>
+                                            <span style="font-size: 1rem">同意<span style="color: #DAC287">委託拍賣協議</span></span>
                                         </el-checkbox>
                                     </el-form-item>
                                 </el-form>
                             </div>
                         </el-col>
-                        <el-col :span="13">
+                        <!-- <el-col :span="13">
                             <div style="margin-left: 80px; ">
                                 <div style="font-size: 1.3em; font-weight: 400; line-height: 45px; margin-bottom: 10px;">
                                     收款資訊
@@ -122,11 +129,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </el-col>
+                        </el-col> -->
                     </el-row>
-                    <div style="text-align: center; margin-bottom: 40px">
-                        <el-button type="primary" @click="onSubmit" style="background-color: #0C4C78; border-radius: 5px" size="mini">
-                            <span style="font-size: 1.6rem; padding: 0px 20px; letter-space: 1px">Submit</span>
+                    <div style="text-align: center; padding-bottom: 40px">
+                        <el-button type="primary" @click="onSubmit" style="background-color: #DAC287; border-radius: 5px;
+                        border-color: rgb(218, 194, 135); width: 35%;" size="mini">
+                            <span style="font-size: 1.5rem; padding: 0px 20px; letter-space: 1px">Submit</span>
                         </el-button>
                     </div>
                 </div>
@@ -139,25 +147,32 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+import { uploadImg } from '~/api/consign'
+
   export default {
     data () {
       return {				
-        //tab: Silver / Base
         showNavbar: true,
         navbarFixed: false,
         lastScrollPosition: 0,
         scrollValue: 0,
         dialogImageUrl: '',
         dialogVisible: false,
+        imgSize: [],
+        fileList: [],
+        test: '',
         form: {
-            firstName: '',
-            lastName: '',
+            full_name: '',
+            // firstName: '',
+            // lastName: '',
             email: '',
             phone: '',
-            productName: '',
-            checked: false,
-            PayPal: false,
-            alipay: false
+            item_name: '',
+            // checked: false,
+            images: ''
+            // PayPal: false,
+            // alipay: false
         },
         account: {
             area: '',
@@ -181,6 +196,11 @@
           label: '中國'
         }],
       }
+    },
+    computed: {
+        full_name() {
+            return this.firstName + ' ' + this.lastName
+        }
     },
     mounted () {
         // this.lastScrollPosition = window.pageYOffset
@@ -220,7 +240,63 @@
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
-        }
+        },
+        // getBase64(file) {
+        //     return new Promise((resolve, reject) => {
+        //         const reader = new FileReader()
+        //         let imgResult = ''
+        //         reader.readAsDataURL(file)
+        //         reader.onload = function onload() {
+        //         imgResult = reader.result
+        //         }
+        //         reader.onerror = function onerror(error) {
+        //         reject(error)
+        //         }
+        //         reader.onloadend = function onloadend() {
+        //         resolve(imgResult)
+        //         }
+        //     })
+        // },
+        // getFile(file) {
+        //     this.getBase64(file.raw).then(res => {
+        //         const params = res.split(',')
+        //         console.log(params, 'params')
+        //         if (params.length > 0) {
+        //             this.test = params[1]
+        //         }
+        //         const data = {
+        //             imgData: this.test,
+        //             token: Cookies.get('token'),
+        //         }
+        //         uploadImg(data).then((res) => {
+        //             console.log(res)
+        //         })
+        //     })
+        // }
+    // handleRemove(file) {
+    //   this.fileList = []
+    //   this.compress(file.raw, (val) => {
+    //     const replaceRes = val.replace(/^data:.*?;base64,/, '')
+    //     this.fileList.push(replaceRes) // 將取得的base64放入陣列中
+    //   })
+    // }
+        // getFile(file) {
+        //     this.compress(file.raw, (val) => {
+                
+        //         const replaceRes = val.replace(/^data:.*?;base64,/, '')
+        //         console.log(replaceRes)
+        //         this.imgSize.push(this.getImgSize(replaceRes))
+        //         const data = {
+        //             imgData: replaceRes,
+        //             token: Cookies.get('token'),
+        //         }
+        //         uploadImg(data).then((res) => {
+        //             console.log(res)
+        //         })
+        //     })
+            
+        // },
+       
     },
       
   }
@@ -235,5 +311,8 @@
 <style scoped>
     .checkboxStyle >>> .el-checkbox__label {
         width: 95% !important;
+    }
+    .uploadStyle >>> .el-upload-list__item {
+        padding: 0px !important;
     }
 </style>

@@ -38,6 +38,7 @@
                 </el-table-column>
                 <el-table-column
                     prop="orderDetail"
+                    align="center"
                     label="訂單明細">
                     <template slot-scope="scope">
                         <div class="btn"
