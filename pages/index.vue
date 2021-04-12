@@ -56,7 +56,7 @@
                                                 <div class="btn btn-solid btn-solid-gold" v-if="item.status === 1">
                                                   Bidding
                                                 </div>
-                                                <div class="btn btn-solid btn-solid-primary">
+                                                <div class="btn btn-line">
                                                   {{ item.bids }} Bids
                                                 </div>
                                               </div>

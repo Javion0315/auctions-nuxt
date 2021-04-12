@@ -238,25 +238,7 @@
     }
 }
 
-.productList__item__img{
-    border: 1px solid #BCBCBC;
-    padding: 1.5vw;
-    border-radius: 7px;
-    text-align: center;
-    height: calc(64vw / 3);
-    max-height: 257px;
-    margin-bottom: 1rem;
-    @include media('below-tablet') {
-        height: 40vw; 
-    }
-    @include media('below-mobile') {
-        height: 50vw; 
-   }
-    img{
-        height: 100%;
-        width: auto;
-    }
-}
+
 .highlightItem{
     color: #fff;
     .highlightItem__section{

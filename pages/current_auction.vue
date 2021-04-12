@@ -14,7 +14,7 @@
                     <el-col :span="7">
                         <el-image :src="imgPath + item.image"></el-image>
                     </el-col>
-                    <el-col :span="13">
+                    <el-col :span="13" :xs="17">
                         <div>
                             <h2 class="title-l">{{ item.title }}</h2>
                             <div class="date">{{ item.start_time }} - {{ item.end_time }}</div>
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                     </el-col>
-                    <el-col :span="4">
+                    <el-col :span="4" :xs="0">
                         <nuxt-link class="link" :to="localePath({ name: 'auction-id', params: { id: item.id }})">
                             <div class="btn btn-solid btn-solid-primary" @click="onSubmit(item.id)">View</div>
                         </nuxt-link>
@@ -90,25 +90,7 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-  .pageStyle >>> .el-pager >>> li {
-    font-size: 20px !important;
-  }
-  .pageStyle >>> .el-icon {
-    font-size: 23px !important;
-  }
-  .pageStyle >>> .el-pager li.active {
-    font-size: 20px;
-    color: #CBB885 !important;
-  }
-  .pageStyle >>> li:hover {
-    color: #CBB885
-  }
-
-</style>
 <style lang="scss">
   @import "assets/css/base/default.scss";
   @import "assets/css/pages/subPage_auctionsList.scss";
-  
 </style>

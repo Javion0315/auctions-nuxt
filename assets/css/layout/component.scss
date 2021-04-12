@@ -78,6 +78,7 @@
             background: $web-secondaryColor;
             border:none;
             color: #fff;
+            border: 1px solid $web-secondaryColor;
             &:hover,&:focus,&:active{
                 background: darken($web-secondaryColor,10%) ;
                 color: #fff;

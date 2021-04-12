@@ -176,6 +176,7 @@
   background: #C7B179;
   border: none;
   color: #fff;
+  border: 1px solid #C7B179;
 }
 
 .btn-solid-gold:hover, .btn-solid-gold:focus, .btn-solid-gold:active {

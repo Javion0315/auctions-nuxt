@@ -7,11 +7,25 @@
 @import "../utilities/_media-queries";
 
 /* ----------------------------------------------------------------------------------- */
-/* custom Element UI */
+/* Element UI CSS */
 /* ----------------------------------------------------------------------------------- */
-/* 改变主题色变量 */
-$--color-primary: $web-mainColor;
-
+  .pageStyle{
+    .el-pager{
+        li{
+            font-size: 1rem !important;
+            &.active{
+                font-size: 1rem;
+                color: $web-secondaryColor !important;
+            }
+            &:hover{
+                color: $web-secondaryColor
+            }
+        }
+    }
+    .el-icon{
+        font-size: 1.2rem !important;
+    }
+  }
 /* ----------------------------------------------------------------------------------- */
 /* build */
 /* ----------------------------------------------------------------------------------- */
@@ -268,6 +282,29 @@ h1.logoName{
     }
 }
 
+/* ----------------------------------------------------------------------------------- */
+/* product */
+/* ----------------------------------------------------------------------------------- */
+
+.productList__item__img{
+    border: 1px solid #BCBCBC;
+    padding: 1.5vw;
+    border-radius: 7px;
+    text-align: center;
+    height: calc(64vw / 3);
+    max-height: 257px;
+    margin-bottom: 1rem;
+    @include media('below-tablet') {
+        height: 40vw; 
+    }
+    @include media('below-mobile') {
+        height: 50vw; 
+   }
+    img{
+        height: 100%;
+        width: auto;
+    }
+}
 /* ----------------------------------------------------------------------------------- */
 /* dowload */
 /* ----------------------------------------------------------------------------------- */
@@ -1372,7 +1409,7 @@ h1.logoName{
     margin: 1rem auto 2rem !important;
     color: $textcColor-gray;
     float: none !important;
-    padding-top: 2rem;
+        padding-top: 2rem;
     a{
         color: $textcColor-gray;
         &:hover{

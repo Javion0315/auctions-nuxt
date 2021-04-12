@@ -15,16 +15,29 @@
         margin-bottom: 2rem;
         line-height: 2rem;
     }
+
+    .productList__item__img{
+        @include media('below-tablet') {
+            height: 30vw; 
+        }
+        @include media('below-mobile') {
+            height: 40vw; 
+        }
+    }
 }
 .auctionsList__list{
     .item{
-        margin-bottom: 2rem
+        margin-bottom: 2rem;
     }
     .title-l{
-        margin-bottom: 0.6rem
+        margin-bottom: 0.6rem;
+        line-height: 2.3rem;
+        @media (max-width: 768px)  {
+            line-height: 1.9rem;
+        }
     }
     .date{
-        margin-bottom: 0.8rem
+        margin-bottom: 0.8rem;
     }
     .link{
         width: 23%;
@@ -34,3 +47,4 @@
         }
     }
 }
+

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <section class="mainContent">
+    <div class="mainContent">
         <el-breadcrumb class="location container" separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首頁</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/' }">專場頁</el-breadcrumb-item>
             <el-breadcrumb-item class="current">{{ data.title }}</el-breadcrumb-item>
         </el-breadcrumb>
         
-        <div class="container">
+        <section class="container">
             <el-row :gutter="20">
                 <el-col :span="24" :sm="14">
                     <div class="pdImg">
@@ -101,7 +101,8 @@
                 <el-col class="pdTool" :span="24" :sm="10">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-top: 60px">
                         <el-button class="btnStyle" plain @click="social_sharing"><i class="el-icon-s-promotion iconStyle"></i> Share To</el-button>
-                        <el-button class="btnStyle" plain><i class="el-icon-date iconStyle"></i> Add Calander</el-button>
+                        <el-button class="btnStyle" plain @click="ics_download()"><i class="el-icon-date iconStyle"></i> Add Calander</el-button>
+                        <!-- <el-button class="btnStyle follow" plain><span class="iconStyle"><font-awesome-icon  :icon="['far', 'heart']" /></span>Follow</el-button> -->
                         <el-button class="btnStyle follow" plain @click="addFavorite">
                             <span class="iconStyle">
                                 <font-awesome-icon  :icon="['far', 'heart']" v-if="shoppingcartCount === 0" />
@@ -145,8 +146,8 @@
                     </div>
                 </social-sharing>  
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
   </div>
 </template>
 
@@ -203,6 +204,12 @@ export default {
       this.getInit()
   },
   methods: {
+    ics_download(){
+        // Create event : this.$ics.addEvent(language, subject, description, location, begin, stop, url, organizer, rrule)
+        this.$ics.addEvent('GemCard Auction', this.data.title , '','', this.data.start_time, this.data.end_time)
+        // Download calendar file : this.$ics.download(fileName)
+        this.$ics.download('GemCard-Auction')
+    },       
     addFavorite() {
         const data = {
             token: Cookies.get('token'),

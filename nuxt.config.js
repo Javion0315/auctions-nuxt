@@ -61,6 +61,7 @@ export default {
     { src: '~/plugins/firebase.js', ssr: false ,/*mode: 'server' ,*/  mode: 'client' },//Firebase SDK
     { src: '~/plugins/element-ui/element-ui' },
     { src: '~/plugins/font-awesome' },
+    { src: '~/plugins/vue-ics' },
  ],
  /*
   ** Nuxt.js dev-modules
