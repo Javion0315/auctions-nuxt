@@ -1,6 +1,6 @@
 <template>
   <div class="grayBg">
-      <div class="account mainContent" style="margin-top: 70px">
+      <div class="account mainContent">
           <section class="Account" style="padding: 0px">
             <div class="heading container">
                 <h1 class="title-l">Account</h1>

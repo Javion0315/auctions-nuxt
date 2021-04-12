@@ -2,7 +2,7 @@
     <div>
         <section class="sectionBox ProfileDetails">
             <h2 class="title-m">Profile Details</h2>
-            <div class="btn btn-line">Edit</div>
+            <nuxt-link class="btn btn-line" :to="localePath('account_profile_edit')">Edit</nuxt-link>
             <ul>
                 <li>Full Name : Miss. Hsuan Ma</li>
                 <li>Email : Ada@gmail.com</li>

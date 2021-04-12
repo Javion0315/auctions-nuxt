@@ -2,7 +2,7 @@
     <div>
         <section class="sectionBox ReceivedPayment">
             <h2 class="title-m">收款資訊</h2>
-            <div class="btn btn-line">Edit</div>
+            <nuxt-link class="btn btn-line" :to="localePath('account_payeeInfo_edit')">Edit</nuxt-link>
             <div class="title">銀行帳戶：</div>
             <dl class="ReceivedPayment__list">
                 <dt>SWIFT / ABA no / SortCode：</dt><dd>25928374</dd>
@@ -86,7 +86,8 @@
         title="訂單明細"
         :visible.sync="dialogVisible_orderDetail"
         width="70%"
-        center>
+        center
+        style="max-width: 1000px; margin:auto;">
             <div class="orderDetail-wp">
                 <p>繳費期限：2020/12/1 - 2020/12/5</p>
                 <div class="row orderDetail__head">

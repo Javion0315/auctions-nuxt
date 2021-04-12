@@ -212,7 +212,8 @@
         title="訂單明細"
         :visible.sync="dialogVisible_orderDetail"
         width="70%"
-        center>
+        center
+        style="max-width: 1000px; margin:auto;">
             <div class="orderDetail-wp">
                 <p>繳費期限：2020/12/1 - 2020/12/5</p>
                 <div class="row orderDetail__head">
