@@ -7,7 +7,7 @@
             <div class="content">
                 <el-row :gutter="20">
                      <el-col :span="12">USD $ 5000</el-col>
-                     <el-col :span="12"><div class="btn btn-solid-primary">提高額度</div></el-col>
+                     <el-col :span="12"><nuxt-link class="btn btn-solid-primary" :to="localePath('accoutn_creditLimit_edit')">提高額度</nuxt-link></el-col>
                 </el-row>
                 <div>推薦人：曾小姐</div>   
                 <div>推薦人聯絡方式：0909090909 / a@a.com</div>   

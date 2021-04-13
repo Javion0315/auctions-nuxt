@@ -53,10 +53,12 @@ import accountSell from '~/components/accountSell'
         
     },
     mounted () {
-      //如果上一頁是account_payeeInfo_edit，tab就切換到該頁籤
+      //上一頁是哪一頁，tab就切換到對應的頁籤
       let URL = this.prevRoute.path;
       if(URL === '/account_payeeInfo_edit'){
           this.activeName = 'third'
+       }else if(URL === '/accoutn_creditLimit_edit'){
+          this.activeName = 'second'
        }else{
           this.activeName = 'first'
        }
