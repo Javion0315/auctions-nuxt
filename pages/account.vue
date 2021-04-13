@@ -37,15 +37,29 @@ import accountSell from '~/components/accountSell'
     },
     data () {
       return {				
-           activeName: 'first'
+          activeName: 'first',
+           ////獲取上一頁路徑並將其儲存在數據中
+          prevRoute: null,
         
       }
+    },
+    beforeRouteEnter(to, from, next) {
+      //獲取上一頁路徑並將其儲存在數據中
+      next(vm => {
+        vm.prevRoute = from
+      })
     },
     created() {
         
     },
     mounted () {
-       
+      //如果上一頁是account_payeeInfo_edit，tab就切換到該頁籤
+      let URL = this.prevRoute.path;
+      if(URL === '/account_payeeInfo_edit'){
+          this.activeName = 'third'
+       }else{
+          this.activeName = 'first'
+       }
     },
     beforeDestroy(){
     },

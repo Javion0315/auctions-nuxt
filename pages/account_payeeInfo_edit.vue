@@ -72,7 +72,7 @@ import accountSell from '~/components/accountSell'
               name: '',
               phone: '',
               address: '',
-          }
+          },
         
       }
     },
@@ -86,7 +86,12 @@ import accountSell from '~/components/accountSell'
     },
     methods: {
         goBack() {
-          this.$router.go(-1);
+          if (window.history.length <= 1) {
+            this.$router.push({path:'/'});
+            return false
+          } else {
+              this.$router.go(-1);
+          }
         },
         onSubmit() {
           console.log('submit!');
