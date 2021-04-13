@@ -26,13 +26,13 @@
                                         </div>                                       
                                     </el-form-item>
                                     <el-form-item>
-                                        <el-input v-model="form.email" placeholder="Email Address"></el-input>
+                                        <el-input v-model="form.email" placeholder="Email Address" style="width: 100%"></el-input>
                                     </el-form-item>
                                     <el-form-item>
-                                        <el-input v-model="form.phone" placeholder="Phone Number"></el-input>
+                                        <el-input v-model="form.phone" placeholder="Phone Number" style="width: 100%"></el-input>
                                     </el-form-item>
                                     <el-form-item>
-                                        <el-input v-model="form.item_name" placeholder="拍品名稱"></el-input>
+                                        <el-input v-model="form.item_name" placeholder="拍品名稱" style="width: 100%"></el-input>
                                     </el-form-item>
                                     <el-form-item>
                                         <span>上傳圖片</span>
@@ -41,9 +41,9 @@
                                             <el-upload
                                                 ref="upload"
                                                 action="none"
-                                                :limit="1"
                                                 class="uploadStyle"
                                                 :auto-upload="false"
+                                                multiple
                                                 list-type="picture-card"
                                                 :on-remove="handleRemove"
                                                 :on-change="getFile"
@@ -142,7 +142,7 @@
 
 <script>
 import Cookies from 'js-cookie';
-import { uploadImg } from '~/api/consign'
+import { uploadImg, submitConsignData } from '~/api/consign'
 
   export default {
     data () {
@@ -153,31 +153,15 @@ import { uploadImg } from '~/api/consign'
         scrollValue: 0,
         dialogImageUrl: '',
         dialogVisible: false,
-        imgSize: [],
         fileList: [],
-        test: '',
         form: {
-            full_name: '',
-            // firstName: '',
-            // lastName: '',
+            firstName: '',
+            lastName: '',
             email: '',
             phone: '',
             item_name: '',
-            // checked: false,
-            images: ''
-            // PayPal: false,
-            // alipay: false
-        },
-        account: {
-            area: '',
-            link: '',
-            ISBN: '',
-            SortCode: '',
-            enName: '',
-            account: '',
-            user: '',
-            phone: '',
-            address: ''
+            checked: false,
+            images: []
         },
         options: [{
           value: '1',
@@ -193,7 +177,7 @@ import { uploadImg } from '~/api/consign'
     },
     computed: {
         full_name() {
-            return this.firstName + ' ' + this.lastName
+            return this.form.firstName + ' ' + this.form.lastName
         }
     },
     mounted () {
@@ -206,7 +190,36 @@ import { uploadImg } from '~/api/consign'
     },
     methods: {
         onSubmit() {
-            console.log('submit')
+            this.fileList.forEach((item) => {
+                const data = {
+                    imgData: item,
+                    token: Cookies.get('token'),
+                }
+                uploadImg(data).then((res) => {
+                    this.form.images.push(res.data.filePath)
+                    
+                })
+            })
+            setTimeout(() => {
+                const form = {
+                    token: Cookies.get('token'),
+                    full_name: this.full_name,
+                    email: this.form.email,
+                    phone: this.form.phone,
+                    item_name: this.form.item_name,
+                    images: this.form.images
+                }
+                submitConsignData(form).then((res) => {
+                    this.$notify({
+                        title: '成功',
+                        message: res.data.msg,
+                        type: 'success'
+                    });
+                    this.form = []
+                    this.fileList = []
+                    this.$refs.upload.clearFiles();
+                })
+            }, 1000)
         },
         anchorScroll(){
           $(".tab-anchor-tabs").on('click',".tab-anchor", function(){
@@ -235,62 +248,55 @@ import { uploadImg } from '~/api/consign'
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
         },
-        // getBase64(file) {
-        //     return new Promise((resolve, reject) => {
-        //         const reader = new FileReader()
-        //         let imgResult = ''
-        //         reader.readAsDataURL(file)
-        //         reader.onload = function onload() {
-        //         imgResult = reader.result
-        //         }
-        //         reader.onerror = function onerror(error) {
-        //         reject(error)
-        //         }
-        //         reader.onloadend = function onloadend() {
-        //         resolve(imgResult)
-        //         }
-        //     })
-        // },
-        // getFile(file) {
-        //     this.getBase64(file.raw).then(res => {
-        //         const params = res.split(',')
-        //         console.log(params, 'params')
-        //         if (params.length > 0) {
-        //             this.test = params[1]
-        //         }
-        //         const data = {
-        //             imgData: this.test,
-        //             token: Cookies.get('token'),
-        //         }
-        //         uploadImg(data).then((res) => {
-        //             console.log(res)
-        //         })
-        //     })
-        // }
-    // handleRemove(file) {
-    //   this.fileList = []
-    //   this.compress(file.raw, (val) => {
-    //     const replaceRes = val.replace(/^data:.*?;base64,/, '')
-    //     this.fileList.push(replaceRes) // 將取得的base64放入陣列中
-    //   })
-    // }
-        // getFile(file) {
-        //     this.compress(file.raw, (val) => {
-                
-        //         const replaceRes = val.replace(/^data:.*?;base64,/, '')
-        //         console.log(replaceRes)
-        //         this.imgSize.push(this.getImgSize(replaceRes))
-        //         const data = {
-        //             imgData: replaceRes,
-        //             token: Cookies.get('token'),
-        //         }
-        //         uploadImg(data).then((res) => {
-        //             console.log(res)
-        //         })
-        //     })
-            
-        // },
-       
+        // 圖片壓縮轉base64格式
+        compress(fileObj, callback) {
+            try {
+                const image = new Image()
+                image.src = URL.createObjectURL(fileObj)
+                image.onload = function() {
+                const that = this
+                // 默认按比例压缩
+                let w = that.width
+                let h = that.height
+                const scale = w / h
+                w = fileObj.width || w
+                h = fileObj.height || (w / scale)
+                let quality = 0.2 // 默认图片质量为0.7
+                // 生成canvas
+                const canvas = document.createElement('canvas')
+                const ctx = canvas.getContext('2d')
+                // 创建属性节点
+                const anw = document.createAttribute('width')
+                anw.nodeValue = w
+                const anh = document.createAttribute('height')
+                anh.nodeValue = h
+                canvas.setAttributeNode(anw)
+                canvas.setAttributeNode(anh)
+                ctx.drawImage(that, 0, 0, w, h)
+                // 图像质量
+                if (fileObj.quality && fileObj.quality <= 1 && fileObj.quality > 0) {
+                    quality = fileObj.quality
+                }
+                // quality值越小，所绘制出的图像越模糊
+                const data = canvas.toDataURL('image/jpeg', quality)
+                // 压缩完成执行回调
+                callback(data)
+                }
+            } catch (e) {
+                console.log('压缩失败!')
+            }
+        },
+        getFile(file) {
+            this.compress(file.raw, (val) => {
+                this.fileList.push(val) // 將取得的base64放入陣列中
+            })
+        },
+        handleRemove(file) {
+            this.fileList = []
+            this.compress(file.raw, (val) => {
+                this.fileList.push(val) // 將取得的base64放入陣列中
+            })
+        }
     },
       
   }

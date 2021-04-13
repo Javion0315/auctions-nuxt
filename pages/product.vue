@@ -49,14 +49,14 @@
                             <div>
                                 當前出價: USD {{ data.current_price }}<span class="text-gray">({{ data.bids }}Bids)</span><br>
                                 拍賣會結束於: <span style="font-weight: bold; font-size: 1.2rem">{{ data.end_time }}</span><br>
-                                剩餘時間: {{ day }}天 {{ hr }}時 {{ min }}分 {{ sec }}秒
+                                <span v-if="sec > 0">剩餘時間: {{ day }}天 {{ hr }}時 {{ min }}分 {{ sec }}秒</span>
                             </div>
                         </div>
                     </div>
                     <div class="pdInfo__bidStyle" style="margin-top: 50px;background-color: #F2F2F2; padding: 25px;">
                         <el-radio v-model="radio" label="Auto">自動出價</el-radio>
                         <el-radio v-model="radio" label="unAuto">直接出價</el-radio>
-                        <el-row class="bidStyle__Btn row flexBetween" v-if="autobid === 0">
+                        <el-row class="bidStyle__Btn row flexBetween" v-if="autobid === 0" style="margin-top: 15px;">
                             <el-col :span="12">
                                <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm col">
                                     <el-form-item prop="placeAutoBids" v-if="radio === 'Auto' && autobid === 0" style="margin-bottom: 0px">
