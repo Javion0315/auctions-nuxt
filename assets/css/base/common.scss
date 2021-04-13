@@ -26,9 +26,7 @@
         font-size: 1.2rem !important;
     }
 }
-.el-input{
-    width: 85%;
-}
+
 
 /* ----------------------------------------------------------------------------------- */
 /* build */
@@ -1413,6 +1411,7 @@ h1.logoName{
     margin: 1rem auto 2rem !important;
     color: $textcColor-gray;
     float: none !important;
+    line-height: 1.5rem;
         padding-top: 2rem;
     a{
         color: $textcColor-gray;

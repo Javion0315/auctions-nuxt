@@ -3,7 +3,7 @@
     <div class="mainContent">
         <el-breadcrumb class="location container" separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首頁</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/' }">專場頁</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/auction/'+ data.special_id }">{{ data.special_name }}</el-breadcrumb-item>
             <el-breadcrumb-item class="current">{{ data.title }}</el-breadcrumb-item>
         </el-breadcrumb>
         

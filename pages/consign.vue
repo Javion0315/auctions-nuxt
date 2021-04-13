@@ -1,29 +1,26 @@
 <template>
   <div>
-      <section class="policy mainContent" style="background-color: #001939">
-          <section class="Privacy" style="padding: 0px">
-            <a id="Privacy_zh" name="Privacy_zh"></a>
+      <section class="mainContent fullColorBg">
+          <section class="" style="padding-top: 70px">
             <div class="container">
                 <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
                     <h1 class="heading-m" style="font-weight: 400; text-align: center; font-size: 2.5rem; color: #DAC287">Consign Ｗith Us</h1>
-                    <span style="font-size: 1.6em; font-weight: 300; line-height: 45px; width: 57%; color: #DAC287">
+                    <p style="font-size: 1.6em; font-weight: 300; line-height: 2.5rem; width: 57%;">
                         Do you have a high quality item that you would like to get the absolute maximum price possible?
-                    </span>
+                    </p>
                 </div>
-                <div style="margin: 60px 0px; background-color: #152B48">
+                <div class="decoration-bg">
                     <el-row style="padding: 65px 0px 0px; display: flex; justify-content: center;">
-                        <el-col :span="12">
-                            <div style="font-size: 1.5em; font-weight: 400; line-height: 45px; margin-bottom: 10px; color: #DAC287">
-                                Contact Information
-                            </div>
+                        <el-col :span="12" :xs="21">
+                            <div class="title-m">Contact Information</div>
                             <div>
                                 <el-form ref="form" :model="form" label-width="80px">
                                     <el-form-item>
                                         <div style="width: 100%; display: flex; justify-content: space-between;">
-                                            <el-col :span="11">
+                                            <el-col :span="15">
                                                 <el-input v-model="form.firstName" placeholder="First Name" style="width: 100%;"></el-input>
                                             </el-col>
-                                            <el-col :span="11">
+                                            <el-col :span="8">
                                                 <el-input v-model="form.lastName" placeholder="Last Name" style="width: 100%;"></el-input>
                                             </el-col>
                                         </div>                                       
@@ -40,7 +37,7 @@
                                     <el-form-item>
                                         <span>上傳圖片</span>
                                         <!-- :on-change="getFile" -->
-                                        <div style="border: 1px solid; padding: 20px 0px; border-radius: 5px; background-color: white">
+                                        <div style="border: 1px solid; padding: 1rem 0px 1rem 1rem; border-radius: 5px; background-color: white">
                                             <el-upload
                                                 ref="upload"
                                                 action="none"
@@ -131,11 +128,8 @@
                             </div>
                         </el-col> -->
                     </el-row>
-                    <div style="text-align: center; padding-bottom: 40px">
-                        <el-button type="primary" @click="onSubmit" style="background-color: #DAC287; border-radius: 5px;
-                        border-color: rgb(218, 194, 135); width: 35%;" size="mini">
-                            <span style="font-size: 1.5rem; padding: 0px 20px; letter-space: 1px">Submit</span>
-                        </el-button>
+                    <div class="txtCenter" style="margin-top:4rem;letter-space: 1px">
+                        <div @click="onSubmit" class="btn btn-solid-gold" style="padding: 0.5rem 5rem;">SUBMIT</div>
                     </div>
                 </div>
                 
@@ -304,7 +298,7 @@ import { uploadImg } from '~/api/consign'
 
 <style lang="scss">
   @import "assets/css/base/default.scss";
-  @import "assets/css/pages/subPage_policy.scss";
+  @import "assets/css/pages/subPage_entrance.scss";
  
 </style>
 
@@ -315,4 +309,5 @@ import { uploadImg } from '~/api/consign'
     .uploadStyle >>> .el-upload-list__item {
         padding: 0px !important;
     }
+    
 </style>

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+// @import "compass/css3";
+@import "../utilities/_variable";
+@import "../utilities/_mixin";
+@import "../utilities/_extend";
+@import "../utilities/_media-queries";
+@import "../pages/subPage_common";
+
+/* ----------------------------------------------------------------------------------- */
+/* build */
+/* ----------------------------------------------------------------------------------- */
+.fullColorBg{
+    background-color: $web-mainColor;
+    color: $web-secondaryColor;
+    .decoration-bg{
+        margin: 3rem 0;
+        background: -moz-linear-gradient(top, rgba(242,242,242,0.1) 0%, rgba(242,242,242,0) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(242,242,242,0.1) 0%,rgba(242,242,242,0) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(242,242,242,0.1) 0%,rgba(242,242,242,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#00f2f2f2',GradientType=0 ); /* IE6-9 */;
+    }
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* Element UI CSS */
+/* ----------------------------------------------------------------------------------- */

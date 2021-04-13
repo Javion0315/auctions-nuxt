@@ -136,3 +136,8 @@ export default {
     },
 }
 </script>
+<style lang="scss">
+  @import "assets/css/base/default.scss";
+  @import "assets/css/pages/subPage_entrance.scss";
+ 
+</style>
