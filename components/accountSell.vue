@@ -125,6 +125,8 @@
 <script>
 import Cookies from 'js-cookie';
 import { consignList } from '~/api/consign';
+import { getOrderDetails } from '~/api/product';
+import { getAuctionList } from '~/api/auction';
 
 export default {
     components: {
@@ -151,20 +153,7 @@ export default {
                 serviceCharges: ' - ',
                 orderDetail: '訂單明細',
             }],
-            consignData: [],
-            // consignData: [{
-            //     itemPic: 'https://goldinauctions.com/ItemImages/000084/84388a_lg.jpeg',
-            //     itemName: '2000 Michael Jordan Fleer #15',
-            //     status: '審核中，請留意您的email',
-            // }, {
-            //     itemPic: 'https://goldinauctions.com/ItemImages/000077/77806a_lg.jpeg',
-            //     itemName: '2000 Michael Jordan Fleer #15',
-            //     status: '審核通過',
-            // }, {
-            //     itemPic: 'https://goldinauctions.com/ItemImages/000077/77806a_lg.jpeg',
-            //     itemName: '2000 Michael Jordan Fleer #15',
-            //     status: '審核未通過',
-            // }],
+            consignData: [], //狀態 --> 審核中，請留意您的email、審核通過、審核未通過
         }
         },
     created() {
@@ -183,6 +172,14 @@ export default {
                     this.consignData = res.data.consignList
                 }
             })
+            const auctionData = {
+                token: Cookies.get('token'),
+                page: this.page,
+                limit: 10
+            }
+            getAuctionList(auctionData).then((item) => {
+               console.log(item) 
+            }) 
         }
     },
 }

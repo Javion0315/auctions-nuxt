@@ -67,13 +67,13 @@
                             width="180">
                         </el-table-column>
                         <el-table-column
-                            prop="status"
+                            prop="pay_status"
                             label="付款狀態">
                             <!-- scope.row.status === '待付款' ? 'btn btn-solid-primary' : '' -->
                             <template slot-scope="scope">
-                                <div :class="scope.row.status === 0 ? 'btn btn-solid-primary' : ''"
+                                <div :class="scope.row.pay_status === 0 ? 'btn btn-solid-primary colorStyle' : ''"
                                 disable-transitions>
-                                    <div v-if="scope.row.status === 0" 
+                                    <div v-if="scope.row.pay_status === 0" 
                                     @click="dialogVisible_paymentMethod = true">
                                         待付款
                                     </div>
@@ -87,8 +87,8 @@
                             label="訂單明細">
                             <template slot-scope="scope">
                                 <div class="btn"
-                                :class="scope.row.paymentStatus === '訂單確認中' ? 'btn-solid-gray' : 'btn-solid-primary'">
-                                    <div v-if="scope.row.paymentStatus !== '訂單確認中'" 
+                                :class="scope.row.pay_status === 1 ? 'btn-solid-gray' : 'btn-solid-primary'">
+                                    <div v-if="scope.row.pay_status !== 1" 
                                     @click="orderDetail(scope.row.id)">
                                         訂單明細
                                     </div>
@@ -102,11 +102,9 @@
                             label="申請發票">
                             <template slot-scope="scope">
                                 <div class="btn"
-                                :class="scope.row.paymentStatus === '訂單確認中' ||
-                                scope.row.paymentStatus === '待付款' ||
-                                scope.row.paymentStatus === '款項確認中' ? 'btn-solid-gray' : 'btn-solid-primary'">
+                                :class="scope.row.pay_status !== 2 ? 'btn-solid-gray' : 'btn-solid-primary'">
                                 
-                                <div v-if="scope.row.paymentStatus == '已付款'">
+                                <div v-if="scope.row.pay_status === 2">
                                     <a href="mailto:support@gemcard.co">申請發票</a>
                                 </div>
                                 <div v-else>申請發票</div>
@@ -114,8 +112,13 @@
                             </template>
                         </el-table-column>
                          <el-table-column
-                            prop="logistics"
+                            prop="express_status"
                             label="物流狀態">
+                            <template slot-scope="scope">
+                                <span v-if="scope.row.express_status === 0">未發貨</span>
+                                <span v-else-if="scope.row.express_status === 1">已發貨</span>
+                                <span v-else>已簽收</span>
+                            </template>
                         </el-table-column>
                     </el-table>
                 </el-collapse-item>
@@ -336,3 +339,9 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+    .colorStyle {
+        background-color: #D12558;
+    }
+</style>
