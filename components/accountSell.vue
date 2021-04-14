@@ -66,12 +66,12 @@
                     <template slot-scope="scope">
                         <el-image
                         style="width: 50px;"
-                        :src='scope.row.itemPic'
+                        :src='imgPath + scope.row.images[0]'
                         fit="contain"></el-image>
                     </template>
                 </el-table-column>
                 <el-table-column
-                    prop="itemName"
+                    prop="item_name"
                     label="拍品名稱">
                 </el-table-column>
                 <el-table-column
@@ -123,12 +123,17 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+import { consignList } from '~/api/consign';
 
 export default {
     components: {
     },
     data() {
         return {
+            page: 1,
+            total: 0,
+            imgPath: '',
             dialogVisible_orderDetail: false,
            transactionData: [{
                 item: '2000 Michael Jordan Fleer #15',
@@ -146,26 +151,39 @@ export default {
                 serviceCharges: ' - ',
                 orderDetail: '訂單明細',
             }],
-            consignData: [{
-                itemPic: 'https://goldinauctions.com/ItemImages/000084/84388a_lg.jpeg',
-                itemName: '2000 Michael Jordan Fleer #15',
-                status: '審核中，請留意您的email',
-            }, {
-                itemPic: 'https://goldinauctions.com/ItemImages/000077/77806a_lg.jpeg',
-                itemName: '2000 Michael Jordan Fleer #15',
-                status: '審核通過',
-            }, {
-                itemPic: 'https://goldinauctions.com/ItemImages/000077/77806a_lg.jpeg',
-                itemName: '2000 Michael Jordan Fleer #15',
-                status: '審核未通過',
-            }],
+            consignData: [],
+            // consignData: [{
+            //     itemPic: 'https://goldinauctions.com/ItemImages/000084/84388a_lg.jpeg',
+            //     itemName: '2000 Michael Jordan Fleer #15',
+            //     status: '審核中，請留意您的email',
+            // }, {
+            //     itemPic: 'https://goldinauctions.com/ItemImages/000077/77806a_lg.jpeg',
+            //     itemName: '2000 Michael Jordan Fleer #15',
+            //     status: '審核通過',
+            // }, {
+            //     itemPic: 'https://goldinauctions.com/ItemImages/000077/77806a_lg.jpeg',
+            //     itemName: '2000 Michael Jordan Fleer #15',
+            //     status: '審核未通過',
+            // }],
         }
         },
     created() {
-       
+        this.imgPath = process.env.IMAGE_DOMAIN
+       this.getInit()
     },
     methods: {
-        
+        getInit() {
+            const data = {
+                token: Cookies.get('token'),
+                page: this.page,
+                limit: 10
+            }
+            consignList(data).then((res) => {
+                if(res.data.code === 1) {
+                    this.consignData = res.data.consignList
+                }
+            })
+        }
     },
 }
 </script>

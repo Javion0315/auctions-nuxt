@@ -8,3 +8,8 @@ export function uploadImg(data) {
 export function submitConsignData(data) {
     return request.post('/auction/submitConsignData.do', data);
 }
+
+// account 頁面的 consign 列表
+export function consignList(data) {
+    return request.post('/auction/consignList.do', data);
+}
